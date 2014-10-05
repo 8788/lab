@@ -1,0 +1,113 @@
+﻿<config>
+{
+    "title": "html代码转javascript"
+}
+</config>
+
+<style type="text/css">
+body {
+	background-color: #fafafa;
+}
+.html2js {
+	width: 800px;
+	margin: 5px auto 0;
+}
+
+#html, #javascript {
+	width: 790px;
+	height: 190px;
+	padding: 5px;
+	border: 1px solid #ccc;
+	box-shadow: 2px 2px 5px rgba(0,0,0,.1);
+}
+h2 {
+	text-align: center;
+}
+p {
+	margin: 10px 0;
+	line-height: 20px;
+}
+button {
+	margin-right: 5px;
+}
+#is-array {
+	margin: 0 3px 0 5px;
+	width: 13px;
+	height: 13px;
+}
+label {
+	display: inline-block;
+}
+select {
+	width: auto;
+	font-size: 14px;
+}
+</style>
+
+<div class="html2js">
+	<h2>html代码转javascript</h2>
+	<p>需要转换的html代码</p>
+	<textarea name="" id="html"></textarea>
+	<p>
+		<button class="btn btn-primary" id="single-btn">转单引号格式</button>
+		<button class="btn btn-primary" id="double-btn">转双引号格式</button>
+		<input type="checkbox" name="" id="is-array" checked><label for="is-array">数组拼接</label>
+		<select name="indent" id="indent">
+			<option value="1">制表符缩进</option>
+			<option value="2">2个空格缩进</option>
+			<option value="4" selected>4个空格缩进</option>
+		</select>
+	</p>
+	<p>生成的javascript代码</p>
+	<textarea name="" id="javascript"></textarea>
+</div>
+	
+<script src="js/htmlformat.js"></script>
+<script src="js/jsformat.js"></script>
+<script>
+	function html2js(html, quotes, isArray) {
+		var arr = html.split('\n');
+		var reg = new RegExp(quotes, 'g');
+		for (var i = arr.length - 1; i >= 0; i--) {
+			var cur = arr[i].replace(reg, '\\' + quotes);
+			var startSpace = cur.match(/^\s*/g);
+			cur = cur.replace(/^\s*|\s*$/, '');
+			if (cur === '') {
+				arr.splice(i, 1);
+				continue;
+			}
+			cur = startSpace + quotes + cur + quotes;
+			arr[i] = cur;
+		}
+		if (isArray) {
+			return '[\n' + arr.join(',\n') + '\n].join('+ quotes + quotes +');'
+		} else {
+			return arr.join(' +\n') + ';';
+		}
+	}
+
+	var htmlEle = document.getElementById('html');
+	var jsEle = document.getElementById('javascript');
+	var singleBtn = document.getElementById('single-btn');
+	var doubleBtn = document.getElementById('double-btn');
+	var checkbox = document.getElementById('is-array');
+	
+	singleBtn.onclick = function () {
+		transform('\'');
+	};
+
+	doubleBtn.onclick = function () {
+		transform('\"');
+	}
+
+	function transform(quotes) {
+		var input = htmlEle.value.replace(/^\s*/, '');
+		var indentSize = document.getElementById('indent').value;
+		var indentChar = ' ';
+		if (indentSize == 1) {
+			indentChar = '\t';
+		}
+		input = style_html(input, indentSize, indentChar, 800);
+		jsEle.value = html2js(input, quotes, checkbox.checked);
+	}
+</script>

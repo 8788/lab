@@ -1,0 +1,93 @@
+<config>
+{
+    "title": "在线图片转base64"
+}
+</config>
+
+<style type="text/css">
+.img2base64 {
+	width: 800px;
+	margin: 10px auto;
+}
+label {
+	display: inline-block;
+	vertical-align: middle;
+	line-height: 30px;
+}
+#file {
+	line-height: normal;
+}
+#textarea {
+	width: 790px;
+	height: 240px;
+	padding: 5px;
+	margin: 8px auto;
+	border: 1px solid #ccc;
+	box-shadow: 2px 2px 5px rgba(0,0,0,.1);
+	font-size: 12px;
+	line-height: 18px;
+}
+p {
+	line-height: 30px;
+}
+img {
+	max-width: 800px;
+	margin-top: 8px;
+}
+
+#tips,
+img {
+	display: none;
+}
+
+::selection {
+	background-color: #6495ed;
+	color: #fff;
+}
+
+</style>
+
+<div class="img2base64" id="img2base64">
+	<p>支持 PNG、GIF、JPG、WEBP等格式的图片转换成base64编码</p>
+	<label for="file">请选择图片：</label>
+	<input type="file" name="" id="file" value="请选择图片"><br>
+	<textarea name="" id="textarea"></textarea>
+	<p id="tips">你选择的图片是：</p>
+	<img src="" alt="">
+</div>
+
+<script>
+var img2base64 = document.getElementById('img2base64');
+var ipt = document.getElementById('file');
+var textarea = document.getElementById('textarea');
+var tips = document.getElementById('tips');
+var img = document.getElementsByTagName('img')[0];
+ipt.onchange = function () {
+	textarea.value = '';
+	img.style.display = 'none';
+	tips.style.display = 'none';
+	if (window.FileReader) {
+		var file = ipt.files[0]
+		if (!/image/g.test(file.type)) {
+			alert('上传格式有误，请上传图片');
+			ipt.value = '';
+			return;
+		}
+
+		var reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onloadend = function (e) {
+			textarea.value = reader.result;
+			textarea.onmouseover = function () {
+				this.focus();
+				this.select();
+			}
+			img.src = reader.result;
+			img.style.display = 'inline-block';
+			tips.style.display = 'block';
+		}
+	} else {
+		alert('您的浏览器不支持FileReader，推荐使用Chrome/Firefox访问本页面');
+	}
+}
+</script>

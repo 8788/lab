@@ -1,0 +1,172 @@
+<config>
+{
+    "title": "可拖拽，改变大小的对话框"
+}
+</config>
+
+<style>
+body{ background: #666;}
+#box{ position: absolute; top: 40%; left: 35%; width: 400px; height: 200px; background-color: #fff;}
+.h{ cursor: move; overflow: hidden; height: 30px; padding: 0 15px; background-color: #A5C11B; font: 14px/30px "Microsoft Yahei"; color: #fff;}
+.b{ padding: 10px 15px; font: 12px/1.3 Arial, "Microsoft Yahei"; color: #333;}
+#box span{ position: absolute; width: 15px; height: 15px;}
+#box .tl{ cursor: nw-resize; left: 0; top: 0;}
+#box .tr{ cursor: sw-resize; right: 0; top: 0;}
+#box .bl{ cursor: sw-resize; left: 0; bottom: 0;}
+#box .br{ cursor: nw-resize; right: 0; bottom: 0;}
+</style>
+
+<div id="box">
+	<div class="h">just a dialog (I can drag)</div>
+	<div class="b">content area... (I can change size)</div>
+	<span class="tl"></span>
+	<span class="tr"></span>
+	<span class="bl"></span>
+	<span class="br"></span>
+</div>
+
+<script>
+// getByClass
+function getByClass(p, c) {
+	if (p.getElementsByClassName) {
+		return p.getElementsByClassName(c);
+	} else {
+		var res = [];
+		var re = new RegExp('^|\\s' + c + '\\s|$', 'i');
+		var ele = p.getElementsByTagName('*');
+		for (var i = 0, len = ele.length; i < len; i++) {
+			if(re.test(ele[i].className)) {
+				res.push(ele[i]);
+			}
+		}
+		return res;
+	}
+}
+
+window.onload = function () {
+	var isIE = !!window.ActiveXObject;
+	var box = document.getElementById('box');
+	var h = getByClass(box, 'h')[0];
+	var b = getByClass(box, 'b')[0];
+
+	// 给四个脚添加拖拽功能
+	var span = box.getElementsByTagName('span');
+	for (var i = 0; i < span.length; i++) {
+		dragChange(span[i]);
+	}
+
+	// 四个脚的拖拽功能
+	function dragChange(obj) {
+		obj.onmousedown = function (ev) {
+			var oEvent = ev || event;
+
+			// 初始化拖动时需要用到的参数
+			var disX = oEvent.clientX - obj.offsetLeft;
+			var disY = oEvent.clientY - obj.offsetTop;
+			var clientW = document.documentElement.clientWidth;
+			var clientH = document.documentElement.clientHeight;
+
+			var oldX = oEvent.clientX;
+			var oldY = oEvent.clientY;
+			var oldWidth = box.offsetWidth;
+			var oldHeight = box.offsetHeight;
+			var oldLeft = box.offsetLeft;
+			var oldTop = box.offsetTop;
+
+			document.onmousemove = function (ev) {
+				var oEvent = ev || event;
+
+				// 通过搜索class来判断拖动方向
+				var classN = obj.className;
+				if (classN.indexOf('r') != -1) {
+					var newWidth = oldWidth + oEvent.clientX - oldX;
+					if (newWidth < 100) {
+						newWidth = 100;
+					} else if (newWidth > clientW - oldLeft) {
+						newWidth = clientW - oldLeft
+					}
+					box.style.width = newWidth + 'px';
+				}
+
+				if (classN.indexOf('b') != -1) {
+					var newHeight = oldHeight + oEvent.clientY - oldY;
+					if (newHeight < 100) {
+						newHeight = 100;
+					} else if (newHeight > clientH - oldTop) {
+						newHeight = clientH - oldTop
+					}
+					box.style.height = newHeight + 'px';
+				}
+
+				if (classN.indexOf('l') != -1) {
+					var newWidth = oldWidth - (oEvent.clientX - oldX);
+					var newLeft = oldLeft + (oEvent.clientX - oldX);
+					if (newLeft < 0) {
+						newLeft = 0;
+						newWidth = oldLeft + oldWidth;
+					}
+					if (newWidth < 100) {
+						newWidth = 100;
+						newLeft = oldWidth + oldLeft - 100;
+					}
+					box.style.width = newWidth + 'px';
+					box.style.left = newLeft + 'px';
+				}
+
+				if (classN.indexOf('t') != -1) {
+					var newHeight = oldHeight - (oEvent.clientY - oldY);
+					var newTop = oldTop + (oEvent.clientY - oldY);
+					if (newTop < 0) {
+						newTop = 0;
+						newHeight = oldTop + oldHeight;
+					}
+					if (newHeight < 100) {
+						newHeight = 100;
+						newTop = oldTop + oldHeight - 100;
+					}
+					box.style.height = newHeight + 'px';
+					box.style.top = newTop + 'px';
+				}
+			};
+
+			document.onmouseup = function () {
+				isIE && obj.releaseCapture();
+				document.onmousemove = null;
+				document.onmouseup = null;
+			};
+			isIE && obj.setCapture();
+			return false;
+		}
+	}
+
+	// 通过头部拖拽整个box
+	h.onmousedown = function (ev) {
+		var oEvent = ev || event;
+		var disX = oEvent.clientX - box.offsetLeft;
+		var disY = oEvent.clientY - box.offsetTop;
+		h.style.cursor = 'move';
+
+		document.onmousemove = function (ev) {
+			var oEvent = ev || event;
+			var l = oEvent.clientX - disX;
+			var t = oEvent.clientY - disY;
+			l < 0 && (l = 0);
+			t < 0 && (t = 0);
+			l > document.documentElement.clientWidth - box.offsetWidth && (l = document.documentElement.clientWidth - box.offsetWidth);
+			t > document.documentElement.clientHeight - box.offsetHeight && (t = document.documentElement.clientHeight - box.offsetHeight);
+			box.style.left = l + 'px';
+			box.style.top = t + 'px';
+		};
+
+		document.onmouseup = function () {
+			isIE && box.releaseCapture();
+			h.style.cursor = 'default';
+			document.onmousemove = null;
+			document.onmouseup = null;
+		};
+		isIE && box.setCapture();
+		return false;
+	};
+}
+</script>
+

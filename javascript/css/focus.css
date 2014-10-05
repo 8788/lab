@@ -1,0 +1,31 @@
+@charset "UTF-8";
+/**
+ * @name 	common.css
+ * @author  @Bubblings
+ * @date    2013-08-17 20:47:59
+ * @version 1.0
+ */
+
+ /* header */
+
+ /* focus */
+.focus{ position: relative; zoom: 1; width: 100%; height: 410px; background-color: #010101;}
+.focus img{ display: block;}
+.focus-img{ position: absolute; z-index: 100; width: 100%; height: 410px;}
+.focus-img li{ overflow: hidden; display: none; position: absolute; width: 100%; height: 410px; opacity: 0; filter: alpha(opacity=0); background-repeat: no-repeat; background-position: center;}
+.focus-img li a{ display: block; width: 1145px; height: 410px; margin: 0 auto;}
+
+/* focus-nav */
+.focus-nav{ position: absolute; z-index: 102; right: 0; bottom: 25px; width: 150px; height: 305px; padding: 13px; background: url(../img/focus-nav-bg.png); _background: #none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="img/focus-nav-bg.png");}
+.focus-nav-list{ overflow: hidden; border-radius: 6px; background-color: #010101;}
+.focus-nav-list li{ float: left; cursor: pointer; opacity: 0.4; filter: alpha(opacity=40); border-bottom: 1px solid #2d2d2d;}
+.focus-nav-list .current{ opacity: 1; filter: alpha(opacity=100);}
+
+/* focus-txt */
+.focus-txt{ cursor: default; position: absolute;bottom: 0; z-index: 101; width: 1145px; height: 95px;}
+.focus-txt-bg{ position: absolute; left: 0; z-index: -1; width: 660px; height: 70px; background: url(../img/focus-txt-bg.png) no-repeat; _background: none;}
+.focus-txt-btn{ float: left; width: 52px; height: 52px; margin: 9px 0 0 5px;}
+.focus-txt-btn a{ display: block; width: 52px; height: 52px; background: url(../img/focus-txt-play.png) no-repeat; _background: none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="img/focus-txt-play.png");}
+.focus-txt-btn a:hover{ background: url(../img/focus-txt-play-h.png) no-repeat; _background: none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="img/focus-txt-play-h.png");}
+.focus-txt-con{ float: left; margin-left: 10px; height: 70px; font: 18px/70px "Microsoft Yahei"; _font-weight: bold;}
+.focus-txt-con a{ display: inline-block; height: 70px; color: #fff;}

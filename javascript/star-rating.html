@@ -1,0 +1,130 @@
+<config>
+{
+    "title": "星星评分功能"
+}
+</config>
+
+<style>
+.star-wrap{ width: 200px; margin: 50px auto;}
+.star-rating{ display: inline-block; height: 27px; font-size: 0;}
+.star-rating .star-icon{ display: inline-block; width: 27px; height: 27px; background: url(img/star.gif) no-repeat 0 0;}
+.star-rating .star-hover{ background-position: 0 -29px;}
+</style>
+
+<div class="star-wrap">
+    <span class="star-rating">
+        <a class="star-icon" href="javascript:;"></a>
+        <a class="star-icon" href="javascript:;"></a>
+        <a class="star-icon" href="javascript:;"></a>
+        <a class="star-icon" href="javascript:;"></a>
+        <a class="star-icon" href="javascript:;"></a>
+    </span>
+    <br />
+    <span class="star-rating">
+        <a class="star-icon" href="javascript:;"></a>
+        <a class="star-icon" href="javascript:;"></a>
+        <a class="star-icon" href="javascript:;"></a>
+        <a class="star-icon" href="javascript:;"></a>
+        <a class="star-icon" href="javascript:;"></a>
+    </span>
+    <br />
+    <span class="star-rating">
+        <a class="star-icon" href="javascript:;"></a>
+        <a class="star-icon" href="javascript:;"></a>
+        <a class="star-icon" href="javascript:;"></a>
+        <a class="star-icon" href="javascript:;"></a>
+        <a class="star-icon" href="javascript:;"></a>
+    </span>
+    <br />
+    <span class="star-rating">
+        <a class="star-icon" href="javascript:;"></a>
+        <a class="star-icon" href="javascript:;"></a>
+        <a class="star-icon" href="javascript:;"></a>
+        <a class="star-icon" href="javascript:;"></a>
+        <a class="star-icon" href="javascript:;"></a>
+    </span>
+</div>
+
+<script>
+window.onload = function(){
+    var objList = getByClass(document, 'star-rating');
+    for( var i = 0; i < objList.length; i++ ){
+        new StarRating(objList[i]);
+    }
+}
+
+function StarRating(obj){   // 以DOM对象作为参数传入
+    this.target = obj;
+    this.init();
+    this.addEvent();
+}
+StarRating.prototype.init = function(){
+    this.grade = 0;
+    this.stars = getByClass(this.target, 'star-icon');
+}
+StarRating.prototype.addEvent = function(){
+    var that = this;
+    for( var i = 0; i < that.stars.length; i++ ){
+        (function(index){
+            that.stars[i].onmouseover = function(){
+                /* 清空已选 */
+                for(var j = 0; j < that.stars.length; j++){
+                    removeClass(that.stars[j], 'star-hover');
+                }
+                for(var i = 0; i <= index; i++){
+                    addClass(that.stars[i], 'star-hover');
+                }
+            }
+            that.stars[i].onmouseout = function(){
+                /* 清空已选 */
+                for(var j = 0; j < that.stars.length; j++){
+                    removeClass(that.stars[j], 'star-hover');
+                }
+                /* 还原评分 */
+                for(var i = 0; i < that.grade; i++){
+                    addClass(that.stars[i], 'star-hover');
+                }
+            }
+            that.stars[i].onclick = function(){
+                that.grade = getByClass(that.target, 'star-hover').length;
+                alert(that.grade + '分');
+            }
+        })(i);
+    }
+}
+
+/* getByClass */
+function getByClass(p, c){
+    if(p.getElementsByClassName){
+        return p.getElementsByClassName(c);
+    }else{
+        var res = [];
+        var ele = p.getElementsByTagName('*');
+        var re = new RegExp('(^|\\s)' + c + '(\\s|$)', 'i');
+        for( var i = 0; i < ele.length; i++ ){
+            if(re.test(ele[i].className)){
+                res.push(ele[i]);
+            }
+        }
+        return res;
+    }
+}
+
+/* String trim */
+String.prototype.trim = function(){
+    return this.replace(/(^\s*)|(\s*$)/g, '');
+}
+
+/* addClass */
+function addClass(obj, c){
+    var re = new RegExp('(^|\\s)' + c + '(\\s|$)', 'i');
+    if(!re.test(obj.className)){
+        obj.className = (obj.className + ' ' + c).trim();
+    }
+}
+
+/* removeClass */
+function removeClass(obj, c){
+    obj.className = obj.className.replace(c, '').trim();
+}
+</script>

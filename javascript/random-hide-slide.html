@@ -1,0 +1,142 @@
+<config>
+{
+    "title": "碎片随机消失的焦点图"
+}
+</config>
+<style>
+li { list-style: none;}
+img { vertical-align: middle;}
+ol li { list-style: none;}
+
+#box { overflow: hidden; position: relative; width: 800px; height: 330px; margin: 100px auto 0;}
+#img-wrap a{ display: block; width: 800px; height: 330px;}
+#img-wrap{ position: relative;}
+#img-wrap span { position: absolute; background-repeat: no-repeat;}
+ol { position: absolute; right: 20px; bottom: 20px;}
+ol li { cursor: pointer; float: left; width: 20px; height: 20px; margin-left: 5px; text-align: center; font: 12px/20px Arial; background-color: #333; color: #fff;}
+ol li.active,
+ol li:hover { background-color: #f40;}
+#prev,
+#next { position: absolute; top: 50%; left: 20px; margin-top: -50px; width: 40px; height: 100px; background: url(img/prev-next.png) no-repeat 0 0; opacity: .3; filter: alpha(opacity=30);}
+#next { left: auto; right: 20px; background-position: -50px 0;}
+#prev:hover,
+#next:hover { opacity: .7; filter: alpha(opacity=70);}
+</style>
+
+<div id="box">
+	<div id="img-wrap">
+		<a href="###"></a>
+	</div>
+	<ol>
+		<li class="active">1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li>5</li>
+	</ol>
+	<a href="javascript:;" id="prev"></a>
+	<a href="javascript:;" id="next"></a>
+</div>
+
+<script>
+window.onload = function () {
+	var box = document.getElementById('box');
+	var imgWrap = document.getElementById('img-wrap');
+	var imgLink = imgWrap.getElementsByTagName('a')[0];
+	var nextBtn = document.getElementById('next');
+	var prevBtn = document.getElementById('prev');
+	var ol = box.getElementsByTagName('ol')[0];
+	var navLi = ol.getElementsByTagName('li');
+
+	var col = 10;
+	var row = 5;
+	var now = 1;
+
+	/**
+	 * 循环创建span
+	 */
+	for (var i = 0; i < row; i++) {
+		for (var j = 0; j < col; j++) {
+			var w = parseInt(imgWrap.offsetWidth / col);
+			var h = parseInt(imgWrap.offsetHeight / row);
+			var span = document.createElement('span');
+			span.style.top = h * i + 'px';
+			span.style.left = w * j + 'px';
+			span.style.width = w + 'px';
+			span.style.height = h + 'px';
+			span.style.backgroundImage = 'url(img/focus-' + now + '.jpg)';
+			span.style.backgroundPosition = -w * j + 'px ' + (-h * i) + 'px';
+			imgWrap.appendChild(span);
+		}
+	}
+
+	/**
+	 * hide description
+	 * @param  {String} nextOrPrev 区分是显示下一张还是上一张
+	 */
+	function change() {
+		// 当前navLi高亮显示
+		for (var i = 0; i < navLi.length; i++) {
+			navLi[i].className = '';
+		}
+		navLi[now-1].className = 'active';
+
+		imgLink.style.background = 'url(img/focus-' + now + '.jpg) no-repeat';
+		var span = imgWrap.getElementsByTagName('span');
+		var i = 0;
+		var timer = setInterval(function () {
+			i++;
+			var rnd = parseInt(Math.random() * span.length);
+			while (span[rnd].style.display === 'none') {
+				rnd = parseInt(Math.random() * span.length);
+			}
+			span[rnd].style.display = 'none';
+
+			if (i === span.length) {
+				clearInterval(timer);
+				for (var j = 0; j < span.length; j++) {
+					span[j].style.backgroundImage = 'url(img/focus-' + now + '.jpg)';
+					span[j].style.display = 'block';
+				}
+				imgLink.style.background = 'url(img/focus-' + (now%5 + 1) + '.jpg) no-repeat';
+			}	
+		}, 15);
+	}
+
+
+	for (var i = 0; i < navLi.length; i++) {
+		(function (index) {
+			navLi[i].onclick = function () {
+				now = index + 1;
+				change();
+			};
+		})(i)
+	}
+
+	function next() {
+		now++;
+		now === 6 && (now = 1);
+		change('next');
+	};
+
+	function prev() {
+		now--;
+		now === 0 && (now = 5);
+		change('prev');
+	};
+
+	nextBtn.onclick = next;
+	prevBtn.onclick = prev;
+
+	/**
+	 * autoPlay
+	 */
+	var timer = setInterval(next, 3000);
+	box.onmouseover = function () {
+		clearInterval(timer);
+	};
+	box.onmouseout = function () {
+		timer = setInterval(next, 3000);
+	}
+};
+</script>

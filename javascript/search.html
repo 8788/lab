@@ -1,0 +1,140 @@
+<config>
+{
+    "title": "简单搜索功能"
+}
+</config>
+
+<style type="text/css">
+#search{ width: 600px; margin: 50px auto;}
+input{ vertical-align: middle;}
+label{ display: inline-block;}
+#sel{ width: 80px;}
+#txt{ margin-bottom: 0;}
+table{ margin-top: 20px; text-align: center; border: 1px solid #ccc;}
+td{ width: 80px; height: 30px; font: 14px/30px SimSun;}
+</style>
+
+<div id="search">
+    <select name="" id="sel">
+        <option value="1">搜姓名</option>
+        <option value="2">搜年龄</option>
+        <option value="3">搜性别</option>
+        <option value="4">搜地区</option>
+    </select>
+    <input type="text" name="" id="txt">
+    <input type="button" value="搜索" id="btn" class="btn btn-primary">
+    <label for="btn">(多个关键词请以空格分隔)</label>
+    <table id="table" border="1" cellpadding="0" cellspacing="0">
+        <thead>
+            <tr>
+                <td>序号</td>
+                <td>姓名</td>
+                <td>年龄</td>
+                <td>性别</td>
+                <td>所在地</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Jim</td>
+                <td>20</td>
+                <td>男</td>
+                <td>北京</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Amy</td>
+                <td>18</td>
+                <td>女</td>
+                <td>上海</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>张三</td>
+                <td>22</td>
+                <td>男</td>
+                <td>南京</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>李四</td>
+                <td>19</td>
+                <td>女</td>
+                <td>上海</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>张五</td>
+                <td>24</td>
+                <td>男</td>
+                <td>北京</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>李六</td>
+                <td>19</td>
+                <td>男</td>
+                <td>上海</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>小明</td>
+                <td>20</td>
+                <td>男</td>
+                <td>南京</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>小红</td>
+                <td>22</td>
+                <td>女</td>
+                <td>上海</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>小兰</td>
+                <td>19</td>
+                <td>女</td>
+                <td>北京</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>John</td>
+                <td>18</td>
+                <td>男</td>
+                <td>上海</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+window.onload = function(){
+    var oTxt = document.getElementById('txt');
+    var oBtn = document.getElementById('btn');
+    var oSel = document.getElementById('sel');
+    var aRow = document.getElementById('table').tBodies[0].rows;
+    var type = 1;   //搜索类别：姓名 年龄 性别 地区
+
+    oSel.onchange = function(){
+        type = oSel.value;
+    }
+
+    oBtn.onclick = function(){
+        var sTxt = oTxt.value.replace(/^\s*|\s*$/g, '');
+        if(sTxt){
+            var aTxt = sTxt.toLowerCase().split(' ');
+            for (var i = 0; i < aRow.length; i++) {
+                aRow[i].style.background = '';
+                for (var j = 0; j < aTxt.length; j++) {
+                    if(aRow[i].cells[type].innerHTML.toLowerCase().search(aTxt[j]) != -1){
+                        aRow[i].style.background = 'red';
+                    }
+                };
+                    
+            };
+        }
+    }
+}
+</script>

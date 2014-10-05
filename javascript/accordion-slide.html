@@ -1,0 +1,93 @@
+<config>
+{
+	"title": "手风琴效果焦点图"
+}
+</config>
+
+
+<style>
+	#box { width: 920px; height: 330px; margin: 100px auto;}
+	ul { overflow: auto;}
+	li { position: relative; float: left; overflow: hidden; list-style: none; width: 30px; height: 330px;}
+	li span { position: absolute; width: 20px; height: 330px; padding: 5px; text-align: center; background-color: #fff; font: 14px "Microsoft Yahei"; color: #fff;}
+	img { height: 330px;}
+</style>
+
+
+<div id="box">
+	<ul>
+		<li><span style="background: #580;">这是第一张图片</span><img src="img/focus-1.jpg" height="330" width="800" alt=""></li>
+		<li><span style="background: #f40;">这是第二张图片</span><img src="img/focus-2.jpg" height="330" width="800" alt=""></li>
+		<li><span style="background: #9e5f65;">这是第三张图片</span><img src="img/focus-3.jpg" height="330" width="800" alt=""></li>
+		<li><span style="background: #555;">这是第四张图片</span><img src="img/focus-4.jpg" height="330" width="800" alt=""></li>
+		<li style="width: 800px;"><span style="background: #0af;">这是第五张图片</span><img src="img/focus-5.jpg" height="330" width="800" alt=""></li>
+	</ul>
+</div>
+
+<script>
+function getStyle(ele, attr) {
+	return ele.currentStyle ? ele.currentStyle[attr] : getComputedStyle(ele, false)[attr];
+}
+
+function move(ele, json, opts) {
+	var opts = opts || {};
+	opts.time = opts.time || 800;
+	opts.type = opts.type || 'buffer';
+
+	var count = Math.round(opts.time/30);
+	var start = {};
+	var dis = {};
+	var n = 0;
+
+	for (var attr in json) {
+		if (attr === 'opacity') {
+			start[attr] = parseInt(getStyle(ele, attr)*100);
+		} else {
+			start[attr] = parseInt(getStyle(ele, attr));
+		}
+		dis[attr] = json[attr] - start[attr];
+	}
+
+	clearInterval(ele.timer);
+	ele.timer = setInterval(function () {
+		n++;
+		var cur;
+		for (var attr in json) {
+			switch(opts.type) {
+				case 'linear': 
+					cur = start[attr] + dis[attr] * n /count;
+					break;
+				case 'buffer':
+					var a = 1 - n / count;
+					cur = start[attr] + dis[attr] * (1 - a * a * a);
+					break;
+			}
+			if (attr === 'opacity') {
+				ele.style.filter = 'alpha(opacity' + cur + ')';
+				ele.style.opacity = cur/100;
+			} else {
+				ele.style[attr] = cur + 'px';
+			}
+		}
+
+		if (n === count) {
+			clearInterval(ele.timer);
+			opts.end && opts.end();
+		}
+	}, 30);
+}
+
+window.onload = function () {
+	var box = document.getElementById('box');
+	var li = box.getElementsByTagName('li');
+
+	for (var i = 0; i < li.length; i++) {
+		li[i].onmouseover = function () {
+			for (var j = 0; j < li.length; j++) {
+				move(li[j], {'width': 30});
+			}
+			move(this,{'width': 800});
+		};
+	}
+};
+</script>

@@ -1,0 +1,148 @@
+<config>
+{
+    "title": "简单排序功能"
+}
+</config>
+
+<style type="text/css">
+#sort{ width: 600px; margin: 50px auto;}
+table{ margin-top: 20px; text-align: center; border: 1px solid #ccc;}
+td{ width: 90px; height: 30px; font: 14px/30px SimSun;}
+</style>
+
+<div id="sort">
+    <table id="table" border="1" cellpadding="0" cellspacing="0">
+        <thead>
+            <tr>
+                <td>序号<a id="up" href="javascript:;">↑</a><a id="down" href="javascript:;">↓</a></td>
+                <td>姓名<a id="upWord" href="javascript:;">↑</a><a id="downWord" href="javascript:;">↓</a></td>
+                <td>年龄</td>
+                <td>性别</td>
+                <td>所在地</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>6</td>
+                <td>李六</td>
+                <td>19</td>
+                <td>男</td>
+                <td>上海</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>张三</td>
+                <td>22</td>
+                <td>男</td>
+                <td>南京</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Amy</td>
+                <td>18</td>
+                <td>女</td>
+                <td>上海</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>李四</td>
+                <td>19</td>
+                <td>女</td>
+                <td>上海</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>小红</td>
+                <td>22</td>
+                <td>女</td>
+                <td>上海</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>小兰</td>
+                <td>19</td>
+                <td>女</td>
+                <td>北京</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Jim</td>
+                <td>20</td>
+                <td>男</td>
+                <td>北京</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>John</td>
+                <td>18</td>
+                <td>男</td>
+                <td>上海</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>张五</td>
+                <td>24</td>
+                <td>男</td>
+                <td>北京</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>小明</td>
+                <td>20</td>
+                <td>男</td>
+                <td>南京</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+window.onload = function(){
+    var oTable = document.getElementById('table');
+    var oUp = document.getElementById('up');
+    var oDown = document.getElementById('down');
+    var oUpWord = document.getElementById('upWord');
+    var oDownWord = document.getElementById('downWord');
+    var aRow = oTable.tBodies[0].rows;
+    /* 按序号排 */
+    oUp.onclick = function(){
+        tabSort('up', 0, 'num');
+    };
+    oDown.onclick = function(){
+        tabSort('down', 0, 'num');
+    };
+    /* 按姓名排 */
+    oUpWord.onclick = function(){
+        tabSort('up', 1, 'word');
+    };
+    oDownWord.onclick = function(){
+        tabSort('down', 1, 'word');
+    };
+
+    function tabSort(upOrDown, col, type){
+    //upOrDown:升序or降序, col:根据那一列值排序, type:按数字or汉字排序
+        var arr=[];
+
+        for(var i = 0; i < aRow.length; i++){
+            arr[i]=aRow[i];
+        }
+
+        arr.sort(function(row1, row2){
+            var s1 = row1.cells[col].innerHTML;
+            var s2 = row2.cells[col].innerHTML;
+            if(type == 'num'){
+                // 排序数字
+                return upOrDown == 'up' ? s1 - s2 : s2 - s1;
+            }else{
+                // 排序汉字
+                return upOrDown == 'up' ? s1.localeCompare(s2) : s2.localeCompare(s1);
+            }
+        });
+
+        for (var i = 0; i < aRow.length; i++) {
+            oTable.tBodies[0].appendChild(arr[i]);
+        };
+    }
+}
+</script>

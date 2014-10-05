@@ -1,0 +1,150 @@
+<config>
+{
+    "title": "拖拽图片交换位置"
+}
+</config>
+
+<style>
+.clearfix:after{ content: ""; display: block; visibility: hidden; height: 0; clear: both;}
+.clearfix{ zoom: 1;}
+#box{ position: relative; width: 680px; margin: 50px auto; padding-top: 30px;}
+li{ position: absolute; width: 150px; height: 150px; background-color: #ccc; border: 1px solid #ccc; background-color: #fff;}
+#btn{ position: absolute; top: 10px; padding: 5px 10px; font: 12px/1.5 "Microsoft Yahei"; color: #fff; background-color: #580; text-decoration: none;}
+.clone{ position: absolute; width: 150px; height: 150px; border: 1px dashed #ccc;}
+</style>
+
+<div id="box">
+	<!-- <a href="#" id="btn">随机</a> -->
+	<ul class="list clearfix">
+		<li style="top: 50px; left: 0px"><img width="150" src="img/1.jpg" /></li>
+		<li style="top: 50px; left: 170px"><img width="150" src="img/2.jpg" /></li>
+		<li style="top: 50px; left: 340px"><img width="150" src="img/3.jpg" /></li>
+		<li style="top: 50px; left: 510px"><img width="150" src="img/4.jpg" /></li>
+		<li style="top: 220px; left: 0px"><img width="150" src="img/5.jpg" /></li>
+		<li style="top: 220px; left: 170px"><img width="150" src="img/6.jpg" /></li>
+		<li style="top: 220px; left: 340px"><img width="150" src="img/7.jpg" /></li>
+		<li style="top: 220px; left: 510px"><img width="150" src="img/8.jpg" /></li>
+	</ul>
+</div>
+
+<script>
+window.onload = function () {
+	var box = document.getElementById('box');
+	var ul = box.getElementsByTagName('ul')[0];
+	var li = box.getElementsByTagName('li');
+	var btn = document.getElementById('btn');
+	var htmlArr = [];	// 存放li中的内容
+
+	for (var i = 0; i < li.length; i++) {
+		htmlArr[i] = li[i].innerHTML;	// 复制li中的内容
+		dragCollide(li[i]);	// 给每个li添加拖拽
+	}
+
+	// 随机功能
+	btn.onclick = function () {
+		htmlArr.sort(function () {
+			return Math.random() - 0.5;
+		});
+		for(var i = 0; i < htmlArr.length; i++){
+			li[i].innerHTML = htmlArr[i];
+		}
+		return false;
+	}
+
+	// 拖拽
+	function dragCollide(dragEle) {
+		dragEle.onmousedown = function (ev) {
+			var oEvent = ev || event;
+			var isIE = !!window.ActiveXObject;
+			var disX = oEvent.clientX - dragEle.offsetLeft;
+			var disY = oEvent.clientY - dragEle.offsetTop;
+			for (var i = 0; i < li.length; i++) {
+				li[i].style.zIndex = 1;
+			};
+			this.style.zIndex = '2';
+
+			// 创建占位节点
+			var clone = document.createElement('div');
+			clone.className = 'clone';
+			clone.style.left = this.offsetLeft + 'px';
+			clone.style.top = this.offsetTop + 'px';
+			box.appendChild(clone);
+
+			// 记录初始位置
+			var oldL = dragEle.offsetLeft;
+			var oldT = dragEle.offsetTop;
+
+			document.onmousemove = function (ev) {
+				var oEvent = ev || event;
+				dragEle.style.left = oEvent.clientX - disX + 'px';
+				dragEle.style.top = oEvent.clientY - disY + 'px';
+				var ele = getCollEle(dragEle);	// 比较最近的元素
+				if (ele) {
+					ele.style.marginTop = '-10px';
+					ele.style.marginLeft = '-10px';
+					ele.style.borderColor = 'red';
+				}
+			};
+
+			document.onmouseup = function () {
+				var ele = getCollEle(dragEle);
+				if (ele) {
+					dragEle.style.left = ele.style.left;
+					dragEle.style.top = ele.style.top;
+					ele.style.left = oldL + 'px';
+					ele.style.top = oldT + 'px';
+					ele.style.background = '#ccc';
+				} else {
+					dragEle.style.left = oldL + 'px';
+					dragEle.style.top = oldT + 'px';
+				}
+				box.removeChild(clone);
+				document.onmousemove = null;
+				document.onmouseup = null;
+				isIE && dragEle.releaseCapture()
+			};
+			isIE && dragEle.setCapture();
+			return false;
+		}
+	}
+
+	// 获取距离最近的元素
+	function getCollEle(dragEle) {
+		var min = 10000000;	// 参考值
+		var minEle = null;
+		for (var i = 0; i < li.length; i++) {	// 待优化
+			var num = collide(dragEle, li[i]);
+			if (num < min && num > 0) {	// > 0 表示碰撞到情况
+				min = num;
+				minEle = li[i];
+			}
+			li[i].style.marginTop = '';
+			li[i].style.marginLeft = '';
+			li[i].style.borderColor = '#ccc';
+		}
+		return minEle;
+	}	
+}
+
+// 碰撞检测，并返回中心点距离
+function collide(dragEle, testEle) {
+	var dragL = dragEle.offsetLeft;
+	var dragR = dragEle.offsetLeft + dragEle.offsetWidth;;
+	var dragT = dragEle.offsetTop;
+	var dragB = dragEle.offsetTop + dragEle.offsetHeight;
+
+	var testL = testEle.offsetLeft;
+	var testR = testEle.offsetLeft + dragEle.offsetWidth;;
+	var testT = testEle.offsetTop;
+	var testB = testEle.offsetTop + dragEle.offsetHeight;
+
+	var x = Math.abs(testL + testEle.offsetWidth/2 - (dragL + dragEle.offsetWidth/2));
+	var y = Math.abs(testT + testEle.offsetHeight/2 - (dragT + dragEle.offsetHeight/2));
+
+	if(dragR < testL || dragB < testT || dragL > testR || dragT > testB){
+		return 0;
+	}else{
+		return Math.sqrt(x*x + y*y);
+	}
+}
+</script>

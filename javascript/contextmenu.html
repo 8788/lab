@@ -1,0 +1,63 @@
+<config>
+{
+    "title": "自定义浏览器右键菜单"
+}
+</config>
+
+
+<style type="text/css">
+#contextmenu{ display: none; position: absolute; background-color: #fff;}
+.menu-list{width: 150px; padding: 10px 0; border: 1px solid #eee;
+	-webkit-box-shadow: 1px 1px 2px #ccc;
+	-moz-box-shadow: 1px 1px 2px #ccc;
+	box-shadow: 1px 1px 2px #ccc;
+}
+.menu-list li{ height: 30px; line-height: 30px;}
+.menu-list .devide{ border-bottom: 1px solid #ddd;}
+.menu-list li a{ height: 30px; display: block; padding-left: 30px; line-height: 30px; text-decoration: none; color: #666; font-size: 12px}
+.menu-list li a:hover{ background-color: #ccc;}
+</style>
+
+
+<p>在页面中任意位置点击右键，你试下。。。</p>
+<div id="contextmenu">
+	<ul class="menu-list">
+		<li class="devide"><a href="http://weibo.com/607768123">微博首页</a></li>
+		<li><a target="_blank" href="http://riny.net/">我的博客</a></li>
+		<li><a target="_blank" href="http://riny.net/lab">前端实验室</a></li>
+		<li><a target="_blank" href="http://riny.net/metro">metro空间</a></li>
+	</ul>
+</div>
+
+<script>
+	window.onload = function(){
+		document.oncontextmenu = function(ev){
+			var oEvent = ev || event;
+			//鼠标点击坐标
+			var l = oEvent.clientX;
+			var t = oEvent.clientY;
+			var oDiv = document.getElementById('contextmenu');
+
+			//oDiv宽与高
+			var w = oDiv.offsetWidth ? oDiv.offsetWidth : 152;
+			var h = oDiv.offsetHeight ? oDiv.offsetHeight : 173;
+
+			//判断是否到边界
+			if(l + w < document.documentElement.clientWidth){
+				oDiv.style.left = l + 'px';
+			}else{
+				oDiv.style.left = l - w + 'px';
+			}
+			if(t + h < document.documentElement.clientHeight){
+				oDiv.style.top = t + 'px';
+			}else{
+				oDiv.style.top = t - h + 'px';
+			}
+
+			oDiv.style.display = 'block';
+			// 阻止浏览器默认右键
+			return false;
+		}
+	}
+</script>
+

@@ -1,0 +1,181 @@
+<config>
+{
+    "title": "简单选项卡"
+}
+</config>
+<style>
+.clearfix:after{ content: ''; display: block; height: 0; visibility: hidden; clear: both;}
+.clearfix{ zoom: 1;}
+
+.tab{ width: 300px; margin: 30px auto;}
+.tab-h{ height: 30px; background: #eee;}
+.tab-h .active{ background: #f80; color:#fff;}
+.tab-nav{ float: left; height: 30px; padding: 0 10px; font: 12px/30px "Microsoft Yahei"; color: #333; text-decoration: none;}
+.tab-b{ border: 1px solid #eee; border-top: 0 none;}
+.tab-content{ display: none; height: 180px; padding: 10px;}
+</style>
+
+<div class="tab">
+    <div class="tab-h clearfix">
+        <a class="tab-nav active" href="javascript:;">tab1</a>
+        <a class="tab-nav" href="javascript:;">tab2</a>
+        <a class="tab-nav" href="javascript:;">tab3</a>
+    </div>
+    <div class="tab-b">
+        <div class="tab-content" style="display: block;">1</div>
+        <div class="tab-content">2</div>
+        <div class="tab-content">3</div>
+    </div>
+</div>
+<div class="alert alert-info">
+    <p>选项卡算是网页中较常用的一个效果之一，虽然比较简单，但是麻雀虽小，五脏俱全，其中的原理也在js很多效果中通用（例如焦点图等）。在制作选项卡时，需要解决的一个问题，就是在循环中，怎样将i的值传递到事件中，围绕这一点，可以引申出常见的几种写法。下面附上一个最简单的选项卡结构。</p>
+</div>
+
+<h3>1.通过js添加自定义属性</h3>
+<pre class="prettyprint linenums">
+window.onload = function(){
+    var tab = getByClass(document, 'tab')[0];
+    var tabNav = getByClass(tab, 'tab-nav');
+    var tabCon = getByClass(tab, 'tab-content');
+
+    for( var i = 0; i < tabNav.length; i++){
+        tabNav[i].index = i;    //此处通过添加自定义属性index来保存i的值
+        tabNav[i].onclick = function(){
+            for(var i = 0; i < tabNav.length; i++){
+                removeClass(tabNav[i], 'active');
+                tabCon[i].style.display = 'none';
+            }
+            addClass(this, 'active');
+            tabCon[this.index].style.display = 'block';
+        }
+    }
+}
+</pre>
+
+<h3>2.通过闭包传递i的值</h3>
+<pre class="prettyprint linenums">
+window.onload = function(){
+    var tab = getByClass(document, 'tab')[0];
+    var tabNav = getByClass(tab, 'tab-nav');
+    var tabCon = getByClass(tab, 'tab-content');
+
+    for( var i = 0; i < tabNav.length; i++){
+        (function(index){
+            tabNav[i].onclick = function(){
+                for( var i = 0; i < tabNav.length; i++){
+                    removeClass(tabNav[i], 'active');
+                    tabCon[i].style.display = 'none';
+                }
+                addClass(this, 'active');
+                tabCon[index].style.display = 'block';
+            }
+        })(i);  // 此处将i的值以参数传入
+    }
+}
+</pre>
+
+<h3>3.第二种的一个变形，也是通过闭包来实现</h3>
+<pre class="prettyprint linenums">
+window.onload = function(){
+    var tab = getByClass(document, 'tab')[0];
+    var tabNav = getByClass(tab, 'tab-nav');
+    var tabCon = getByClass(tab, 'tab-content');
+
+    for( var i = 0; i < tabNav.length; i++){
+        tabNav[i].onclick = (function(index){
+            return function(){  // 返回一个函数
+                for( var i = 0; i < tabNav.length; i++){
+                    removeClass(tabNav[i], 'active');
+                    tabCon[i].style.display = 'none';
+                }
+                addClass(this, 'active');
+                tabCon[index].style.display = 'block';
+            }
+        })(i);  // 此处将i的值以参数传入
+    }
+}
+</pre>
+
+<script type="text/javascript">
+window.onload = function(){
+    var tab = getByClass(document, 'tab')[0];
+    var tabNav = getByClass(tab, 'tab-nav');
+    var tabCon = getByClass(tab, 'tab-content');
+    /*
+    ** method 1 **
+    for( var i = 0; i < tabNav.length; i++){
+        tabNav[i].index = i;
+        tabNav[i].onclick = function(){
+            for(var i = 0; i < tabNav.length; i++){
+                removeClass(tabNav[i], 'active');
+                tabCon[i].style.display = 'none';
+            }
+            addClass(this, 'active');
+            tabCon[this.index].style.display = 'block';
+        }
+    }
+    */
+    /*
+    ** method 2 **
+    for( var i = 0; i < tabNav.length; i++){
+        (function(index){
+            tabNav[i].onclick = function(){
+                for( var i = 0; i < tabNav.length; i++){
+                    removeClass(tabNav[i], 'active');
+                    tabCon[i].style.display = 'none';
+                }
+                addClass(this, 'active');
+                tabCon[index].style.display = 'block';
+            }
+        })(i);
+    }
+    */
+    /** method 3 **/
+    for( var i = 0; i < tabNav.length; i++){
+        tabNav[i].onclick = (function(index){
+            return function(){
+                for( var i = 0; i < tabNav.length; i++){
+                    removeClass(tabNav[i], 'active');
+                    tabCon[i].style.display = 'none';
+                }
+                addClass(this, 'active');
+                tabCon[index].style.display = 'block';
+            }
+        })(i);
+    }
+}
+
+/* getByClass */
+function getByClass(p, c){
+    if(p.getElementsByClassName){
+        return p.getElementsByClassName(c);
+    }else{
+        var res = [];
+        var ele = p.getElementsByTagName('*');
+        var re = new RegExp('(^|\\s)' + c + '(\\s|$)', 'i');
+        for(var i = 0; i < ele.length; i++){
+            if(re.test(ele[i].className)){
+                res.push(ele[i]);
+            }
+        }
+        return res;
+    }
+}
+
+/* removeClass */
+function removeClass(obj, c){
+    obj.className = obj.className.replace(c, '').trim();
+}
+
+/* addClass */
+function addClass(obj, c){
+    obj.className = (obj.className + ' ' + c).trim();
+}
+
+/* String trim */
+if (!String.prototype.trim) {
+    String.prototype.trim = function(){
+        return this.replace(/^\s*|\s*$/g, '');
+    }
+}
+</script>

@@ -1,0 +1,81 @@
+<config>
+{
+	"title": "js简易计算器"
+}
+</config>
+
+<style type="text/css">
+#calculator{ width: 300px; margin: 50px auto; background-color: #fff;}
+#show{ width: 285px; height: 60px; padding: 0 5px; text-align: right; background-color: #666; font: 30px/60px Arial; color: #fff;}
+#btns{ font-size: 0;}
+#btns a{ float: left; width: 70px; height: 80px; margin: 5px 5px 0 0; font: 30px/80px Arial; text-align: center; background-color: #aaa; color: #fff;}
+#btns a:hover{ text-decoration: none;}
+#btns a:active{ background-color: pink;}
+#btns .reset,
+#btns .delete{ width: 145px; height: 40px; font: 16px/40px "Microsoft Yahei"; background-color: #aaaccc;}
+#btns .sign{ background-color: #888;}
+</style>
+
+
+<div id="calculator">
+	<div id="show"></div>
+	<div id="btns">
+		<a class="reset" href="javascript:;">复位</a>
+		<a class="delete" href="javascript:;">删除</a>
+		<a href="javascript:;">7</a>
+		<a href="javascript:;">8</a>
+		<a href="javascript:;">9</a>
+		<a class="sign" href="javascript:;">/</a>
+		<a href="javascript:;">4</a>
+		<a href="javascript:;">5</a>
+		<a href="javascript:;">6</a>
+		<a class="sign" href="javascript:;">*</a>
+		<a href="javascript:;">1</a>
+		<a href="javascript:;">2</a>
+		<a href="javascript:;">3</a>
+		<a class="sign" href="javascript:;">-</a>
+		<a href="javascript:;">.</a>
+		<a href="javascript:;">0</a>
+		<a href="javascript:;">=</a>
+		<a class="sign" href="javascript:;">+</a>
+	</div>
+</div>
+
+<script>
+	window.onload = function(){
+		var str = '';
+		var oShow = document.getElementById('show');
+		var oBtn = document.getElementById('btns').getElementsByTagName('a');
+		for(var i = 0; i < oBtn.length; i++){
+			oBtn[i].onclick = function(){
+				if(this.innerHTML == '='){	//计算结果
+					oShow.innerHTML = eval(str);
+					str = eval(str) + '';
+				}else if(this.innerHTML == '.'){	//处理小数点
+					if(!/\./.test(str)){
+						str += this.innerHTML;
+						oShow.innerHTML = str;
+					}
+				}else if(this.className == 'sign'){	//运算符处理
+					if(/\d/.test(str.charAt(str.length-1))){
+						str += this.innerHTML;
+						oShow.innerHTML = str;
+					}else{
+						str = str.substring(0, str.length-1);
+						str += this.innerHTML;
+						oShow.innerHTML = str;
+					}
+				}else if(this.className == 'delete'){	//删除
+					str = str.substring(0, str.length-1);
+					oShow.innerHTML = str;
+				}else if(this.className == 'reset'){	//复位
+					str = '';
+					oShow.innerHTML = str;
+				}else{
+					str += this.innerHTML;
+					oShow.innerHTML = str;
+				}
+			}
+		}
+	}
+</script>

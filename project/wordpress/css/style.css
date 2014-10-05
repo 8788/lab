@@ -1,0 +1,170 @@
+﻿@charset "utf-8";
+/**
+* project : style.css
+* version : 1.0
+* last change : 2012.03.28
+*
+*/
+
+body{ background-color:#ebebeb;}
+.container-fluid{ margin:0 auto; width:90%\9; min-width:980px\9;}
+
+/* header */
+.header{ position:relative; z-index:9; background-color:#fff;}
+.logo-banner{ height:90px;}
+.index-logo, .logo{ padding:10px 0 10px 20px;}
+.index-logo h1, .logo h2{ line-height:22px; }
+.index-logo h1 a, .logo h2 a{ font:20px/22px "Segoe UI",Tahoma,"Microsoft YaHei"; color:#333; }
+.index-logo h2, .logo h3{ font:14px/18px "Segoe UI",Tahoma,"Microsoft YaHei"; color:#c3c3c3;}
+.navbar{ height:40px; background-color:#222; margin:0;}
+.navbar .inner{ background-color:#222;}
+
+/* main */
+.body{ background-color:#fff; padding:10px 0;}
+.main{ position:relative; z-index:8;}
+.main .inner{ padding:10px 2%; }
+.content{ }
+
+.post{ position:relative; margin-bottom:20px; padding:5px 2% 10px; background-color:#ebebeb;}
+.post .title{ line-height:24px; margin:0; padding:5px; word-wrap:break-word; break-word:break-all;}
+.post .title a{ zoom:1; font:20px/24px "Segoe UI",Tahoma,"Microsoft YaHei"; color:#000;}
+.post .title a:hover{ text-decoration:none; color:#8FC400;}
+.post .desc{ text-indent:2em; padding-top:10px;  border-top:1px solid #ccc; font:13px/24px "Segoe UI",Tahoma,SimSun; word-wrap:break-word; break-word:break-all;}
+.post .info{ margin-top:10px; hight:36px;}
+.post .info .article-tag{ float:left; line-height:36px; margin-right:5px;}
+.post .other-info{ float:left; font:12px/36px Arial,SimSun;}
+.post .read-more{ float:right; }
+.post .read-more .btn{ border:0; padding:8px 10px; background:#8FC400; color:#fff; text-shadow:none; -webkit-transition:all 1s linear; -moz-transition:all 1s linear; transition:all 1s linear;}
+.post .read-more .btn:hover{ background-color:#222;}
+.post .time{ position:absolute; top:20px; left:-60px; width:60px; height:48px; padding:6px 0; text-align:center; font:bold 14px/24px sans-serif,Arial,SimSun; color:#fff; background-color:#8FC400;}
+
+/** turn page **/
+.pagination{ text-align:center;}
+
+/** article **/
+.detail{ position:relative; padding:5px 3%; background-color:#ebebeb;}
+.detail .title{ font:20px/24px "Segoe UI",Tahoma,"Microsoft YaHei"; color:#000;}
+.detail .info{ margin-bottom:10px; padding:0 0 5px 0; border-bottom:1px solid #ccc; font:12px/20px "Segoe UI",Tahoma,SimSun;}
+.detail .info span{ margin-right:10px;}
+.detail p{ text-indent:2em; font:14px/24px "Segoe UI",Tahoma,SimSun; color:#333;}
+
+.else{ padding:20px 0 10px; border-bottom:1px solid #ccc; font:12px/28px "Segoe UI",Tahoma,SimSun;}
+.share{ padding:0;}
+#bdshare{ padding-top:5px; border-top:1px solid #ccc;}
+.share-txt{ float:left; margin-right:5px; font:12px/27px SimSun;}
+.article-tag { font:12px/24px "Segoe UI",Tahoma,SimSun;}
+.article-tag a{ border:1px solid #ccc; margin:0 2px; padding:4px 8px; background-color:#fff;}
+
+/* aside */
+.aside .inner{ padding:10px 5% 10px 0;}
+.aside .title{ display:inline-block; width:97%; height:36px; font:16px/36px "Microsoft YaHei"; background-color:#8FC400; text-align:center; -webkit-transition:all .8s linear; -moz-transition:all .8s linear; transition:all .8s linear;}
+.aside .title span{ display:inline-block; width:70%; height:36px; background-color:#333; color:#fff; vertical-align:top;}
+.aside .title:hover{ background-color:#333;}
+.aside .title:hover span{ background-color:#8FC400; -webkit-animation:asideTitle .8s ease-in; -moz-animation:asideTitle .8s ease-in; animation:asideTitle .8s ease-in;}
+
+/** search **/
+.search{}
+.search .search-ipt{ float:left; width:70%; padding:7px 2%;}
+.search .btn{ float:left; width:23%; border:0; padding:8px 0; background:#8FC400; color:#fff; text-shadow:none; -webkit-transition:all 1s linear; -moz-transition:all 1s linear; transition:all 1s linear;}
+.search .btn:hover{ background:#222;}
+
+/** recent post **/
+.article-list{ margin-left:10px;}
+.article-list li{ padding-left:20px; margin-bottom:5px; font:13px/20px "Segoe UI",Tahoma,SimSun; background:url(../img/arror.png) no-repeat left 8px;}
+.article-list a{ font:13px/20px "Segoe UI",Tahoma,SimSun; color:#333; word-wrap:break-word; break-word:break-all;}
+.article-list a:hover{ color:#8FC400; text-decoration:none;}
+
+/* footer */
+.footer .span4 .inner{ padding:10px 20px;}
+.footer .title{ font:14px/30px "Microsoft YaHei"; border-bottom:1px solid #ccc;}
+
+/** links **/
+.link-list{}
+.link-list li{ cursor:pointer; float:left; margin:5px 10px 0 0; padding:3px 5px; border:1px solid #ccc;}
+.link-list li:hover{ background-color:#fff; }
+.link-list li a{ font:12px/20px SimSun; color:#666; text-decoration:none;}
+.link-list li:hover a{ color:#8FC400;}
+
+/** about **/
+.about { margin-top: 5px;}
+.about img{ float:left; margin:0 10px 10px 0;}
+.about p{ font:12px/21px "Microsoft Yahei"; color:#666;}
+
+/** tags **/
+.tags{ padding:5px 0;}
+.tags a{ float:left; margin:0 10px 10px 0; padding:2px 10px; border:1px solid #cacaca; border-left:3px solid #8FC400; background-color:#f7f7f7; color:#666;
+	-webkit-transition:all 1s linear;
+	-moz-transition:all 1s linear;
+	transition:all 1s linear;
+}
+.tags a:hover{ text-decoration:none; background-color:#fff; color:#8FC400; border-left-color:#222;
+	-webkit-animation:tags .5s ease-in;
+	-moz-animation:tags .5s ease-in;
+	animation:tags .5s ease-in;
+}
+
+@media (max-width: 480px){
+	.container-fluid{ padding:0;}
+}
+@media (max-width: 768px){
+	
+}
+
+@media (min-width: 768px) and (max-width: 1200px){
+
+}
+
+@media (max-width: 1200px){
+	.post .time,
+	.info .article-tag{ display:none;}
+
+}
+
+@media (min-width: 1200px){
+	.container-fluid{ padding:0 100px;}
+	
+	/** back-to-top **/
+	.back-to-top{ display:none; position:fixed; _position:absolute; right:30px; bottom:80px; width:32px; height:32px;}
+	.back-to-top a{ display:inline-block; width:32px; height:32px; background:url(../img/back-to-top.png) 0 0;}
+	.back-to-top a:hover{ background-position:-32px 0;}
+}
+
+
+/* animation */
+/** asideTitle **/
+@-webkit-keyframes asideTitle{
+	0%{ background-color:#333;}
+	50%{ width:0px; font-size:0;}
+	100%{ background-color:#8FC400;}
+}
+@-moz-keyframes asideTitle{
+	0%{ background-color:#333;}
+	50%{ width:0px; font-size:0;}
+	100%{ background-color:#8FC400;}
+}
+@keyframes asideTitle{
+	0%{ background-color:#333;}
+	50%{ width:0px; font-size:0;}
+	100%{ background-color:#8FC400;}
+}
+
+/** tags **/
+@-webkit-keyframes tags{
+	30%{ -webkit-transform:rotate(-20deg); -moz-transform:rotate(-20deg); transform:rotate(-20deg);}
+	60%{ -webkit-transform:rotate(20deg); -moz-transform:rotate(20deg); transform:rotate(20deg);}
+	80%{ -webkit-transform:rotate(-20deg); -moz-transform:rotate(-20deg); transform:rotate(-20deg);}
+}
+@-moz-keyframes tags{
+	30%{ -webkit-transform:rotate(-20deg); -moz-transform:rotate(-20deg); transform:rotate(-20deg);}
+	60%{ -webkit-transform:rotate(20deg); -moz-transform:rotate(20deg); transform:rotate(20deg);}
+	80%{ -webkit-transform:rotate(-20deg); -moz-transform:rotate(-20deg); transform:rotate(-20deg);}
+}
+@keyframes tags{
+	30%{ -webkit-transform:rotate(-20deg); -moz-transform:rotate(-20deg); transform:rotate(-20deg);}
+	60%{ -webkit-transform:rotate(20deg); -moz-transform:rotate(20deg); transform:rotate(20deg);}
+	80%{ -webkit-transform:rotate(-20deg); -moz-transform:rotate(-20deg); transform:rotate(-20deg);}
+}
+
+/** share ico **/
+#bdshare a{ -webkit-filter:grayscale(100%); -moz-filter:grayscale(100%); filter:grayscale(100%); filter:gray;}
+#bdshare a:hover{ -webkit-filter:grayscale(0); -moz-filter:grayscale(0); filter:grayscale(0);}

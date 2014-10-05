@@ -1,0 +1,285 @@
+<config>
+{
+    "title": "简单日历组件"
+}
+</config>
+
+<style>
+li { list-style: none;}
+.form{ width: 500px; margin: 100px auto;}
+.form input { padding: 2px 5px; width: 160px; height: 22px;}
+.form label{ float: left; width: 80px; height: 28px; line-height: 28px;}
+/* 日历组件 */
+body{ font: 12px/1.5 "Microsoft Yahei", SimSun, Arial;}
+.calendar{ position: absolute; display: none; width: 210px; margin: 0 auto; border: 1px solid #e5e5e5;}
+.calendar .title{ padding-top: 3px; font-size: 14px; color: #0069CA; text-align: center;}
+.calendar ol{ border-bottom: 1px solid #e5e5e5; color: #555;}
+.calendar li{ float: left; width: 30px; height: 30px; line-height: 30px; text-align: center; font-family: Arial, "Microsoft Yahei";}
+
+/* 日历状态 */
+.calendar ul{ background: url(img/calendar-bg.png) no-repeat 36px 60px;}
+.calendar ul li{ cursor: pointer;}
+.calendar ul li:hover{ cursor: pointer; background-color: #fdab00; color: #fff;}
+.calendar ul .blank{ cursor: default; background-color: #fff;}
+.calendar ul .blank:hover{ background-color: #fff;}
+.calendar .week{ color: #c60b02;}
+.calendar .pass{ color: #999; cursor: not-allowed;}
+.calendar .pass:hover{ cursor: not-allowed; background: none; color: #999;}
+.calendar .today{ background-color: #6899ff; color: #fff;}
+.calendar .today:hover{ background-color: #6899ff; color: #fff;}
+
+/* 年月切换 */
+.prev-year,
+.prev-month,
+.next-year,
+.next-month{ position: absolute; top: 5px; left: 5px; width: 16px; text-decoration: none; font-family: SimSun; font-weight: bold; color: #666;}
+.prev-year:hover,
+.prev-month:hover,
+.next-year:hover,
+.next-month:hover{ color: #999;}
+.prev-month{ left: 28px;}
+.next-year{ left:auto; right: 5px;}
+.next-month{ left:auto; right: 28px;}
+
+/* 月份背景 */
+.calendar .c-1{ background-position: 56px 35px;}
+.calendar .c-2{ background-position: -114px 35px;}
+.calendar .c-3{ background-position: -286px 35px;}
+.calendar .c-4{ background-position: 56px -125px;}
+.calendar .c-5{ background-position: -114px -125px;}
+.calendar .c-6{ background-position: -286px -125px;}
+.calendar .c-7{ background-position: 56px -282px;}
+.calendar .c-8{ background-position: -114px -282px;}
+.calendar .c-9{ background-position: -286px -282px;}
+.calendar .c-10{ background-position: 56px -437px;}
+.calendar .c-11{ background-position: -114px -437px;}
+.calendar .c-12{ background-position: -286px -437px;}
+</style>
+
+<form class="form" action="#">
+    <label for="date">选择时间：</label>
+    <input id="date" type="text" my-calendar="true" name="date" />
+</form>
+
+<script>
+/**
+ * 日历组件
+ */
+(function(){
+    var arr = [];
+    window.myCalendar = function(id){
+        var ipt = document.getElementById(id);
+        if(ipt.getAttribute('my-calendar') !== 'true') return;
+        
+        var tmplArr = [
+            '<a class="prev-year" href="javascript:;">&lt;&lt;</a>',
+            '<a class="prev-month" href="javascript:;">&lt;</a>',
+            '<a class="next-year" href="javascript:;">&gt;&gt;</a>',
+            '<a class="next-month" href="javascript:;">&gt;</a>',
+            '<dl>',
+            '<dt class="title"></dt>',
+            '<dd>',
+            '   <ol class="clearfix">',
+            '       <li>一</li>',
+            '       <li>二</li>',
+            '       <li>三</li>',
+            '       <li>四</li>',
+            '       <li>五</li>',
+            '       <li class="week">六</li>',
+            '       <li class="week">七</li>',
+            '   </ol>',
+            '   <ul class="clearfix"></ul>',
+            '</dd>',
+            '</dl>'
+        ];
+
+        var calendar = document.createElement('div');
+        calendar.className = 'calendar';
+        calendar.innerHTML = tmplArr.join('');
+        document.body.appendChild(calendar);
+        arr.push(calendar);
+
+        ipt.onfocus = function(){
+            for(var i = 0; i < arr.length; i++){
+                arr[i].style.display = 'none';
+            }
+            calendar.style.display = 'block';
+            calendar.style.top = getPos(ipt).top + ipt.offsetHeight + 'px';
+            calendar.style.left = getPos(ipt).left + 'px';
+        };
+
+        // 隐藏calendar
+        ipt.onclick = calendar.onclick = function(ev){
+            var oEvent = ev || event;
+            oEvent.cancelBubble = true;
+        };
+
+        // 此处需使用事件绑定，防止直接使用onclick发生覆盖
+        addEvent(document, 'click', function(){
+            calendar.style.display = 'none';
+        });
+
+        /*var timer = null;
+        ipt.onblur = function(){
+            timer = setTimeout(function(){
+                calendar.style.display = 'none';
+            }, 200);
+        };
+        calendar.onclick = function(){
+            clearTimeout(timer);
+            ipt.focus();
+        };*/
+
+        // var calendar = getByClass(document, 'calendar')[0];
+        var ul = calendar.getElementsByTagName('ul')[0];
+        var title = calendar.getElementsByTagName('dt')[0];
+        var pMonth = getByClass(calendar, 'prev-month')[0];
+        var pYear = getByClass(calendar, 'prev-year')[0];
+        var nMonth = getByClass(calendar, 'next-month')[0];
+        var nYear = getByClass(calendar, 'next-year')[0];
+        var adjust = 0; // 切换年份月份调整
+
+        // 获取日期相关参数
+        function getArgu(){
+            var date = new Date();
+            // 先保存今天日期，再进行调整
+            var today = date.getDate();
+            // 获取本月一号星期几
+            date.setMonth(date.getMonth()+adjust, 1);
+            var day = date.getDay();
+            // *显式*将日期设置为1号，防止31号切换月份出现bug(上边以设置)
+            date.setDate(1);
+            // 获取本月天数
+            date.setMonth(date.getMonth()+1, 0);
+            var num = date.getDate();
+            return {
+                num: num,               // 本月天数
+                day: day,               // 本月1号星期几
+                year: date.getFullYear(), // 需显示的年份
+                month: date.getMonth(), // 需显示的月份
+                today: today            // 今天的日期
+            }
+        }
+
+        function updateDate(){
+            ul.innerHTML = '';
+            // 设置title文字
+            title.innerHTML = getArgu().year + '年' + (getArgu().month+1) + '月';
+            // 给ul添加背景 ul的class值为: 'clearfix c-11'
+            ul.className = 'clearfix c-' +  (getArgu().month+1);
+
+            // 创建空白li
+            var day = getArgu().day;
+            if(day === 0) day = 7; // 矫正星期日
+            day--;
+            for(var i = 0; i < day; i++){
+                var li = document.createElement('li');
+                ul.appendChild(li);
+            }
+
+            // 循环创建本月日期
+            var d = getArgu().num;
+            for(var j = 0; j < d; j++){
+                var li = document.createElement('li');
+                li.innerHTML = j + 1;
+                ul.appendChild(li);
+                li.onclick = function(ev){
+                    if(this.className === 'pass') return;
+                    ipt.value = getArgu().year + '-' + (getArgu().month+1) + '-' + this.innerHTML;
+                    calendar.style.display = 'none';
+                    if(ev){
+                        ev.stopPropagation();
+                    }else{
+                        event.cancelBubble = true;
+                    }
+                }
+            }
+
+            // 设置日期状态
+            var allLi = ul.children;
+            var today = getArgu().today;
+            for(var k = 0; k < allLi.length; k++){
+                if(adjust < 0){ 
+                    allLi[k].className = 'pass';
+                }else if(adjust === 0){
+                    if(parseInt(allLi[k].innerHTML) < today || allLi[k].innerHTML == ''){
+                        allLi[k].className = 'pass';
+                    }else if(parseInt(allLi[k].innerHTML) === today){
+                        allLi[k].className = 'today';
+                    }else{  // 还未过去的日期
+                        if(k % 7 === 5 || k % 7 === 6){
+                            allLi[k].className = 'week';
+                        }
+                    }               
+                }else{
+                    if(k % 7 === 5 || k % 7 === 6){
+                        allLi[k].className = 'week';
+                    }
+                }
+            }
+        }
+
+        updateDate();
+
+        // 切换月份年份
+        pMonth.onclick = function(){
+            adjust--;
+            updateDate();
+        };
+        nMonth.onclick = function(){
+            adjust++;
+            updateDate();
+        };
+        pYear.onclick = function(){
+            adjust-=12;
+            updateDate();
+        };
+        nYear.onclick = function(){
+            adjust+=12;
+            updateDate();
+        };
+    };
+
+    // getByClass
+    function getByClass(p, c){
+        if(p.getElementsByClassName){
+            return p.getElementsByClassName(c);
+        }else{
+            var res = [];
+            var re = new RegExp('(^|\\s)' + c + '(\\s|$)', 'i');
+            var ele = p.getElementsByTagName('*');
+            for(var i = 0; i < ele.length; i++){
+                if(re.test(ele[i].className)){
+                    res.push(ele[i]);
+                }
+            }
+            return res;
+        }
+    }
+
+    // getPos
+    function getPos(obj){
+        var l = t = 0;
+        while(obj){
+            l += obj.offsetLeft;
+            t += obj.offsetTop;
+            obj = obj.offsetParent;
+        }
+        return { top: t, left: l}
+    }
+
+    // addEvent
+    function addEvent(obj, type, fn){
+        if(obj.addEventListener){
+            obj.addEventListener(type, fn, false);
+        }else{
+            obj.attachEvent('on'+type, fn);
+        }
+    }
+})();
+
+
+window.onload = function(){
+    myCalendar('date');
+}
+</script>

@@ -1,0 +1,200 @@
+<config>
+{
+    "title": "面向对象-焦点图"
+}
+</config>
+
+<link rel="stylesheet" href="css/focus.css">
+<div class="focus">
+	<div class="focus-img">
+		<ul>
+			<li style="display: block; opacity: 1; filter: alpha(opacity=100); background-image: url(img/qiyi-1.jpg)"><a title="《被解救的姜戈》全面感受昆汀暴力美学的冲击" href="#"></a></li>
+			<li style="background-image: url(img/qiyi-2.jpg)"><a title="抹布女也有春天》[更新至9集]“抹布女”逆袭" href="#"></a></li>
+			<li style="background-image: url(img/qiyi-3.jpg)"><a title="威尼斯观影：蔡明亮新作《郊游》 挑战先锋艺术" href="#"></a></li>
+			<li style="background-image: url(img/qiyi-4.jpg)"><a title="青春那些事儿：阿sa揭娱乐圈潜规则 与男友感情并不稳定" href="#"></a></li>
+			<li style="background-image: url(img/qiyi-5.jpg)"><a title="《璀璨人生》[更新至22集]闺蜜夺爱终极腹黑" href="#"></a></li>
+			<li style="background-image: url(img/qiyi-6.jpg)"><a title="康熙来了：小S痴恋吴奇隆狂揩油 贴面愿与男神拍床戏" href="#"></a></li>
+			<li style="background-image: url(img/qiyi-7.jpg)"><a title="VIP会员独享爱奇艺电视首发终极优惠！" href="#"></a></li>
+			<li style="background-image: url(img/qiyi-8.jpg)"><a title="健康相对论：两性生活提高活力，小时代男色经验谈" href="#"></a></li>
+			<li style="background-image: url(img/qiyi-9.jpg)"><a title="乐朝天下要闻联播-谁敢比我猛" href="#"></a></li>
+			<li style="background-image: url(img/qiyi-10.jpg)"><a title="中国大学生电视节青奥主题竞赛单元出征！" href="#"></a></li>
+		</ul>
+	</div>
+	<div class="focus-txt clearfix">
+		<div class="focus-txt-bg png-fix"></div>
+		<div class="focus-txt-btn"><a class="png-fix" href="#"></a></div>
+		<div class="focus-txt-con"><a href="#">《被解救的姜戈》全面感受昆汀暴力美学的冲击</a></div>
+	</div>
+	<div class="focus-nav png-fix">
+		<ul class="focus-nav-list clearfix">
+			<li class="current"><img src="img/focus-nav-1.jpg" alt=""></li>
+			<li><img src="img/focus-nav-2.jpg" alt=""></li>
+			<li><img src="img/focus-nav-3.jpg" alt=""></li>
+			<li><img src="img/focus-nav-4.jpg" alt=""></li>
+			<li><img src="img/focus-nav-5.jpg" alt=""></li>
+			<li><img src="img/focus-nav-6.jpg" alt=""></li>
+			<li><img src="img/focus-nav-7.jpg" alt=""></li>
+			<li><img src="img/focus-nav-8.jpg" alt=""></li>
+			<li><img src="img/focus-nav-9.jpg" alt=""></li>
+			<li><img src="img/focus-nav-10.jpg" alt=""></li>
+		</ul>
+	</div>
+</div>
+
+<script>
+window.onload = function(){
+	new Focus('focus');
+};
+
+function getByClass(oParent, sClass){
+    if(oParent.getElementsByClassName){
+        return oParent.getElementsByClassName(sClass);
+    }else{
+		var aRes = [];
+		var re = new RegExp('(^|\\s)' + sClass + '($|\\s)', 'i');
+		var aEle = oParent.getElementsByTagName('*');
+		for(var i = 0; i < aEle.length; i++){
+		    if(re.test(aEle[i].className)){
+		        aRes.push(aEle[i]);
+		    }
+		}
+		return aRes;
+    }
+}
+
+function css(obj, attr, value){
+	if(arguments.length === 2){
+		return obj.currentStyle ? obj.currentStyle[attr] : getComputedStyle(obj, false)[attr];
+	}else{
+		obj.style[attr] = value;
+	}
+}
+
+function addClass(obj, sClass){
+	removeClass(obj, sClass);
+	obj.className += ' ' + sClass;
+}
+
+function removeClass(obj, sClass){
+	var re = new RegExp('(^|\\s)' + sClass + '($|\\s)', 'gi');
+	obj.className = obj.className.replace(re, '');
+}
+
+function move(obj, json, fnEnd){
+	clearInterval(obj.timer);
+
+	obj.timer = setInterval(function(){
+		var canStop = true;	// 是否可以停止定时器
+		for(var attr in json){
+
+			/* 获取当前值 */
+			var cur = 0;
+			if(attr == 'opacity'){
+				cur = Math.round(css(obj, 'opacity') * 100);
+			}else{
+				cur = parseInt(css(obj, attr)) || 0;	// 若未设置，则赋值为0
+			}
+
+			if(cur != json[attr]){
+				canStop = false;
+			}
+
+			/* 计算速度 */
+			var speed = (json[attr] - cur)/6;
+			speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+
+			/* 运动 */
+			if(attr == 'opacity'){
+				obj.style.opacity = (cur + speed)/100;
+				obj.style.filter = 'alpha(opacity = ' + (cur + speed) + ')';
+			}else{
+				obj.style[attr] = (cur + speed) + 'px';
+			}
+		}
+
+		if(canStop){ // 都到达目标值，结束定时器
+			clearInterval(obj.timer);
+			if(fnEnd){ fnEnd();}
+		}
+	}, 30);
+}
+
+/* focus */
+function Focus(sClass){
+	this.target = sClass;
+	this.init();
+	this.addEvent();
+	this.autoPlay();
+	this.hover();
+}
+
+Focus.prototype = {
+	init: function(){
+		this.oFocus = getByClass(document, this.target)[0];
+		this.aLink = getByClass(document, 'focus-img')[0].getElementsByTagName('a');
+		this.aImgLi = getByClass(document, 'focus-img')[0].getElementsByTagName('li');
+		this.aNavLi = getByClass(document, 'focus-nav')[0].getElementsByTagName('li');
+		this.focusTxt = getByClass(document, 'focus-txt')[0];
+		this.oTxt = getByClass(document, 'focus-txt-con')[0].getElementsByTagName('a')[0];
+		this.iNum = 0;
+		this.timer = null;
+	},
+	addEvent: function(){
+		for (var i = 0; i < this.aNavLi.length; i++) {
+			var that = this;
+			that.aNavLi[i].index = i;
+			that.aNavLi[i].onclick = function(){
+				if(that.iNum === this.index){
+					return;
+				}
+				that.iNum = this.index;
+				that.tab();
+			};
+		};
+	},
+	tab: function(){
+		var that = this;
+		for (var i = 0; i < that.aNavLi.length; i++) {
+			removeClass(that.aNavLi[i], 'current');
+			that.aImgLi[i].style.display = 'none';
+			that.aImgLi[i].style.opacity = '0';
+			that.aImgLi[i].style.filter = '(opacity = 0)';
+		};
+		that.focusTxt.style.bottom = '-20px';
+		that.focusTxt.style.opacity = '0';
+		that.focusTxt.style.filter = 'alpha(opacity = 0)';
+		addClass(that.aNavLi[that.iNum], 'current');
+		that.aImgLi[that.iNum].style.display = 'block';
+		move(that.aImgLi[that.iNum], {opacity: 100}, function(){
+			move(that.focusTxt, {bottom: 0, opacity: 100}, function(){
+				removeClass(that.focusTxt, 'focus-txt-hidden');
+			})
+		});
+		that.oTxt.innerHTML = that.aLink[that.iNum].title;
+	},
+	next: function(){
+		var that = this;
+		that.iNum++;
+		if(that.iNum >= 10){
+			that.iNum = 0;
+		}
+		that.tab();
+	},
+	autoPlay: function(){
+		var that = this;
+		that.timer = setInterval(function(){
+			that.next.call(that);
+		}, 5000);
+	},
+	hover: function(){
+		var that = this;
+		that.oFocus.onmouseover = function(){
+			clearInterval(that.timer);
+		};
+		that.oFocus.onmouseout = function(){
+			that.autoPlay();
+		};
+	}
+}
+</script>
+

@@ -1,0 +1,93 @@
+<config>
+{
+    "title": "无缝滚动"
+}
+</config>
+<style>
+body { background-color: #555;}
+img { vertical-align: middle;}
+#box { overflow: hidden; position: relative; width: 800px; height: 123px; margin: 150px auto 20px; background-color: #fff;}
+ul { position: absolute; left: 0; top: 0;}
+li {list-style: none;  float: left; width: 150px; padding: 5px;}
+h2,
+h3 { text-align: center; font: 12px/30px "Microsoft Yahei"; color: #fff;}
+h2 { font-size: 16px;}
+</style>
+
+<div id="box">
+	<ul>
+		<li><img src="img/roll-1.jpg" height="113" width="150" alt=""></li>
+		<li><img src="img/roll-2.jpg" height="113" width="150" alt=""></li>
+		<li><img src="img/roll-3.jpg" height="113" width="150" alt=""></li>
+		<li><img src="img/roll-4.jpg" height="113" width="150" alt=""></li>
+		<li><img src="img/roll-5.jpg" height="113" width="150" alt=""></li>
+	</ul>
+</div>
+<h2>无缝滚动demo</h2>
+<h3>← →键可以控制滚动方向</h3>
+
+<script>
+window.onload = function () {
+	var box = document.getElementById('box');
+	var ul = box.getElementsByTagName('ul')[0];
+	var li = box.getElementsByTagName('li');
+
+	ul.innerHTML += ul.innerHTML;
+	ul.style.width = li.length * li[0].offsetWidth + 'px';
+	var w = ul.offsetWidth/2;
+
+	var speed = -5;	// 默认速度
+	document.onkeydown = function (ev) {
+		var oEvent = ev || event;
+		if (oEvent.keyCode === 37) {
+			speed = -5;
+		} else if (oEvent.keyCode === 39) {
+			speed = 5;
+		}
+	};
+
+	var left = 0;
+	function roll() {
+		left += speed;
+		ul.style.left = (left%w - w)%w + 'px';
+	}
+	
+	var timer = setInterval(roll, 30);
+
+
+	box.onmouseover = function () {
+		clearInterval(timer);
+	};
+
+	box.onmouseout = function () {
+		timer = setInterval(roll, 30)
+	};
+
+	
+	/*  向左移动 假设5张图 每张宽100
+		left	% 500	actual
+		0		% 500	0
+		-100	% 500	-100
+		-200	% 500	-200
+		-300	% 500	-300
+		-400	% 500	-400
+		-500	% 500	0
+		-600	% 500	-100
+	 */
+	
+	/*  向右移动 假设5张图 每张宽100(向右移动的规律同样适用向左)
+		left	%500	-500	% 500	actual
+		0		0		-500	0		0
+		100		100 	-400	-400	-400
+		200		200		-300	-300	-300
+		300		300		-200	-200	-200
+		400		400		-100	-100	-100
+		500		0		-500	0		0
+		600		100		-400	-400	-400
+		700		200		-300	-300	-300
+		800 	300		-200	-200	-200
+		900 	400		-100	-100	-100
+		1000	0		-500	0		0
+	 */
+};
+</script>
