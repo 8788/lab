@@ -1,0 +1,148 @@
+@charset "utf-8";
+
+/**
+ * @fileOverview 
+ */
+
+$wrapWidth: 480px;
+$gridSize: 80px;
+$baseGap: 15px;
+$boxSize: ($gridSize + $baseGap)*4;
+/* $bgMap: (
+	0: #ccc0b2,
+	2: #eee4da,
+	4: #ece0c8,
+	8: #f2b179,
+	16: #f59563,
+	32: #f57c5f
+); */
+
+body {
+	overflow: hidden;
+	font-family: "Clear Sans", "Helvetica Neue", Arial, "Microsoft Yahei", SimSun;
+}
+
+.wraper {
+	width: 480px;
+	height: 560px;
+	margin: 10px auto 0;
+	background-color: #efefef;
+}
+.head,
+.box {
+	
+}
+
+.head {
+	width: $boxSize + $baseGap;
+	height: 100px;
+	margin: 0 auto;
+	padding-top: 30px;
+	line-height: 48px;
+}
+
+.title {
+	color: #776E65;
+	line-height: 48px;
+}
+
+.score {
+	float: right;
+
+	span {
+		margin-left: 10px;
+		padding: 10px 15px;
+		color: #ECE0C8;
+		background-color: #BBADA0;
+	}
+	em {
+		font-style: normal;
+		color: #fff;
+	}
+}
+
+.tips {
+	margin-top: 10px;
+	line-height: 24px;
+	font-size: 14px;
+}
+
+.box {
+	position: relative;
+	width: $boxSize;
+	height: $boxSize;
+	margin: 0 auto;
+	padding-top: $baseGap;
+	*padding-bottom: $baseGap;
+	padding-left: $baseGap;
+	border-radius: 5px;
+	background-color: #BBADA0;
+}
+
+.grid { 
+	position: absolute;
+	width: $gridSize;
+	height: $gridSize;
+	border-radius: 3px;
+	filter:progid:DXImageTransform.Microsoft.gradient(enabled='true',startColorstr='#59EEE4DA', endColorstr='#59EEE4DA');
+	background-color: rgba(238, 228, 218, 0.35);
+}
+
+.number {
+	overflow: hidden;
+	position: absolute;
+	border-radius: 3px;
+	width: $gridSize;
+	height: $gridSize;
+	line-height: $gridSize;	
+	font-size: 36px;
+	font-weight: bold;
+	text-align: center;
+	color: #fff;
+}
+
+// background color
+// .value-0 {  
+//     background: #ccc0b2;
+// }  
+.value-2 {
+    background: #eee4da;
+    color: #776E65;
+}  
+.value-4 {
+    background: #ece0c8;
+    color: #776E65;
+}  
+.value-8 {
+    background: #f2b179;
+}  
+.value-16 {
+    background:#f59563;
+}  
+.value-32 {
+    background:#f57c5f;
+}  
+.value-64 {
+    background:#f65d3b;  
+}  
+.value-128 {
+    background:#edce71;
+}  
+.value-256 {
+    background:#edcc61;  
+}  
+.value-512 {
+    background:#ecc850;  
+}  
+.value-1024 {
+    background:#edc53f;  
+}  
+.value-2048 {
+    background:#eec22e;  
+}
+.value-4096 {
+    background:#aa66cc;  
+}
+.value-8192 {
+    background:#9933cc;  
+}

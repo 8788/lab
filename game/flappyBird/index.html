@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>flappy bird 像素鸟游戏 - javascript</title>
+<meta name="description" content="javascript flappy bird, javascript像素鸟">
+<meta name="keywords" content="javascript flappy bird, javascript像素鸟">
+<link href="../../common/css/global.css" rel="stylesheet">
+<link href="../../common/css/page.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+		<div class="game" id="game">
+			<div class="main">
+				
+				<div class="lawn" id="lawn"></div>
+			</div>
+			<div class="mask"></div>
+		</div>
+    </div>
+
+<script src="../../common/js/page.js"></script>
+<script src="js/common.js"></script>
+<script src="js/game.js"></script>
+<script>
+    var ele = document.getElementById('game');
+    var game = new Game(ele);
+    game.init();
+</script>
+<script src="http://s11.cnzz.com/stat.php?id=5886804&web_id=5886804&show=pic1" language="JavaScript"></script>
+</body>
+</html>
