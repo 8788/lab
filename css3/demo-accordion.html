@@ -1,0 +1,86 @@
+<config>
+{
+    "title": "纯css3实现手风琴效果"
+}
+</config>
+
+<style type="text/css">
+.accordion {
+    width: 300px;
+    margin: 100px auto;
+}
+.item-title {
+    display: block;
+    height: 36px;
+    padding: 0 10px;
+    line-height: 36px;
+    background-color: #08C;
+    color: #fff;
+    border-bottom: 1px solid #eee;
+}
+.item-title:hover {
+    color: #fff;
+}
+.item-con {
+    max-height: 0;
+    overflow: hidden;
+    -webkit-transition: max-height 0.5s ease-out;
+    -moz-transition: max-height 0.5s ease-out;
+    transition: max-height 0.5s ease-out;
+}
+li {
+    padding-left: 20px;
+    line-height: 28px;
+    border-bottom: 1px solid #eee;
+    background-color: #ddd;
+}
+
+.item:target .item-con {
+    max-height: 116px;
+}
+</style>
+
+<div class="accordion">
+    <div class="item" id="collapse1">
+        <a class="item-title" href="#collapse1">Collapsible Group Item #1</a>
+        <div class="item-con">
+            <ul>
+                <li>test list #1</li>
+                <li>test list #1</li>
+                <li>test list #1</li>
+            </ul>
+        </div>
+    </div>
+    <div class="item" id="collapse2">
+        <a class="item-title" href="#collapse2">Collapsible Group Item #2</a>
+        <div class="item-con">
+            <ul>
+                <li>test list #2</li>
+                <li>test list #2</li>
+                <li>test list #2</li>
+                <li>test list #2</li>
+            </ul>
+        </div>
+    </div>
+    <div class="item" id="collapse3">
+        <a class="item-title" href="#collapse3">Collapsible Group Item #3</a>
+        <div class="item-con">
+            <ul>
+                <li>test list #3</li>
+                <li>test list #3</li>
+                <li>test list #3</li>
+            </ul>
+        </div>
+    </div>
+    <div class="item" id="collapse4">
+        <a class="item-title" href="#collapse4">Collapsible Group Item #4</a>
+        <div class="item-con">
+            <ul>
+                <li>test list #4</li>
+                <li>test list #4</li>
+                <li>test list #4</li>
+                <li>test list #4</li>
+            </ul>
+        </div>
+    </div>
+</div>

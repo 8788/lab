@@ -1,0 +1,62 @@
+﻿<config>
+{
+	"title": "rgba"
+}
+</config>
+
+<style type="text/css">
+	.rgba-1{ width:50px; height:50px; background:rgb(255,0,0); }
+	.rgba-2{ width:50px; height:50px; background:rgba(255,0,0,.8); }
+	.rgba-3{ width:50px; height:50px; background:rgba(255,0,0,.6); }
+	.rgba-4{ width:50px; height:50px; background:rgba(255,0,0,.4); }
+	.rgba-5{ width:50px; height:50px; background:rgba(255,0,0,.2); }
+	.rgba-6{ width:50px; height:50px; background:rgba(255,0,0,0); }		
+	.rgba-list li{float:left; text-align:center; line-height:50px; list-style-type:none; }	
+</style>
+
+<h2>rgba</h2>
+<h3>语法</h3>
+<pre>
+R：红色值。正整数 | 百分数
+G：绿色值。正整数 | 百分数
+B：蓝色值。正整数| 百分数
+A：透明度。取值0~1之间</pre>
+		
+<h3>说明</h3>
+<div class="alert alert-info">
+	RGBA在RGB的基础上多了控制alpha透明度的参数。以上R、G、B三个参数，正整数值的取值范围为：0 - 255。百分数值的取值范围为：0.0% - 100.0%。超出范围的数值将被截至其最接近的取值极限。并非所有浏览器都支持使用百分数值。A参数，取值在0~1之间，不可为负值。			
+</div>
+
+<h3>纯色不透明</h3>
+<div class="rgba-1"></div>
+<pre class="prettyprint linenums">.rgba-1{ width:50px; height:50px; background:rgb(255,0,0); }</pre>
+
+<h3>不透明度0.8</h3>
+<div class="rgba-2"></div>
+<pre class="prettyprint linenums">.rgba-2{ width:50px; height:50px; background:rgba(255,0,0,.8); }</pre>
+
+<h3>不透明度0.6</h3>
+<div class="rgba-3"></div>
+<pre class="prettyprint linenums">.rgba-3{ width:50px; height:50px; background:rgba(255,0,0,.6); }</pre>
+
+<h3>不透明度0.4</h3>
+<div class="rgba-4"></div>
+<pre class="prettyprint linenums">.rgba-2{ width:50px; height:50px; background:rgba(255,0,0,.4); }</pre>
+
+<h3>不透明度0.2</h3>
+<div class="rgba-5"></div>
+<pre class="prettyprint linenums">.rgba-3{ width:50px; height:50px; background:rgba(255,0,0,.2); }</pre>
+
+<h3>不透明度0 <small>完全透明</small></h3>
+<div class="rgba-6" style="border:1px solid #ccc;"></div>
+<pre class="prettyprint linenums">.rgba-3{ width:50px; height:50px; background:rgba(255,0,0,0); border:1px solid #ccc;/*加边框看得清楚*/ }</pre>		
+
+<h3>对比</h3>
+<ul class="rgba-list">
+	<li class="rgba-1">1</li>
+	<li class="rgba-2">0.8</li>
+	<li class="rgba-3">0.6</li>
+	<li class="rgba-4">0.4</li>
+	<li class="rgba-5">0.2</li>
+	<li class="rgba-6">0</li>
+</ul>

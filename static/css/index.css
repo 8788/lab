@@ -1,0 +1,47 @@
+@charset "utf-8";
+/**
+* project : lab.css
+* version : 1.0
+* last change : 2013.03.08
+* Author : @Bubblings
+*
+*/
+html{overflow:hidden; }
+body{ position:relative; height:100%; font:12px/1.5 Helvetica, Tahoma, Arial, "Microsoft YaHei", SimSun, sans-serif; }
+.tips{ text-align:center;}
+img[src="http://icon.cnzz.com/img/pic1.gif"]{ display: none;}
+
+.header{ height:40px; background:url(img/header-bg.png) repeat; box-shadow:0 0 10px rgba(0,0,0,.3);}
+.container{ overflow:hidden; width:auto; _position:relative; _top:auto; _bottom:auto; _height:100%;}
+.aside{ overflow:auto; position:absolute; top:50px; bottom:10px; left:10px; width:240px; border:1px solid #ccc; box-shadow:0 0 5px rgba(0,0,0,.3); _top:10px;}
+.main{ overflow:auto; position:absolute; top:50px; right:10px; bottom:10px; left:260px; border:1px solid #ccc; box-shadow:0 0 5px rgba(0,0,0,.3); _zomm:1; _top:10px; _position:static; _height:80%; _margin-top:10px; _margin-left:260px;}
+.main-noaside{ left: 25px;}
+.noaside{ width: 5px;}
+
+.nav{}
+.content{ _position:relative; _overflow:auto; _height:100%; }
+.iframe{ position:absolute; top:0px; left:0px; width:100%; height:100%; }
+
+/* close open aside */
+.close-aside{ position: absolute; top:50%; right:0px; margin-top:-17px; display: block; width: 5px; height: 35px; background: url(img/close.gif) no-repeat;}
+.open-aside{ background: url(img/open.gif) no-repeat;}
+
+/* header */
+.header-link{ float:right; padding:10px 20px 0 0;}
+.header-link a{ padding:0 5px; color:#fff; text-decoration:none; font:14px/20px "Microsoft YaHei";}
+.header-link a:hover{ text-decoration:underline;}
+
+.animation-logo{ float:left; position:relative; width:200px; height:80px; margin-left:20px; padding:10px;}
+.animation-logo p{ opacity:0; color:#fff; font-size:16px;}
+.animation-logo .txt-1{
+	margin-left:60px;
+	-webkit-animation:txt-1-move 2s ease-out;
+	-moz-animation:txt-1-move 2s ease-out;
+	animation:txt-1-move 2s ease-out;
+}
+@-webkit-keyframes txt-1-move{
+	0%{margin-left:0px;opacity:0;}
+	50%{margin-left:30px;opacity:1; -webkit-transform:skew(-15deg);}
+	70%{margin-left:35px;opacity:1;}
+	100%{margin-left:60px;opacity:0; -webkit-transform:skew(-30deg);}
+}

@@ -1,0 +1,71 @@
+﻿<config>
+{
+	"title": "border-radius"
+}
+</config>
+<style type="text/css">
+	.border-radius-1{ width:100px; height:100px; background-color:pink; -moz-border-radius:10px; -webkit-border-radius:10px; border-radius:10px;}
+	.border-radius-2{ width:100px; height:100px; background-color:pink; -moz-border-radius:10px/30px; -webkit-border-radius:10px/30px; border-radius:10px/30px;}
+	.border-radius-3{ width:100px; height:100px; background-color:pink; -moz-border-top-left-radius:10px; -webkit-border-top-left-radius:10px; border-top-left-radius:10px;}
+	.border-radius-4{ width:100px; height:100px; background-color:pink; -moz-border-top-left-radius:10px 30px; -webkit-border-top-left-radius:10px 30px; border-top-left-radius:10px 30px;}
+</style>
+
+<h2>border-radius</h2>
+<h3>语法</h3>		
+<pre  class="prettyprint linenums">
+border-radius ： none | <length>{1,4} [/ <length>{1,4} ]?
+相关属性：border-top-left-radius, border-top-right-radius, border-botton-left-radius, border-bottom-right-radius</pre>
+
+
+<div class="alert alert-info">统一设置各边圆角</div>
+<h3>普通圆角<small>水平半径与垂直半径相等</small></h3>
+<div class="border-radius-1"></div>
+<pre  class="prettyprint linenums">
+.border-radius-1{
+	width:100px;
+	height:100px;
+	background-color:pink;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+}</pre>
+	
+<h3>特殊圆角<small>水平半径与垂直半径不相等</small></h3>
+<div class="border-radius-2"></div>
+<pre  class="prettyprint linenums">
+.border-radius-2{
+	width:100px;
+	height:100px;
+	background-color:pink;
+	-moz-border-radius:10px/30px;	/*==="/"前表示水平半径，"/"后表示垂直半径===*/
+	-webkit-border-radius:10px/30px;
+	border-radius:10px/30px;
+}</pre>		
+	
+<div class="alert alert-info">单独设置某边圆角<small>以左上角为例</small></div>
+
+<h3>普通圆角<small>水平半径与垂直半径相等</small></h3>
+<div class="border-radius-3"></div>
+<pre  class="prettyprint linenums">
+.border-radius-3{
+	width:100px;
+	height:100px;
+	background-color:pink;
+	-moz-border-top-left-radius:10px;
+	-webkit-border-top-left-radius:10px;
+	border-top-left-radius:10px;
+}</pre>		
+
+
+<h3>特殊圆角<small>水平半径与垂直半径不相等</small></h3>
+<div class="border-radius-4"></div>
+<pre  class="prettyprint linenums">
+.border-radius-4{
+	width:100px;
+	height:100px;
+	background-color:pink;
+	-moz-border-top-left-radius:10px 30px; /*=== 注：此处水平半径与垂直半径之间无 "/" ===*/
+	-webkit-border-top-left-radius:10px 30px;
+	border-radius:10px 30px;
+}</pre>	
+<div class="alert alert-block">说明：border-top-right-radius, border-bottom-left-radius, border-bottom-right-radius属性同border-top-left-radius</div>

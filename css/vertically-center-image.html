@@ -1,0 +1,132 @@
+﻿<config>
+{
+	"title": "图片垂直居中"
+}
+</config>
+
+<style type="text/css">
+	.box-1{ display:table;}
+	.img-wrap-1{ display:table-cell; width:200px; height:200px; border:1px solid #ccc; text-align:center; *font-size:178px; zoom:1; vertical-align:middle;}	
+	/* height与font-size之比大约为：1:0.893 */
+	.img-wrap-1 img{ }
+	
+	.box-2{}
+	.img-wrap-2{ display:inline-block; zoom:1; width:200px; height:200px; line-height:200px; border:1px solid #ccc; text-align:center;}
+	.img-wrap-2 img{ vertical-align:middle; width:auto; margin:0 auto;}
+	
+	.box-3{ display:inline-block; width:200px; height:200px; border:1px solid #ccc; text-align:center;}
+	.img-wrap-3 button{ width:100%; height:100%; border:0; background:none;}
+	.img-wrap-3 img{ cursor:pointer;}
+	
+	.box-4{ display:inline-block; width:200px; height:200px; border:1px solid #ccc; text-align:center;}
+	.blank{ width:0px; height:100%; vertical-align:middle;}
+</style>
+
+<h2>图片垂直居中<small>(兼容各主流浏览器，含IE6/IE7)</small></h2>
+<h3>1.利用table-cell实现居中，font-size做兼容<small>兼容IE6+/FF/Chrome</small></h3>
+<div class="alert alert-info">
+	优点：不添加任何多余标签，兼容主流浏览器
+</div>
+<div class="box-1">
+	<a class="img-wrap-1" href="#">
+		<img src="images/1.png" alt="" />
+	</a>
+</div>
+<pre  class="prettyprint linenums">
+&lt;!--html结构--&gt;
+&lt;div class="box-1"&gt;
+	&lt;a class="img-wrap-1" href="#"&gt;
+		&lt;img src="images/1.png" alt="" /&gt;
+	&lt;/a&gt;
+&lt;/div&gt;
+</pre>
+<pre  class="prettyprint linenums">
+/* 样式 */
+.box-1{ display:table;}
+.img-wrap-1{ display:table-cell; width:200px; height:200px; border:1px solid #ccc; text-align:center; *font-size:178px; zoom:1; vertical-align:middle;}
+/* height与font-size之比大约为：1:0.893; zoom:1是为了触发IE的hasLayout */
+</pre>
+	
+<h3>2.利用line-height实现居中<small>兼容IE7+/FF/Chrome</small></h3>
+<div class="alert alert-info">
+	优点：不需要任何hack，兼容IE7+主流浏览器<br />
+	缺点：此方法不兼容IE6，当然也可以用方法1中的font-size来兼容IE6
+</div>
+<div class="box-2">
+	<a class="img-wrap-2" href="#">
+		<img src="images/1.png" alt="" />
+	</a>
+</div>
+
+
+<pre  class="prettyprint linenums">
+&lt;!--html结构--&gt;
+&lt;div class="box-2"&gt;
+	&lt;a class="img-wrap-2" href="#"&gt;
+		&lt;img src="images/1.png" alt="" /&gt;
+	&lt;/a&gt;
+&lt;/div&gt;
+</pre>
+<pre  class="prettyprint linenums">
+/* 样式 */
+.img-wrap-2{ display:inline-block; width:200px; height:200px; line-height:200px; border:1px solid #ccc; text-align:center;}
+.img-wrap-2 img{ vertical-align:middle;}
+</pre>
+		
+
+
+<h3>3.利用button标签实现居中<small>兼容IE6+/FF/Chrome</small></h3>
+<div class="alert alert-info">
+	优点：不需要任何hack，兼容IE6+主流浏览器<br />
+	缺点：添加了多余的标签button
+</div>
+<div class="box-3">
+	<a class="img-wrap-3" href="http://baidu.com/" target="_blank">
+		<button disabled="disabled"><img src="images/1.png" alt="" /></button>
+	</a>
+</div>
+<pre  class="prettyprint linenums">
+&lt;!--html结构--&gt;
+&lt;div class="box-3"&gt;
+	&lt;a class="img-wrap-3" href="http://baidu.com/" target="_blank"&gt;
+		&lt;button disabled="disabled"&gt;&lt;img src="images/1.png" alt="" /&gt;&lt;/button&gt;
+	&lt;/a&gt;
+&lt;/div&gt;
+</pre>
+<pre  class="prettyprint linenums">
+/* 样式 */
+.box-3{ display:inline-block; width:200px; height:200px; border:1px solid #ccc; text-align:center;}
+.img-wrap-3 button{ width:100%; height:100%; border:0; background:none;}
+.img-wrap-3 img{ cursor:pointer;}
+</pre>
+
+
+	
+<h3>4.利用1px小图片实现垂直居中<small>兼容IE6+/FF/Chrome</small></h3>
+<div class="alert alert-info">
+	优点：不需要任何hack，兼容IE6+主流浏览器<br />
+	缺点：添加了多余的标签img
+</div>
+<div class="box-4">
+	<img class="blank" src="images/blank.gif" alt="" />
+	<a class="img-wrap-4" href="#" target="_blank">
+		<img src="images/1.png" alt="" />
+	</a>
+</div>
+<pre  class="prettyprint linenums">
+&lt;!--html结构--&gt;
+&lt;div class="box-4"&gt;
+	&lt;img class="blank" src="images/blank.gif" alt="" /&gt;
+	&lt;a class="img-wrap-4" href="#" target="_blank"&gt;
+		&lt;img src="images/1.png" alt="" /&gt;
+	&lt;/a&gt;
+&lt;/div&gt;
+</pre>
+<pre  class="prettyprint linenums">
+/* 样式 */
+.box-4{ display:inline-block; width:200px; height:200px; border:1px solid #ccc; text-align:center;}
+.blank{ width:0px; height:100%; vertical-align:middle;}
+</pre>
+	
+<div class="alert">当然，垂直居中的方法不止以上几种，但目前较常用的也就这几个，而且兼容性比较好，后面若发现更好的方法再进行补充</div>
+</div>

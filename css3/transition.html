@@ -1,0 +1,112 @@
+﻿<config>
+{
+	"title": "transition"
+}
+</config>
+
+<style type="text/css">
+.transition-1{ padding:10px 20px; display: inline-block; background-color:#f00; -webkit-transition:background 1s linear; -moz-transition:background 1s linear; transition:background 1s linear; }
+.transition-1:hover{ background-color:#009; color:#fff; }
+.transition-2{ width:100px; height:100px; line-height:100px; text-align:center; border-radius:50px/50px; background-color:orange; -webkit-transition:all 1s linear; -moz-transition:all 1s linear; transition:all 1s linear; }
+.transition-2:hover{ -webkit-transform:rotate(360deg); -moz-transform:rotate(360deg); transform:rotate(360deg); }
+.transition-3{ width:100px; height:100px; line-height:100px; text-align:center; background-color:#369; -webkit-transition:all .5s linear; -moz-transition:all .5s linear; transition:all .5s linear; }
+.transition-3:hover{ -webkit-transform:scale(1.2); -moz-transform:scale(1.2); transform:scale(1.2); }
+.transition-4{ width:100px; height:100px; line-height:100px; text-align:center; border-radius:50px/50px; background-color:#963; -webkit-transition:all 1s linear; -moz-transition:all 1s linear; transition:all 1s linear;}
+.transition-4:hover{ background-color:#909; color:#fff; box-shadow:0 0 20px rgba(0,0,0,.7); -webkit-transform:rotate(720deg) scale(2); -moz-transform:rotate(720deg) scale(2); transform:rotate(720deg) scale(2); }
+</style>
+
+
+<h2>transition</h2>
+<h3>语法</h3>
+<pre class="prettyprint linenums">
+transition：[ transition-property ] || [ transition-duration ] || [ transition-timing-function ] || [ transition-delay ]
+transition-property：all | none | &lt;property&gt;[ ,&lt;property&gt; ]*：设置对象中的参与过渡的属性,默认值为all
+transition-duration：&lt;time&gt;[ ,&lt;time&gt; ]*：设置对象过渡的持续时间，默认值为0
+transition-timing-function：linear | ease | ease-in | ease-out | ease-in-out | cubic-bezier(<number>, <number>, <number>, <number>)[,重复]*：设置对象中过渡的动画类型
+transition-delay：&lt;time&gt;[ ,&lt;time&gt; ]*：设置对象延迟过渡的时间
+</pre>
+
+
+<h3>悬停切换背景</h3>
+<span class="transition-1">悬停切换背景</span>
+<pre class="prettyprint linenums">
+.transition-1{ 
+	padding:10px 20px; 
+	background-color:#f00; 
+	-webkit-transition:background 1s linear; 
+	-moz-transition:background 1s linear; 
+	transition:background 1s linear; 
+}
+.transition-1:hover{ 
+	background-color:#009; 
+	color:#fff; 
+}</pre>
+
+
+<h3>悬停旋转</h3>
+<p class="transition-2">旋转</p>
+<pre class="prettyprint linenums">
+.transition-2{ 
+	width:100px; 
+	height:100px; 
+	line-height:100px; 
+	text-align:center; 
+	border-radius:50px/50px; 
+	background-color:orange; 
+	-webkit-transition:all 1s linear; 
+	-moz-transition:all 1s linear; 
+	transition:all 1s linear; 
+}
+.transition-2:hover{ 
+	-webkit-transform:rotate(360deg);
+	-moz-transform:rotate(360deg); 
+	transform:rotate(360deg); 
+}
+</pre>
+
+
+<h3>悬停缩放</h3>
+<p class="transition-3">放大</p>
+<pre class="prettyprint linenums">
+.transition-3{ 
+	width:100px; 
+	height:100px; 
+	line-height:100px; 
+	text-align:center; 
+	background-color:#369; 
+	-webkit-transition:all .5s linear; 
+	-moz-transition:all .5s linear; 
+	transition:all .5s linear; 
+}
+.transition-3:hover{ 
+	-webkit-transform:scale(1.2); 
+	-moz-transform:scale(1.2); 
+	transform:scale(1.2); 
+}
+</pre>
+
+
+<h3>组合过渡效果<small>悬停测试效果</small></h3>
+<p class="transition-4">前端实验室</p>
+<pre class="prettyprint linenums">
+.transition-4{ 
+	width:100px; 
+	height:100px; 
+	line-height:100px; 
+	text-align:center; 
+	border-radius:50px/50px;
+	background-color:#963; 
+	-webkit-transition:all 1s linear; 
+	-moz-transition:all 1s linear; 
+	transition:all 1s linear;
+}
+.transition-4:hover{ 
+	background-color:#909; 
+	color:#fff; 
+	box-shadow:0 0 20px rgba(0,0,0,.7); 
+	-webkit-transform:rotate(720deg) scale(2); 
+	-moz-transform:rotate(720deg) scale(2); 
+	transform:rotate(720deg) scale(2); 
+}</pre>
+	
+<div class="alert">说明：以上demo都是通过hover事件来触发动画，也可以通过js来增删class来实现。</div>

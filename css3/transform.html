@@ -1,0 +1,131 @@
+﻿<config>
+{
+    "title": "transform"
+}
+</config>
+
+
+<style type="text/css">
+.rotate-1{ width:100px; height:100px; background-color:#f90; -webkit-transform:rotate(30deg); -moz-transform:rotate(30deg); transform:rotate(30deg); }
+.scale{ display:inline-block; width:100px; height:100px; line-height:100px; text-align:center; background-color:#66f;}
+.scale-1{ display:inline-block; width:100px; height:100px; line-height:100px; text-align:center; background-color:#66f; -webkit-transform:scale(0.5, 0.5); -moz-transform:scale(0.5, 0.5); transform:scale(0.5, 0.5);}
+.scale-2{ display:inline-block; width:100px; height:100px; line-height:100px; margin-left:20px; text-align:center; background-color:#66f; -webkit-transform:scale(1.5, 1.5); -moz-transform:scale(1.5, 1.5); transform:scale(1.5, 1.5); }
+.translate-wrap{ display:inline-block; width:100px; height:100px; margin:0 0 20px 20px; border:1px solid red;}
+.translate-wrap div{ width:100px; height:100px; line-height:100px; text-align:center; font-size:12px; background:rgba(0,0,0,.3);}
+.translate-1{}
+.translate-2{ -webkit-transform:translate(10px); -moz-transform:translate(10px); transform:translate(10px);}
+.translate-3{ -webkit-transform:translate(-10px, -10px); -moz-transform:translate(10px, -10px); transform:translate(10px, -10px);}
+.skew{ display:inline-block; margin-right:50px; width:100px; height:100px; line-height:100px; text-align:center; background-color:#90f;}
+.skew-1{ -webkit-transform:skew(30deg); -moz-transform:skew(30deg); transform:skew(30deg);}
+.skew-2{ -webkit-transform:skew(0, 10deg); -webkit-transform:skew(0,10deg); transform:skew(0,10deg);}
+.skew-3{ -webkit-transform:skew(30deg, 10deg); -webkit-transform:skew(30deg, 10deg); transform:skew(30deg, 10deg);}
+</style>
+
+
+<h2>transform</h2>
+<h3>语法</h3>
+<pre class="prettyprint linenums">
+transform: none| rotate | scale | skew | translate | matrix;
+通过transform-origin可以设置转换参考位置，默认值为50% 50%,即 center center
+1.rotate(&lt;angle&gt;)：旋转，参照转换中心旋转，如transform:rotate(60deg);
+2.scale(&lt;number&gt;[, &lt;number&gt;])：缩放，参数1表示沿X轴方向缩放，参数2表示沿Y轴方向缩放，如果只提供一个参数，则第二个参数值与第一个相等，相关属性：scaleX(&lt;number&gt;), scaleY(&lt;number&gt;)
+3.translate(&lt;length&gt;[, &lt;length&gt;])：平移，参数1表示沿X轴方向平移，参数2表示沿Y轴方向平移，如果只提供一个参数，则第二个参数值为0，相关属性：translateX(&lt;length&gt;), translateY(&lt;length&gt;)
+4.skew(&lt;angle&gt;[,&lt;angle&gt;]):扭曲，参数1表示沿X轴方向扭曲，参数2参数表示沿Y轴方向扭曲，如果只提供一个参数，则第二个参数为0，相关属性：skewX(&lt;angle&gt;), skewY(&lt;angle&gt;)
+5.matrix(&lt;number&gt;,&lt;number&gt;,&lt;number&gt;,&lt;number&gt;,&lt;number&gt;,&lt;number&gt;)：以一个含六值的(a,b,c,d,e,f)变换矩阵的形式指定一个2D变换，相当于直接应用一个[a,b,c,d,e,f]变换矩阵
+</pre>
+
+<h3>一、旋转rotate</h3>
+<div class="rotate-1"></div>
+<pre class="prettyprint linenums" style="margin-top:30px;">
+.rotate-1{ 
+    width:100px;
+    height:100px; 
+    background-color:#f90; 
+    -webkit-transform:rotate(30deg); 
+    -moz-transform:rotate(30deg); 
+    transform:rotate(30deg); //顺时针旋转30度
+}</pre>
+
+
+<h3>二、缩放scale</h3>
+<div class="scale">默认状态</div>
+<div class="scale-1">缩小50%</div>
+<div class="scale-2">放大50%</div>
+<pre class="prettyprint linenums" style="margin-top:30px;">
+.scale-1{ /*缩小*/
+    display:inline-block; 
+    width:100px; 
+    height:100px; 
+    line-height:100px; 
+    text-align:center; 
+    background-color:#66f; 
+    -webkit-transform:scale(0.5, 0.5); 
+    -moz-transform:scale(0.5, 0.5); 
+    transform:scale(0.5, 0.5);
+}
+.scale-2{ /*放大*/
+    display:inline-block; 
+    width:100px; 
+    height:100px;
+    line-height:100px;
+    margin-left:20px; 
+    text-align:center;
+    background-color:#66f; 
+    -webkit-transform:scale(1.5, 1.5); 
+    -moz-transform:scale(1.5, 1.5);
+    transform:scale(1.5, 1.5);
+}
+/*说明：如果X,Y轴 缩放的倍数一致的话，也可以只写一个值，如：transform:scale(0.8);
+也可以通过scaleX(&lt;number&gt;), scaleY(&lt;number&gt;)来分别设置X,Y轴的缩放情况*/</pre>
+
+<h3>三、移动translate</h3>
+<div class="translate-wrap">
+    <div class="translate-1">默认状态</div>
+</div>
+
+<div class="translate-wrap">
+    <div class="translate-2">向右偏移10</div>
+</div>
+
+<div class="translate-wrap">
+    <div class="translate-3">向上左各偏移10</div>
+</div>      
+
+<pre class="prettyprint linenums">
+/*元素的非变形属性省略不写*/
+.translate-2{ /*向右偏移10px*/
+    -webkit-transform:translate(10px); 
+    -moz-transform:translate(10px); 
+    transform:translate(10px);
+}
+
+.translate-3{ /*向上左各偏移10*/
+    -webkit-transform:translate(-10px, -10px); 
+    -moz-transform:translate(10px, -10px); 
+    transform:translate(10px, -10px);
+}
+/*说明：translate属性与scale属性有所不同，如果只给一个值的话，默认第二个值为0
+也可以通过translateX(&lt;number&gt;), translateY(&lt;number&gt;)来分别设置X,Y轴的移动情况*/</pre>
+
+
+<h3>四、扭曲skew</h3>
+<div class="skew">无扭曲</div>
+<div class="skew skew-1">X:扭曲30</div>
+<div class="skew skew-2">Y:扭曲10</div>
+<div class="skew skew-3">Y:扭曲(30.10)</div>
+<pre class="prettyprint linenums" style="margin-top:20px;">
+.skew-1{ /*沿X方向扭曲30deg*/
+    -webkit-transform:skew(30deg); 
+    -moz-transform:skew(30deg); 
+    transform:skew(30deg);
+}
+.skew-2{ /*沿Y方向扭曲10deg*/
+    -webkit-transform:skew(0, 10deg);
+    -moz-transform:skew(0,10deg); 
+    transform:skew(0,10deg);
+}
+.skew-3{ /*沿X、Y方向分别扭曲30deg, 10deg*/
+    -webkit-transform:skew(30deg, 10deg); 
+    -moz-transform:skew(30deg, 10deg); 
+    transform:skew(30deg, 10deg);
+}</pre>

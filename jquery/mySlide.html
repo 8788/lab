@@ -1,0 +1,208 @@
+﻿<config>
+{
+    "title": "jquery 图片轮播插件"
+}
+</config>
+
+<style type="text/css">
+.slide{ position:relative; zoom:1; overflow:hidden; width:715px;}
+.slide .slide-list{ width:10000px;}
+.slide .slide-list li{ float:left;}
+.slide .slide-list li a{ display:inline-block; zoom:1;}
+.slide .slide-nav{ position:absolute; bottom:10px; right:10px; height:10px; font-size:0;}
+.slide .slide-nav li{ cursor:pointer; display:inline-block; *display:inline; zoom:1; margin-left:3px; width:10px; height:10px; background-color:#333; font-size:12px; _overflow:hidden;}
+.slide .slide-nav .active{ background-color:#fff;}
+</style>
+
+<h2>简单图片轮播插件<small>兼容IE6+, FF, Chrome等主流浏览器</small></h2>
+<h3>水平滚动切换</h3>
+<div class="slide slide-1">
+    <ul class="slide-list cls">
+        <li><a href="#"><img src="images/1.jpg" alt="" /></a></li>
+        <li><a href="#"><img src="images/2.jpg" alt="" /></a></li>
+        <li><a href="#"><img src="images/3.jpg" alt="" /></a></li>
+        <li><a href="#"><img src="images/4.jpg" alt="" /></a></li>
+    </ul>
+    <ol class="slide-nav">
+        <li class="active"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ol>
+</div>
+    
+<pre class="prettyprint linenums">
+==== html ====
+&lt;div class="slide slide-1"&gt;
+    &lt;ul class="slide-list cls"&gt;
+        &lt;li&gt;&lt;a href="#"&gt;&lt;img src="images/1.jpg" alt="" /&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;&lt;img src="images/2.jpg" alt="" /&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;&lt;img src="images/3.jpg" alt="" /&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;&lt;img src="images/4.jpg" alt="" /&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;ol class="slide-nav"&gt;
+        &lt;li class="active"&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+&lt;/div&gt;
+</pre>
+
+<pre class="prettyprint linenums">
+==== css ====
+.slide{ position:relative; zoom:1; overflow:hidden; width:715px;}
+.slide .slide-list{ width:10000px;}
+.slide .slide-list li{ float:left;}
+.slide .slide-list li a{ display:inline-block; zoom:1;}
+.slide .slide-nav{ position:absolute; bottom:10px; right:10px; height:10px; font-size:0;}
+.slide .slide-nav li{ cursor:pointer; display:inline-block; *display:inline; zoom:1; margin-left:3px; width:10px; height:10px; background-color:#333; font-size:12px; _overflow:hidden;}
+.slide .slide-nav .active{ background-color:#fff;}
+</pre>
+
+<pre class="prettyprint linenums">
+==== jquery ====
+;(function(){
+    $.fn.mySlide = function(options){
+        var opts = $.extend({}, $.fn.mySlide.defaults, options);
+        return this.each(function(){
+            var that = $(this);
+            var now = 0;
+            var timer = null;
+            that.find('.slide-nav li').bind(opts.eventType, function(){
+                now = $(this).index();
+                show();
+            });
+
+            function show(){
+                var liLength = $('.slide-list li').width();
+                if( opts.effect == 'horizontal'){
+                    that.find('.slide-list').animate({'margin-left':-now * liLength}, 'slow');
+                }else if( opts.effect == 'fade'){
+                    that.find('.slide-list li').fadeOut();
+                    that.find('.slide-list li').eq(now).fadeIn();
+                }else{
+                    that.find('.slide-list li').hide();
+                    that.find('.slide-list li').eq(now).show();
+                }
+                that.find('.slide-nav li').removeClass('active');
+                that.find('.slide-nav li').eq(now).addClass('active');
+            }
+
+            timer = setInterval(autoPlay,opts.autoTime);
+
+            that.bind('mouseover', function(){
+                clearInterval(timer);
+            }).bind('mouseout', function(){
+                timer = setInterval(autoPlay,opts.autoTime);
+            });
+
+            function autoPlay(){
+                now++;
+                if(now >= that.find('.slide-nav li').length){
+                    now = 0;
+                }
+                show();
+            }
+        });
+    }
+    $.fn.mySlide.defaults = {
+        eventType: 'mouseover',
+        effect: 'horizontal',
+        autoTime: '4000'
+    }
+}(jQuery)); 
+$('.slide-1').mySlide({eventType: 'click'});
+$('.slide-2').mySlide({eventType: 'click', effect: 'fade', autoTime: '4000'});
+$('.slide-3').mySlide({effect: 'none', autoTime: '5000'});
+</pre>
+
+        
+<h3>淡入淡出点击切换</h3>
+<div class="slide slide-2">
+    <ul class="slide-list cls">
+        <li><a href="#"><img src="images/3.jpg" alt="" /></a></li>
+        <li><a href="#"><img src="images/4.jpg" alt="" /></a></li>
+        <li><a href="#"><img src="images/1.jpg" alt="" /></a></li>
+        <li><a href="#"><img src="images/2.jpg" alt="" /></a></li>
+    </ul>
+    <ol class="slide-nav">
+        <li class="active"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ol>
+</div>      
+
+<h3>无特效切换切换</h3>
+<div class="slide slide-3">
+    <ul class="slide-list cls">
+        <li><a href="#"><img src="images/1.jpg" alt="" /></a></li>
+        <li><a href="#"><img src="images/2.jpg" alt="" /></a></li>
+        <li><a href="#"><img src="images/3.jpg" alt="" /></a></li>
+        <li><a href="#"><img src="images/4.jpg" alt="" /></a></li>
+    </ul>
+    <ol class="slide-nav">
+        <li class="active"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ol>
+</div>
+
+<script type="text/javascript">
+    ;(function () {
+        $.fn.mySlide = function(options){
+            var opts = $.extend({}, $.fn.mySlide.defaults, options);
+            return this.each(function(){
+                var that = $(this);
+                var now = 0;
+                var timer = null;
+                that.find('.slide-nav li').bind(opts.eventType, function(){
+                    now = $(this).index();
+                    show();
+                });
+
+                function show(){
+                    var liLength = $('.slide-list li').width();
+                    if( opts.effect == 'horizontal'){
+                        that.find('.slide-list').animate({'margin-left':-now * liLength}, 'slow');
+                    }else if( opts.effect == 'fade'){
+                        that.find('.slide-list li').fadeOut();
+                        that.find('.slide-list li').eq(now).fadeIn();
+                    }else{
+                        that.find('.slide-list li').hide();
+                        that.find('.slide-list li').eq(now).show();
+                    }
+                    that.find('.slide-nav li').removeClass('active');
+                    that.find('.slide-nav li').eq(now).addClass('active');
+                }
+
+                timer = setInterval(autoPlay,opts.autoTime);
+
+                that.bind('mouseover', function(){
+                    clearInterval(timer);
+                }).bind('mouseout', function(){
+                    timer = setInterval(autoPlay,opts.autoTime);
+                });
+
+                function autoPlay(){
+                    now++;
+                    if(now >= that.find('.slide-nav li').length){
+                        now = 0;
+                    }
+                    show();
+                }
+            });
+        }
+        $.fn.mySlide.defaults = {
+            eventType: 'mouseover',
+            effect: 'horizontal',
+            autoTime: '4000'
+        }
+    }(jQuery)); 
+    $('.slide-1').mySlide({eventType: 'click'});
+    $('.slide-2').mySlide({eventType: 'click', effect: 'fade', autoTime: '4000'});
+    $('.slide-3').mySlide({effect: 'none', autoTime: '5000'});
+</script>
+

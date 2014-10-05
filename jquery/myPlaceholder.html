@@ -1,0 +1,177 @@
+﻿<config>
+{
+    "title": "placeholder插件"
+}
+</config>
+
+<style type="text/css">
+input{ vertical-align:middle; margin-bottom:0!important;}
+.placeholder{ display:inline-block; position:absolute; zoom:1; color:#c0c0c0; height:32px; line-height:32px; padding:0px 5px; _padding:2px 5px;}
+.placeholder-hide{ display:none;}
+.ipt{ height:30px!important; padding:0 5px!important;}
+</style>
+
+
+<h2>placeholder插件<small>(兼容IE6+, FF, Chrome等)</small></h2>
+<div class="alert alert-info">
+	placeholder虽然是html5新增的一个属性，但是在实际应用中确算不上一个新东西，很早以前大多数网站就在使用了。简单的说placeholder可以浅显的理解为输入框里的默认占位提示文字。而传统的实现placeholder的方法存在一些问题（下面会提到），今天就编写一个简单的插件存在的问题进行一些改进。
+</div>
+<h3>传统的placeholder</h3>
+<input class="old-ipt" type="text" placeholder="传统的placeholder" name="" id="" />（可在ie下测试）
+<pre class="prettyprint linenums">
+==== 实现代码 ====
+/** old placeholder **/
+;(function($){
+	$.fn.extend({
+		oldPlaceholder: function() {
+			if (!('placeholder' in document.createElement('input'))) {//测试浏览器是否支持placeholder属性
+				return this.each(function() {
+					var that = $(this);
+					placeholderTxt = that.attr('placeholder');	
+					/* 绑定事件 */
+					that.val(placeholderTxt).bind('focus', function(){
+						if( that.val() == placeholderTxt){
+							that.val('');
+						}
+					}).bind('blur', function(){
+						if(!that.val().length){
+							that.val(placeholderTxt);
+						}
+					});
+				});
+			}
+		}
+	})
+})(jQuery);	
+$('.old-ipt').oldPlaceholder();	
+</pre>
+
+<div class="alert alert-info">实现思路其实就是对于不支持placeholder的浏览器，把placeholder里的值赋给输入框的value。focus和blur时，执行对应的事件。虽然，实现了placeholder的功能，但却给后续的操作带来了隐患。请看下面的例子</div>
+<input class="old-ipt" type="text" placeholder="请输入用户名"/><input type="submit" class="btn" value="提交" onclick="alert($(this).prev('.old-ipt').val())"/> <br /><br />		
+<input class="old-ipt" type="text" placeholder="请输入关键字" name="" id="" /><input type="submit" class="btn" value="搜索" onclick="alert($(this).prev('.old-ipt').val())"/> <br /><br />
+<div class="alert alert-error">
+	如果你在IE, FF, Chrome下分别测试了的话，你会发现对于支持placeholder属性的浏览器alert出来的值都为空，而在ie下，alert的值为placeholder的值，因此应用到项目中的话 不论是普通表单还是搜索功能，都需要对输入框的值进行判断，而且仔细观察你还会发现，IE下的placeholder里的字体颜色也不是灰色，如果要实现灰色又需要进行判断... 再者，如果后期需求调整了，要求用图片来代替文字占位符。。。好吧，应该要崩溃了。。。因此要对这个功能进行改进。
+</div>
+<h3>改进后的placeholder</h3>
+<div class="alert alert-info">
+	先看例子，请在IE下测试并与上面的进行对比。
+</div>
+<input class="ipt" type="text" placeholder="请输入用户名"/><input type="submit" class="btn" value="提交" onclick="alert($(this).prev('.ipt').val())"/> <br /><br />		
+<input class="ipt" type="text" placeholder="请输入关键字" name="" id="" /><input type="submit" class="btn" value="搜索" onclick="alert($(this).prev('.ipt').val())"/> <br /><br />		
+<div class="alert alert-info">
+	实现思路：针对不支持placeholder的浏览器，在对应的输入框前面动态添加一个span，给span添加样式并绝对定位，同时赋予对应placeholder的值，然后通过输入框的值的状态，控制span的显示与隐藏。<br />
+	优势：<br />
+	1.对于表单类的提交，无需针对placehodler进行判断（搜索同理）<br />
+	2.span里的文字，可以通过样式来控制，模拟成灰色<br />
+	3.即便后期需求改成用图片做占位符，也只需给span添加背景即可，拓展性相比之前要好很多<br />
+	附上插件代码：（使用时需要根据情况适当调整span的样式）
+</div>
+
+<pre class="prettyprint linenums">
+/** new placeholder **/
+==== 样式 ====
+.placeholder{ display:inline-block; position:absolute; zoom:1; color:#c0c0c0; height:32px; line-height:32px; padding:0px 5px; _padding:2px 5px;}
+.placeholder-hide{ display:none;}
+
+==== jquery ====
+;(function($){
+	$.fn.extend({
+		myPlaceholder: function() {
+			if (!('placeholder' in document.createElement('input'))) {//测试浏览器是否支持placeholder属性
+				return this.each(function() {
+					var that = $(this);
+					var placeholderTxt = that.attr('placeholder');
+					/* 创建span */
+					var _span = $('&lt;span&gt;');
+					_span.attr('class', 'placeholder');
+					_span.text(placeholderTxt);
+					that.before(_span);
+					
+					if(that.val()){
+						_span.addClass('placeholder-hide');
+					}
+					/* 绑定事件 */
+					_span.bind('focus', function(){
+						_span.addClass('placeholder-hide');
+						that.focus();
+					});
+					that.bind('focus', function(){
+						_span.addClass('placeholder-hide');
+					}).bind('blur', function(){
+						if(!that.val().length){
+							_span.removeClass('placeholder-hide');
+						}
+					});
+				});
+			}
+		}
+	})
+})(jQuery);	
+$('.ipt').myPlaceholder();
+</pre>
+<script type="text/javascript">
+$(function(){
+
+	/** old placeholder **/
+	;(function($){
+		$.fn.extend({
+			oldPlaceholder: function() {
+				if (!('placeholder' in document.createElement('input'))) {//测试浏览器是否支持placeholder属性
+					return this.each(function() {
+						var that = $(this);
+						var placeholderTxt = that.attr('placeholder');	
+						/* 绑定事件 */
+						that.val(placeholderTxt).bind('focus', function(){
+							if( that.val() == placeholderTxt){
+								that.val('');
+							}
+						}).bind('blur', function(){
+							if(!that.val().length){
+								that.val(placeholderTxt);
+							}
+						});
+					});
+				}
+			}
+		})
+	})(jQuery);	
+	$('.old-ipt').oldPlaceholder();	
+	
+	/** new placeholder **/
+	;(function($){
+		$.fn.extend({
+			myPlaceholder: function() {
+				if (!('placeholder' in document.createElement('input'))) {//测试浏览器是否支持placeholder属性
+					return this.each(function() {
+						var that = $(this);
+						var placeholderTxt = that.attr('placeholder');
+						/* 创建span */
+						var _span = $('<span>');
+						_span.attr('class', 'placeholder');
+						_span.text(placeholderTxt);
+						that.before(_span);
+						
+						if(that.val()){
+							_span.addClass('placeholder-hide');
+						}
+						/* 绑定事件 */
+						_span.bind('focus', function(){
+							_span.addClass('placeholder-hide');
+							that.focus();
+						});
+						that.bind('focus', function(){
+							_span.addClass('placeholder-hide');
+						}).bind('blur', function(){
+							if(!that.val().length){
+								_span.removeClass('placeholder-hide');
+							}
+						});
+					});
+				}
+			}
+		})
+	})(jQuery);	
+	$('.ipt').myPlaceholder();	
+});
+</script>
+

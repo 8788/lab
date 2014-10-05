@@ -1,0 +1,117 @@
+<config>
+{
+    "title": "css常见两列布局方案"
+}
+</config>
+
+
+<h2>css常见两列布局方案</h2>
+<h3>一、固定宽度两列布局</h3>
+<h4>1.侧栏在左</h4>
+<pre class="prettyprint linenums">
+ &lt;div id="wrapper"&gt;
+	&lt;div id="header"&gt;header&lt;/div&gt;
+	&lt;div id="container" class="cls"&gt;
+		&lt;div id="aside"&gt;
+			&lt;div class="inner"&gt;aside&lt;/div&gt;
+		&lt;/div&gt;
+		&lt;div id="main"&gt;
+			&lt;div class="inner"&gt;main&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;div id="footer"&gt;footer&lt;/div&gt;
+&lt;/div&gt;  
+</pre>
+<pre class="prettyprint linenums">
+#header{ width: 980px; height: 90px; margin: 0 auto; background: #f60;}
+#container{ width: 980px; height: 500px; margin: 0 auto;}
+#aside{ float: left; width: 240px; height: 500px; background: #ccc;}
+#main{ float: left; width: 740px; height: 500px; background: orange;}
+#footer{ width: 980px; height: 90px; margin: 0 auto; background: #08f;}
+</pre>
+<a class="btn btn-success" href="demo/layout/fixed1.html" target="_blank">点击查看demo</a>
+<h4>2.侧栏在右</h4>
+<pre class="prettyprint linenums">
+ &lt;div id="wrapper"&gt;
+	&lt;div id="header"&gt;header&lt;/div&gt;
+	&lt;div id="container" class="cls"&gt;
+		&lt;div id="main"&gt;
+			&lt;div class="inner"&gt;main&lt;/div&gt;
+		&lt;/div&gt;
+		&lt;div id="aside"&gt;
+			&lt;div class="inner"&gt;aside&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;div id="footer"&gt;footer&lt;/div&gt;
+&lt;/div&gt;  
+</pre>
+<pre class="prettyprint linenums">
+#header{ width: 980px; height: 90px; margin: 0 auto; background: #f60;}
+#container{ width: 980px; height: 500px; margin: 0 auto;}
+#main{ float: left; width: 740px; height: 500px; background: orange;}
+#aside{ float:left; width: 240px; height: 500px; background: #ccc;}
+#footer{ width: 980px; height: 90px; margin: 0 auto; background: #08f;}
+</pre>
+<a class="btn btn-success" href="demo/layout/fixed2.html" target="_blank">点击查看demo</a>
+
+<h3>二、自适应布局</h3>
+<h4>1.固定左栏右侧自适应</h4>
+<pre class="prettyprint linenums">
+&lt;div id="wrapper"&gt;
+	&lt;div id="header"&gt;header&lt;/div&gt;
+	&lt;div id="container" class="cls"&gt;
+		&lt;div id="aside"&gt;
+			&lt;div class="inner"&gt;
+				aside
+				&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+		&lt;div id="main"&gt;
+			&lt;div class="inner"&gt;
+				main
+				&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;div id="footer"&gt;footer&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+<pre class="prettyprint linenums">
+#header{ width: 96%; height: 90px; margin: 0 auto; background: #f60;}
+#container{ width: 96%; margin: 0 auto;}
+#aside{ float: left; width: 240px; background: #ccc;}
+#main{ margin-left: 240px; background: orange; }
+#footer{ width: 96%; height: 90px; margin: 0 auto; background: #08f;}
+</pre>
+<a class="btn btn-success" href="demo/layout/fluid1.html" target="_blank">点击查看demo</a>
+
+		<h4>2.固定右栏左侧自适应</h4>
+<pre class="prettyprint linenums">
+&lt;div id="wrapper"&gt;
+	&lt;div id="header"&gt;header&lt;/div&gt;
+	&lt;div id="container" class="cls"&gt;
+		&lt;div id="main"&gt;
+			&lt;div class="inner"&gt;
+				main
+				&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+		&lt;div id="aside"&gt;
+			&lt;div class="inner"&gt;
+				aside
+				&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;div id="footer"&gt;footer&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+<pre class="prettyprint linenums">
+#header{ width: 96%; height: 90px; margin: 0 auto; background: #f60;}
+#container{ width: 96%; height: 500px; margin: 0 auto;}
+#main{ float: left; width: 100%; background: orange;}
+#main .inner{ padding-right: 240px;}
+#aside{ float: left; width: 240px; margin-left: -240px; background: #ccc;}
+#footer{ width: 96%; height: 90px; margin: 0 auto; background: #08f;}
+</pre>
+<a class="btn btn-success" href="demo/layout/fluid2.html" target="_blank">点击查看demo</a>

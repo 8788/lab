@@ -1,0 +1,249 @@
+﻿<config>
+{
+	"title": "animation"
+}
+</config>
+
+
+<style type="text/css">
+	@-webkit-keyframes changeBg{
+		0%{background-color:#000;}
+		20%{background-color:#300;}
+		40%{background-color:#600;}
+		60%{background-color:#900;}
+		80%{background-color:#f00;}
+	}
+	@-moz-keyframes changeBg{
+		0%{background-color:#000;}
+		20%{background-color:#300;}
+		40%{background-color:#600;}
+		60%{background-color:#900;}
+		80%{background-color:#f00;}
+	}
+	@keyframes changeBg{
+		0%{background-color:#000;}
+		20%{background-color:#300;}
+		40%{background-color:#600;}
+		60%{background-color:#900;}
+		80%{background-color:#f00;}
+	}
+	.animation-1{ width:200px; height:30px; line-height:30px; text-align:center; background-color:#000; color:#fff; }
+	.animation-1:hover{ -webkit-animation:changeBg 2s linear; -moz-animation:changeBg 2s linear; animation:changeBg 2s linear; background-color:#f00; }
+
+	@-webkit-keyframes textMove{
+		0%{ padding-left:0px;}
+		20%{ padding-left:50px;}
+		40%{ padding-left:100px;}
+		50%{ padding-left:125px;}
+		60%{ padding-left:100px;}
+		80%{ padding-left:50px;}
+	}
+	@-moz-keyframes textMove{
+		0%{ padding-left:0px;}
+		20%{ padding-left:50px;}
+		40%{ padding-left:100px;}
+		50%{ padding-left:125px;}
+		60%{ padding-left:100px;}
+		80%{ padding-left:50px;}
+	}
+	@keyframes textMove{
+		0%{ padding-left:0px;}
+		20%{ padding-left:50px;}
+		40%{ padding-left:100px;}
+		50%{ padding-left:125px;}
+		60%{ padding-left:100px;}
+		80%{ padding-left:50px;}
+	}
+	.animation-2{ background-color:pink; padding:10px 0;}
+	.animation-2:hover{ -webkit-animation:textMove 2s linear; -moz-animation:textMove 2s linear; animation:textMove 2s linear;}
+	
+
+	.animation-3{ position:relative; width:200px; height:100px; padding:10px; background-color:#ccc;}
+	.animation-3 p{ opacity:0;}
+	.txt-1{
+		margin-left:60px;
+		-webkit-animation:txt-1-move 2s ease-out;
+		-moz-animation:txt-1-move 2s ease-out;
+		animation:txt-1-move 2s ease-out;
+	}
+	@-webkit-keyframes txt-1-move{
+		0%{margin-left:0px;opacity:0;}
+		50%{margin-left:30px;opacity:1; -webkit-transform:skew(-15deg);}
+		70%{margin-left:35px;opacity:1;}
+		100%{margin-left:60px;opacity:0; -webkit-transform:skew(-30deg);}
+	}
+
+	.txt-2{
+		opacity:1;
+		height:36px; 
+		margin-top:10px; 
+		font:18px/36px "Microsoft Yahei";
+		-webkit-animation:txt-2-move 4s ease-out 4s;
+		-moz-animation:txt-2-move 4s ease-out 4s;
+		animation:txt-2-move 4s ease-out 4s;
+	}
+	@-webkit-keyframes txt-2-move{
+		0%{margin-left:0px;opacity:0;}
+		30%{margin-left:50px;opacity:1;}
+		35%{margin-left:55px;opacity:1;}
+		40%{margin-left:55px;opacity:1;}
+		41%{margin-left:55px;opacity:1; -webkit-transform:skew(-30deg)}
+		45%{margin-left:55px;opacity:1;}
+		50%{margin-left:50px;opacity:1;}
+		60%{margin-left:50px;opacity:.5;}
+		70%{margin-left:50px;opacity:1;}
+		80%{margin-left:50px;opacity:.5;}
+		90%{margin-left:50px;opacity:1;}
+		100%{margin-left:50px;opacity:1;}
+	}
+	
+	.txt-3{
+		position:absolute; 
+		bottom:10px;
+		right:0px;
+		margin-left:-60px;
+		-webkit-animation:txt-3-move 2s ease-out 2s;
+		-moz-animation:txt-3-move 2s ease-out 2s;
+		animation:txt-3-move 2s ease-out 2s;
+	}
+	@-webkit-keyframes txt-3-move{
+		0%{margin-right:0px;opacity:0;}
+		50%{margin-right:30px;opacity:1; -webkit-transform:skew(-15deg);}
+		70%{margin-right:35px;opacity:1;}
+		100%{margin-right:60px;opacity:0; -webkit-transform:skew(-30deg);}
+	}
+</style>
+
+
+<h2>animation</h2>
+<h3>渐变背景动画</h3>
+<p class="animation-1">悬停背景渐变</p>
+<pre class="prettyprint linenums">
+@-webkit-keyframes changeBg{
+	0%{background-color:#000;}
+	20%{background-color:#300;}
+	40%{background-color:#600;}
+	60%{background-color:#900;}
+	80%{background-color:#f00;}
+}
+@-moz-keyframes changeBg{
+	0%{background-color:#000;}
+	20%{background-color:#300;}
+	40%{background-color:#600;}
+	60%{background-color:#900;}
+	80%{background-color:#f00;}
+}
+@keyframes changeBg{
+	0%{background-color:#000;}
+	20%{background-color:#300;}
+	40%{background-color:#600;}
+	60%{background-color:#900;}
+	80%{background-color:#f00;}
+}
+.animation-1{ width:200px; height:30px; line-height:30px; text-align:center; background-color:#000; color:#fff; }
+.animation-1:hover{ -webkit-animation:changeBg 2s linear; -moz-animation:changeBg 2s linear; animation:changeBg 2s linear; background-color:#f00; }
+</pre>
+
+<h3>文字移动动画</h3>
+<p class="animation-2">悬停我就移动</p>
+<pre class="prettyprint linenums">		
+@-webkit-keyframes textMove{
+	0%{ padding-left:0px;}
+	20%{ padding-left:50px;}
+	40%{ padding-left:100px;}
+	50%{ padding-left:125px;}
+	60%{ padding-left:100px;}
+	80%{ padding-left:50px;}
+}
+@-moz-keyframes textMove{
+	0%{ padding-left:0px;}
+	20%{ padding-left:50px;}
+	40%{ padding-left:100px;}
+	50%{ padding-left:125px;}
+	60%{ padding-left:100px;}
+	80%{ padding-left:50px;}
+}
+@keyframes textMove{
+	0%{ padding-left:0px;}
+	20%{ padding-left:50px;}
+	40%{ padding-left:100px;}
+	50%{ padding-left:125px;}
+	60%{ padding-left:100px;}
+	80%{ padding-left:50px;}
+}
+.animation-2{ background-color:pink; padding:10px 0;}
+.animation-2:hover{ -webkit-animation:textMove 2s linear; -moz-animation:textMove 2s linear; animation:textMove 2s linear;}
+</pre>
+
+
+<h3>简单的复合动画</h3>
+<div class="animation-3">
+	<p>My Lab</p>
+	<p>前端实验室</p>
+	<p>My Lab</p>
+</div>
+<button class="btn btn-primary" style="margin-top:10px;">点我播放</button>
+<pre class="prettyprint linenums">
+/*由于代码较多，此处只附上加-webkit前缀*/
+.animation-3{ position:relative; width:200px; height:100px; padding:10px; background-color:#ccc;}
+.animation-3 p{ opacity:0;}
+.txt-1{
+	margin-left:60px;
+	-webkit-animation:txt-1-move 2s ease-out;
+	-moz-animation:txt-1-move 2s ease-out;
+	animation:txt-1-move 2s ease-out;
+}
+@-webkit-keyframes txt-1-move{
+	0%{margin-left:0px;opacity:0;}
+	50%{margin-left:30px;opacity:1; -webkit-transform:skew(-15deg);}
+	70%{margin-left:35px;opacity:1;}
+	100%{margin-left:60px;opacity:0; -webkit-transform:skew(-30deg);}
+}
+
+.txt-2{
+	opacity:1;
+	height:36px; 
+	margin-top:10px; 
+	font:18px/36px "Microsoft Yahei";
+	-webkit-animation:txt-2-move 4s ease-out 4s;
+	-moz-animation:txt-2-move 4s ease-out 4s;
+	animation:txt-2-move 4s ease-out 4s;
+}
+@-webkit-keyframes txt-2-move{
+	0%{margin-left:0px; opacity:0;}
+	30%{margin-left:50px; opacity:1;}
+	35%{margin-left:55px; opacity:1;}
+	40%{margin-left:55px; opacity:1;}
+	41%{margin-left:55px; opacity:1; -webkit-transform:skew(-30deg)}
+	45%{margin-left:55px; opacity:1;}
+	50%{margin-left:50px; opacity:1;}
+	60%{margin-left:50px; opacity:.5;}
+	70%{margin-left:50px; opacity:1;}
+	80%{margin-left:50px; opacity:.5;}
+	90%{margin-left:50px; opacity:1;}
+	100%{margin-left:50px; opacity:1;}
+}
+
+.txt-3{
+	position:absolute; 
+	bottom:10px;
+	right:0px;
+	margin-left:-60px;
+	-webkit-animation:txt-3-move 2s ease-out 2s;
+	-moz-animation:txt-3-move 2s ease-out 2s;
+	animation:txt-3-move 2s ease-out 2s;
+}
+@-webkit-keyframes txt-3-move{
+	0%{margin-right:0px; opacity:0;}
+	50%{margin-right:30px; opacity:1; -webkit-transform:skew(-15deg);}
+	70%{margin-right:35px; opacity:1;}
+	100%{margin-right:60px; opacity:0; -webkit-transform:skew(-30deg);}
+}
+</pre>
+<script>
+	$(function(){
+		$('button.btn').click(function(){
+			$('.animation-3').find('p').eq(0).addClass('txt-1').next('p').addClass('txt-2').next('p').addClass('txt-3');
+		})
+	});
+</script>

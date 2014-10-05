@@ -1,0 +1,116 @@
+﻿<config>
+{
+    "title": "jquery简单选项卡插件"
+}
+</config>
+
+<style type="text/css">
+	.tabs{ width:400px;}
+	.tabs-title{ height:30px; padding:0 10px; border:1px solid #ccc; background-color:#eee;}
+	.tabs-title li{ float:left; overflow:hidden; _height:30px; }
+	.tabs-title li a{ display:inline-block; height:30px; padding:0 10px; font:14px/30px SimSun; text-decoration:none; outline:0;}
+	.tabs-title .active{ background-color:#eee;}
+	.tabs-title .active a{ position:relative; margin-top:1px; background-color:#fff;}
+	.tabs-content{ width:378px; height:200px; padding:10px; border:1px solid #ccc; border-top:0;}
+	.tabs-content .option{ height:100%;}
+</style>
+
+
+<h2>简单选项卡<small>兼容IE6+, FF, Chrome等主流浏览器</small></h2>
+<div class="tabs tab1">
+	<ul class="tabs-title cls">
+		<li class="active"><a href="javascript:;">选项卡1</a></li>
+		<li><a href="javascript:;">选项卡2</a></li>
+		<li><a href="javascript:;">选项卡3</a></li>
+	</ul>
+	<div class="tabs-content">
+		<div class="option">选项卡1的内容</div>
+		<div class="option" style="display:none;">选项卡2的内容</div>
+		<div class="option" style="display:none;">选项卡3的内容</div>
+	</div>
+</div>
+
+<div class="tabs tab2" style="margin-top:20px;">
+	<ul class="tabs-title cls">
+		<li class="active"><a href="javascript:;">选项卡1</a></li>
+		<li><a href="javascript:;">选项卡2</a></li>
+		<li><a href="javascript:;">选项卡3</a></li>
+	</ul>
+	<div class="tabs-content">
+		<div class="option">选项卡1的内容（点击触发！）</div>
+		<div class="option" style="display:none;">选项卡2的内容（点击触发！）</div>
+		<div class="option" style="display:none;">选项卡3的内容（点击触发！）</div>
+	</div>
+</div>
+		
+<pre class="prettyprint linenums">
+==== html结构 ====
+&lt;div class="tabs"&gt;
+	&lt;ul class="tabs-title cls"&gt;
+		&lt;li class="active"&gt;&lt;a href="javascript:;"&gt;选项卡1&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="javascript:;"&gt;选项卡2&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="javascript:;"&gt;选项卡3&lt;/a&gt;&lt;/li&gt;
+	&lt;/ul&gt;
+	&lt;div class="tabs-content"&gt;
+		&lt;div class="option"&gt;选项卡1的内容&lt;/div&gt;
+		&lt;div class="option" style="display:none;"&gt;选项卡2的内容&lt;/div&gt;
+		&lt;div class="option" style="display:none;"&gt;选项卡3的内容&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+<pre class="prettyprint linenums">
+==== 样式 ====
+.tabs{ width:400px;}
+.tabs-title{ height:30px; padding:0 10px; border:1px solid #ccc; background-color:#eee;}
+.tabs-title li{ float:left; overflow:hidden; _height:30px; }
+.tabs-title li a{ display:inline-block; height:30px; padding:0 10px; font:14px/30px SimSun; text-decoration:none; outline:0;}
+.tabs-title .active{ background-color:#eee;}
+.tabs-title .active a{ position:relative; margin-top:1px; background-color:#fff;}
+.tabs-content{ width:378px; height:200px; padding:10px; border:1px solid #ccc; border-top:0;}
+.tabs-content .option{ height:100%;}
+</pre>
+
+<pre class="prettyprint linenums">
+==== jquery代码 ====
+;(function(){
+	$.fn.myTabs = function(options){
+		var opts = $.extend({}, $.fn.myTabs.defaults, options);
+		return this.each(function(){
+			var that = $(this);
+			that.find('.tabs-title li').bind(opts.eventType, function(){
+				that.find('.tabs-title li').removeClass('active');
+				$(this).addClass('active');
+				that.find('.option').hide().eq($(this).index()).show();
+			});
+		});
+	}
+	$.fn.myTabs.defaults = {
+		eventType: 'mouseover'
+	}
+}(jQuery));	
+$('.tab1').myTabs();
+$('.tab2').myTabs({eventType:'click'}); //此处可以自定义事件类型，默认为mouseover
+</pre>
+
+<script type="text/javascript">
+	;(function(){
+		$.fn.myTabs = function(options){
+			var opts = $.extend({}, $.fn.myTabs.defaults, options);
+			return this.each(function(){
+				var that = $(this);
+				that.find('.tabs-title li').bind(opts.eventType, function(){
+					that.find('.tabs-title li').removeClass('active');
+					$(this).addClass('active');
+					that.find('.option').hide().eq($(this).index()).show();
+				});
+			});
+		}
+		$.fn.myTabs.defaults = {
+			eventType: 'mouseover'
+		}
+	}(jQuery));	
+	$('.tab1').myTabs();
+	$('.tab2').myTabs({eventType:'click'});
+</script>
+

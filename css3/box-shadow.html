@@ -1,0 +1,83 @@
+﻿<config>
+{
+    "title": "box-shadow"
+}
+</config>
+
+<style type="text/css">
+    .box-shadow-1{ width:160px; padding:10px; text-align:center; background-color:#eee; -webkit-box-shadow:5px 5px rgba(0,0,0,.5); -moz-box-shadow:5px 5px rgba(0,0,0,.5); box-shadow:5px 5px rgba(0,0,0,.5);}
+    .box-shadow-2{ width:160px; padding:10px; text-align:center; background-color:#eee; -webkit-box-shadow:5px 5px 10px rgba(0,0,0,.5); -moz-box-shadow:5px 5px 10px rgba(0,0,0,.5); box-shadow:5px 5px 10px rgba(0,0,0,.5);}
+    .box-shadow-3{ width:160px; padding:10px; text-align:center; background-color:#eee; -webkit-box-shadow:5px 5px 10px 10px rgba(0,0,0,.5); -moz-box-shadow:5px 5px 10px 10px rgba(0,0,0,.5); box-shadow:5px 5px 10px 10px rgba(0,0,0,.5);}
+    .box-shadow-4{ width:160px; padding:10px; text-align:center; background-color:#eee; -webkit-box-shadow:inset 5px 5px 5px rgba(0,0,0,.5); -moz-box-shadow:inset 5px 5px 5px rgba(0,0,0,.5); box-shadow:inset 5px 5px 5px rgba(0,0,0,.5);}
+</style>
+
+
+<h2>box-shadow</h2>
+<h3>语法</h3>
+<pre class="prettyprint linenums">
+box-shadow：none | &lt;shadow&gt; [ , &lt;shadow&gt; ]*
+&lt;shadow&gt; = inset? && [ &lt;length&gt;{2,4} && &lt;color&gt;? ]
+</pre>
+
+
+<h3>说明</h3>
+<div class="alert alert-info">
+    值为none时表示无阴影<br />
+    inset:设置对象的阴影类型为内阴影。该值为空时，则对象的阴影类型为外阴影<br />
+    &lt;shadow&gt;中可取2-4个长度值和一个颜色值<br />
+    1.第1个长度值用来设置对象的阴影水平偏移值。可以为负值<br />
+    2.第2个长度值用来设置对象的阴影垂直偏移值。可以为负值<br />
+    3.第3个值可选，如果提供了第3个长度值则用来设置对象的阴影模糊值。不允许负值 <br />
+    4.第4个值可选，如果提供了第4个长度值则用来设置对象对象的阴影外延值。可以为负值<br />
+    5.最后一个值为阴影颜色，也可用rgba或hsla的透明色       
+</div>
+<h3>举例</h3>
+<div class="box-shadow-1">外阴影效果</div>
+<pre class="prettyprint linenums">
+.bxo-shadow-1{ 
+    width:160px; 
+    padding:10px; 
+    text-align:center; 
+    background-color:#eee; 
+    -webkit-box-shadow:5px 5px rgba(0,0,0,.5);
+    -moz-box-shadow:5px 5px rgba(0,0,0,.5);
+    box-shadow:5px 5px rgba(0,0,0,.5);
+}</pre>
+        
+<div class="box-shadow-2">外阴影模糊效果</div>
+<pre class="prettyprint linenums">
+.box-shadow-2{ 
+    width:160px; 
+    padding:10px; 
+    text-align:center;
+    background-color:#eee;
+    -webkit-box-shadow:5px 5px 10px rgba(0,0,0,.5); 
+    -moz-box-shadow:5px 5px 10px rgba(0,0,0,.5);
+    box-shadow:5px 5px 10px rgba(0,0,0,.5);
+}</pre>
+
+
+<div class="box-shadow-3">外阴影模糊延伸效果</div>
+<pre class="prettyprint linenums">
+.box-shadow-3{ 
+    width:160px; 
+    padding:10px; 
+    text-align:center;
+    background-color:#eee;
+    -webkit-box-shadow:5px 5px 10px 10px rgba(0,0,0,.5); 
+    -moz-box-shadow:5px 5px 10px 10px rgba(0,0,0,.5);
+    box-shadow:5px 5px 10px 10px rgba(0,0,0,.5);
+}</pre>
+        
+<div class="box-shadow-4">内阴影效果</div>
+<pre class="prettyprint linenums">
+.box-shadow-4{ 
+    width:160px; 
+    padding:10px; 
+    text-align:center; 
+    background-color:#eee; 
+    -webkit-box-shadow:inset 5px 5px 5px rgba(0,0,0,.5); 
+    -moz-box-shadow:inset 5px 5px 5px rgba(0,0,0,.5); 
+    box-shadow:inset 5px 5px 5px rgba(0,0,0,.5);
+}
+</pre>

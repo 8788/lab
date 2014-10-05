@@ -1,0 +1,62 @@
+﻿<config>
+{
+	"title": "linear-gradient"
+}	
+</config>
+<style type="text/css">
+	.top-bottom{ background:-moz-linear-gradient(top, #e97e00, #f80200); background:-webkit-linear-gradient(top, #e97e00, #f80200); background:linear-gradient(top, #e97e00, #f80200);}
+	.top-bottom:hover{ background:-moz-linear-gradient(top, #e97e00, #f80200); background:-webkit-linear-gradient(top, #e97e00, #f80200); background:linear-gradient(top, #e97e00, #f80200);}
+	.left-right{ background:-moz-linear-gradient(left, #e97e00, #f80200); background:-webkit-linear-gradient(left, #e97e00, #f80200); background:linear-gradient(left, #e97e00, #f80200);}
+	.left-right:hover{ background:-moz-linear-gradient(left, #e97e00, #f80200); background:-webkit-linear-gradient(left, #e97e00, #f80200); background:linear-gradient(left, #e97e00, #f80200);}
+	.topleft{ background:-moz-linear-gradient(45deg, #e97e00, #f80200); background:-webkit-linear-gradient(45deg, #e97e00, #f80200); background:linear-gradient(45deg, #e97e00, #f80200);}
+</style>
+
+
+<h2>linear-gradient</h2>
+<h3>语法</h3>
+<pre class="prettyprint linenums">
+&lt;linear-gradient&gt;：linear-gradient([ &lt;point&gt;,]? &lt;color-stop&gt;[, &lt;color-stop&gt;]+);
+&lt;point&gt;：[ left | right ]? [ top | bottom ]? || &lt;angle&gt;?
+&lt;color-stop&gt;：&lt;color&gt; [ &lt;length&gt; | &lt;percentage&gt; ]?
+</pre>
+
+<h3>说明</h3>
+<pre class="prettyprint linenums">
+&lt;point&gt;可取如下值
+	left：设置左边为渐变起点的横坐标值。
+	right：设置右边为渐变起点的横坐标值。
+	top：设置顶部为渐变起点的纵坐标值。
+	bottom：设置底部为渐变起点的纵坐标值。
+&lt;angle&gt;：
+	用角度值指定渐变的方向（或角度）。
+&lt;color-stop&gt;：
+	指定渐变的起止颜色。
+</pre>
+
+<h3>从上到下</h3>
+<button class="btn btn-success top-bottom">从上到下渐变</button>
+<pre class="prettyprint linenums">
+.top-bottom{ 
+	background:-moz-linear-gradient(top, #e97e00, #f80200);
+	background:-webkit-linear-gradient:(top, #e97e00, #f80200); 
+	background:linear-gradient:(top, #e97e00, #f80200);
+	float:left;
+}</pre>
+	
+<h3>从左到右</h3>
+<button class="btn btn-success left-right">从左到右渐变</button>
+<pre class="prettyprint linenums">
+.left-right{ 
+	background:-moz-linear-gradient(left, #e97e00, #f80200);
+	background:-webkit-linear-gradient:(left, #e97e00, #f80200); 
+	background:linear-gradient:(left, #e97e00, #f80200);
+}</pre>
+	
+<h3>沿45度方向渐变</h3>
+<button class="btn btn-success topleft">从左上角至右下角</button>
+<pre class="prettyprint linenums">
+.topleft{ 
+	background:-moz-linear-gradient(45deg, #e97e00, #f80200);
+	background:-webkit-linear-gradient:(45deg, #e97e00, #f80200); 
+	background:linear-gradient:(45deg, #e97e00, #f80200);
+}</pre>

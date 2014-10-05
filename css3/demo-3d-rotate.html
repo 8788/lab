@@ -1,0 +1,123 @@
+<config>
+{
+	"title": "css3 3d图片墙"
+}
+</config>
+
+<style type="text/css">
+.list {
+	width: 800px;
+	margin: 50px auto;
+	-webkit-perspective: 800px;
+	perspective: 800px;
+}
+.item {
+	position: relative;
+	float: left;
+	width: 180px;
+	height: 180px;
+	margin-bottom: 20px;
+	margin-right: 20px;
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transition: -webkit-transform 0.7s;
+    -webkit-transition: -moz-transform 0.7s;
+    transition: transform 0.7s;
+}
+.item img {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+/* translateZ 启用gpu加速 */
+.rotate-x {
+	-webkit-transform: rotateX(-180deg) translateZ(0);
+	-moz-transform: rotateX(-180deg) translateZ(0);
+	transform: rotateX(-180deg) translateZ(0);
+}
+.rotate-x img:last-child {
+	-webkit-transform: rotateX(-180deg) translateZ(0);
+	-moz-transform: rotateX(-180deg) translateZ(0);
+	transform: rotateX(-180deg) translateZ(0);
+}
+.change-x {
+	-webkit-transform: rotateX(0deg) translateZ(0);
+	-moz-transform: rotateX(0deg) translateZ(0);
+	transform: rotateX(0deg) translateZ(0);	
+}
+.rotate-y {
+	-webkit-transform: rotateY(-180deg) translateZ(0);
+	-moz-transform: rotateY(-180deg) translateZ(0);
+	transform: rotateY(-180deg) translateZ(0);
+}
+.rotate-y img:last-child {
+	-webkit-transform: rotateY(-180deg) translateZ(0);
+	-moz-transform: rotateY(-180deg) translateZ(0);
+	transform: rotateY(-180deg) translateZ(0);
+}
+.change-y {
+	-webkit-transform: rotateY(0deg) translateZ(0);
+	-moz-transform: rotateY(0deg) translateZ(0);
+	transform: rotateY(0deg) translateZ(0);	
+}
+</style>
+
+
+<div class="list">
+	<div class="item">
+		<img src="img/2.jpg" height="200" width="200" alt="">
+		<img src="img/1.jpg" height="200" width="200" alt="">
+	</div>
+	<div class="item">
+		<img src="img/2.jpg" height="200" width="200" alt="">
+		<img src="img/1.jpg" height="200" width="200" alt="">
+	</div>		
+</div>
+
+<script>
+	if (!"".trim) {
+		String.prototype.trim = function () {
+			return this.replace(/^(\s|\u00A0)+|(\s|\u00A0)+$/g, '');
+		};
+	}
+
+	function hasClass(ele, cls) {
+		var reg = new RegExp('(^|\\s)' + cls + '(\\s|$)', 'gi');
+		return reg.test(ele.className);
+	}
+
+	function addClass(ele, cls) {
+		if (!hasClass(ele, cls)) {
+			ele.className = (ele.className.trim() + ' ' + cls).trim();
+		}
+	}
+
+	function removeClass(ele, cls) {
+		if (hasClass(ele, cls)) {
+			var reg = new RegExp('^|\\s*' + cls + '\\s*|$', 'g');
+			ele.className = ele.className.replace(reg, '');
+		}
+	}
+
+	var items = document.querySelectorAll('.item');
+	var arr = ['rotate-x', 'rotate-y'];
+	var len = len = items.length;
+	for (var i = 0; i < len; i++) {
+		items[i].className = 'item ' + arr[Math.round(Math.random())];
+	}
+
+	setTimeout(function () {
+		var rnd = parseInt(Math.random()*len);
+		var cur = items[rnd];
+		console.log(cur);
+		if (hasClass(cur, 'rotate-x')) {
+			hasClass(cur, 'change-x') ? removeClass(cur, 'change-x') : addClass(cur, 'change-x')
+		} else {
+			hasClass(cur, 'change-y') ? removeClass(cur, 'change-y') : addClass(cur, 'change-y')
+		}
+	}, 300);
+</script>

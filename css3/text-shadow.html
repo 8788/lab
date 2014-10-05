@@ -1,0 +1,109 @@
+﻿<config>
+{
+    "title": "text-shadow"
+}
+</config>
+
+<style type="text/css">
+.text-shadow-1{ padding-left:30px; font:18px/24px "Microsoft YaHei"; text-shadow:0 0 10px #000;}
+.text-shadow-2{ padding-left:30px; font:18px/24px "Microsoft YaHei"; text-shadow:3px 3px 5px #f00;}
+.text-shadow-3{ padding-left:30px; font:18px/24px "Microsoft YaHei"; text-shadow:-5px -5px 5px #333;}
+.text-shadow-4{ padding-left:30px; font:18px/24px "Microsoft YaHei"; text-shadow:0 0 5px rgba(0,0,0,.5);}
+.text-shadow-5{ padding-left:30px; font:18px/24px "Microsoft YaHei"; text-shadow:3px 3px 5px rgba(0,255,255,.3);}
+.text-shadow-6{ padding-left:30px; font:bold 30px/40px "Microsoft YaHei"; color:#999; text-shadow:-1px -1px 0 #fff, 1px 1px 0 #666;}.text-shadow-6{ padding-left:30px; font:bold 30px/40px "Microsoft YaHei"; color:#999; text-shadow:-1px -1px 0 #fff, 1px 1px 0 #666;}
+.text-shadow-7{ padding:10px 30px; font:bold 30px/40px "Microsoft YaHei"; background-color:#999; color:#fff; text-shadow: 1px 1px rgba(197, 223, 248,0.5),2px 2px rgba(197, 223, 248,0.5),3px 3px rgba(197, 223, 248,0.5),4px 4px rgba(197, 223, 248,0.5),5px 5px rgba(197, 223, 248,0.5),6px 6px rgba(197, 223, 248,0.5);}
+.text-shadow-8{ padding-left:30px; font:bold 30px/40px "Microsoft YaHei"; background-color:#999; color:#fff; text-shadow:-1px -1px 0 #f00; 1px 1px 0 #f00;}
+</style>
+
+
+<h2>text-shadow</h2>
+<h3>语法</h3>
+        
+<pre class="prettyprint linenums">
+text-shadow：none | &lt;shadow&gt; [ , &lt;shadow&gt; ]*
+&lt;shadow&gt; = &lt;length&gt;{2,3} && &lt;color&gt;?  </pre>
+        
+<h3>说明</h3>
+<div class="alert alert-info">
+    值为none时表示无阴影<br />
+    &lt;shadow&gt;中可取2-3个长度值和一个颜色值<br />
+    1.第1个长度值用来设置对象的阴影水平偏移值。可以为负值<br />
+    2.第2个长度值用来设置对象的阴影垂直偏移值。可以为负值<br />
+    3.第3个值可选，如果提供了第3个长度值则用来设置对象的阴影模糊值。不允许负值
+    4.最后一个值为阴影颜色，也可用rgba或hsla的透明色
+</div>
+
+<h3>举例</h3>
+<p class="text-shadow-1">我的前端实验室</p>
+        
+<pre  class="prettyprint linenums">
+.text-shadow-1{ 
+    padding-left:30px; 
+    font:18px/24px "Microsoft YaHei"; 
+    text-shadow:0 0 10px #000; /*阴影无偏移*/
+}</pre>
+
+
+<p class="text-shadow-2">我的前端实验室</p>
+<pre  class="prettyprint linenums">
+.text-shadow-2{ 
+    padding-left:30px; 
+    font:18px/24px "Microsoft YaHei"; 
+    text-shadow:3px 3px 5px #f00; /*阴影偏移3px 3px*/
+}</pre>
+
+
+<p class="text-shadow-3">我的前端实验室</p>
+<pre  class="prettyprint linenums">
+.text-shadow-3{ 
+    padding-left:30px; 
+    font:18px/24px "Microsoft YaHei"; 
+    text-shadow:3px 3px 5px #f00; /*当然偏移也可以是负值*/
+}</pre>
+
+<h4 class="alert alert-info">利用rgba实现阴影透明</h4>
+<p class="text-shadow-4">我的前端实验室</p>
+<pre  class="prettyprint linenums">
+.text-shadow-4{ 
+    padding-left:30px; 
+    font:18px/24px "Microsoft YaHei"; 
+    text-shadow:0 0 5px rgba(0,0,0,.5);
+}</pre>
+
+<p class="text-shadow-5">我的前端实验室</p>
+<pre  class="prettyprint linenums">
+.text-shadow-5{ 
+    padding-left:30px; 
+    font:18px/24px "Microsoft YaHei"; 
+    text-shadow:3px 3px 5px rgba(0,255,255,.3);
+}</pre>
+
+<h4 class="alert alert-info">还可以通过设置多个阴影来实现一些特效</h4>
+        
+<p class="text-shadow-6">浮雕效果</p>
+<pre  class="prettyprint linenums">
+.text-shadow-6{ 
+    padding-left:30px; 
+    font:18px/24px "Microsoft YaHei"; 
+    text-shadow:-1px -1px 0 #fff, 1px 1px 0 #666;
+}</pre>
+
+<p class="text-shadow-7">3D效果</p>
+<pre  class="prettyprint linenums">
+.text-shadow-7{ 
+    padding:10px 30px; 
+    font:bold 30px/40px "Microsoft YaHei"; 
+    background-color:#999; 
+    color:#fff; 
+    text-shadow: 1px 1px rgba(197, 223, 248,0.5),2px 2px rgba(197, 223, 248,0.5),3px 3px rgba(197, 223, 248,0.5),
+    4px 4px rgba(197, 223, 248,0.5),5px 5px rgba(197, 223, 248,0.5),6px 6px rgba(197, 223, 248,0.5);}
+</pre>
+
+<p class="text-shadow-8">描边效果</p>
+<pre  class="prettyprint linenums">
+.text-shadow-8{ 
+    padding-left:30px; 
+    font:bold 30px/40px "Microsoft YaHei"; 
+    background-color:#999; color:#fff; 
+    text-shadow:-1px -1px 0 #f00; 1px 1px 0 #f00;
+}</pre>

@@ -1,0 +1,124 @@
+<config>
+{
+	"title": "css3绘制安卓logo"
+}
+</config>
+
+<style type="text/css">
+.android {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 400px;
+	height: 420px;
+	margin: -210px 0 0 -200px;
+	padding-top: 30px;
+}
+.android .head {
+	position: relative;
+	width: 220px;
+	height: 100px;
+	margin: auto;
+	background-color: #a4ca39;
+	border-radius: 110px 110px 0 0;
+}
+.android .head:hover {
+	-webkit-transform-origin: left bottom;
+	-webkit-transform: rotate(-10deg);
+}
+.android .left-horn,
+.android .right-horn {
+	position: absolute;
+	left: 40px;
+	top: -25px;
+	width: 5px;
+	height: 40px;
+	border-radius: 10px;
+	background-color: #a4ca39;
+	-webkit-transform: rotate(-30deg);
+	-moz-transform: rotate(-30deg);
+	transform: rotate(-30deg);
+}
+.android .right-horn {
+	left: auto;
+	right: 40px;
+	-webkit-transform: rotate(30deg);
+	-moz-transform: rotate(30deg);
+	transform: rotate(30deg);
+}
+.android .left-eye,
+.android .right-eye {
+	position: absolute;
+	top: 50px;
+	left: 50px;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: #fff;
+}
+.android .right-eye {
+	left: auto;
+	right: 50px;
+}
+.android .body {
+	position: relative;
+	width: 220px;
+	height: 200px;
+	margin: 10px auto;
+	border-radius: 0 0 30px 30px;
+	background-color: #a4ca39;
+}
+.android .left-arm,
+.android .right-arm {
+	position: absolute;
+	left: -50px;
+	top: 10px;
+	width: 40px;
+	height: 150px;
+	border-radius: 20px;
+	background-color: #a4ca39;
+	-webkit-transform-origin: center top;
+	transform-origin: center top;
+}
+.android .right-arm {
+	left: auto;
+	right: -50px;
+}
+.android .left-arm:hover {
+	-webkit-transform: rotate(10deg);
+	transform: rotate(10deg);
+}
+.android .right-arm:hover {
+	-webkit-transform: rotate(-10deg);
+	transform: rotate(-10deg);
+}
+.android .left-leg, 
+.android .right-leg {
+	position: absolute;
+	top: 200px;
+	left: 40px;
+	width: 40px;
+	height: 80px;
+	border-radius: 0 0 20px 20px;
+	background-color: #a4ca39;
+}
+.android .right-leg {
+	left: auto;
+	right: 40px;
+}
+</style>
+
+<div class="android">
+	<div class="head">
+		<span class="left-horn"></span>
+		<span class="right-horn"></span>
+		<span class="left-eye"></span>
+		<span class="right-eye"></span>
+	</div>
+	<div class="body">
+		<span class="left-arm"></span>
+		<span class="right-arm"></span>
+		<span class="left-leg"></span>
+		<span class="right-leg"></span>
+	</div>
+</div>
