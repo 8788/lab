@@ -84,7 +84,7 @@ module.exports = function(grunt) {
         watch: {
             html: {
                 files: ['**/*.html', '!node_modules/**', '!deploy/**'],
-                tasks: ['default']
+                tasks: ['buildPage']
             }
         }
     });
@@ -96,4 +96,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-connect');
 
     grunt.registerTask('default', ['clean', 'copy', 'buildPage']);
+    grunt.registerTask('server', ['default', 'connect', 'watch']);
 };
