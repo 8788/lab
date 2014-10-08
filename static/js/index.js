@@ -98,7 +98,7 @@ var zNodes =[
 $(function(){
 	$.fn.zTree.init($("#nav-tree"), setting, zNodes);
 	if(window.location.hash){
-		$('.iframe').attr('src', window.location.hash.replace('_', '/').substring('1') + '.html');
+		$('.iframe').attr('src', window.location.hash.replace(/_/g, '/').substring('1') + '.html');
 	}
 	$('.nav').delegate('#nav-tree li li a', 'click', function(e){
 		var url = $(this).attr('href');
@@ -114,17 +114,22 @@ $(function(){
 		$('.tips').slideUp();
 	},4000);
 
-	$('.close-aside').toggle(function(){
-		$('.main').addClass('main-noaside');
-		$('.aside').addClass('noaside').find('.nav').hide();
-		$('.close-aside').addClass('open-aside');
-	}, function(){
-		$('.main').removeClass('main-noaside');
-		$('.aside').removeClass('noaside').find('.nav').show();
-		$('.close-aside').removeClass('open-aside');
+	$('.close-aside').click(function () {
+		var $this = $(this);
+		var main = $('.main');
+		var aside = $('.aside');
+		if ($this.hasClass('open-aside')) {
+			main.removeClass('main-noaside');
+			aside.removeClass('noaside').find('.nav').show();
+			$this.removeClass('open-aside');			
+		} else {
+			main.addClass('main-noaside');
+			aside.addClass('noaside').find('.nav').hide();
+			$this.addClass('open-aside');
+		}
 	});
 
-	if(!$.browser.msie){
+	if('animation' in document.documentElement.style || '-webkit-animation' in document.documentElement.style || '-moz-animation' in document.documentElement.style){
 		setTimeout(function(){
 			animateLogo();
 		},500);

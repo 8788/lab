@@ -20,6 +20,15 @@ module.exports = function(grunt) {
                 config.keywords = config.keywords || config.title;
                 config.description = config.description || config.title;
 
+                // adjust dir level
+                var dirLevel = item.match(/\//g).length;
+                var chdir = '';
+                while(dirLevel > 0) {
+                    chdir += '../';
+                    dirLevel--;
+                }
+                config.chdir = chdir;
+
                 str = str.replace(exec[0], '');
                 var content = str.trim();
                 var header = grunt.file.read('templates/header.html');
