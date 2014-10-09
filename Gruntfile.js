@@ -70,13 +70,38 @@ module.exports = function(grunt) {
         },
 
         copy: {
-            main: {
+            all: {
                 files: [
                     {
                         src: ['**/*', '!node_modules/**', '!templates/**', '!Gruntfile.js', '!package.json'],
                         dest: 'deploy/'
                     }
                 ]
+            },
+            static: {
+                files: [
+                    {
+                        src: ['static/**/*'],
+                        dest: 'deploy/'
+                    }
+                ]
+            }
+        },
+
+        compass: {
+            main: {
+                options: {
+                    basePath: 'static/',
+                    sassDir: 'sass',
+                    cssDir: 'css',
+                    imagesDir: 'img',
+                    javascriptsDir: 'js',
+                    outputStyle: 'compressed',
+                    force: true,
+                    relativeAssets: true,
+                    noLineComments: true,
+                    assetCacheBuster: false
+                }
             }
         },
 
@@ -94,6 +119,10 @@ module.exports = function(grunt) {
             html: {
                 files: ['**/*.html', '!node_modules/**', '!deploy/**'],
                 tasks: ['buildPage']
+            },
+            sass: {
+                files: ['static/**/*.scss'],
+                tasks: ['compass', 'copy:static']
             }
         }
     });
@@ -103,7 +132,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-contrib-compass');
 
-    grunt.registerTask('default', ['clean', 'copy', 'buildPage']);
+    grunt.registerTask('default', ['clean', 'copy:all', 'buildPage']);
     grunt.registerTask('server', ['default', 'connect', 'watch']);
 };

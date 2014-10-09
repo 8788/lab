@@ -8,6 +8,7 @@
         "grunt-contrib-clean": "~0.5.0",
         "grunt-contrib-copy": "~0.5.0",
         "grunt-contrib-connect": "~0.8.0",
+        "grunt-contrib-compass": "~0.8.0",
         "cheerio": "~0.17.0",
         "ejs": "~0.8.0"
     }
