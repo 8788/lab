@@ -8,7 +8,7 @@ body{ position:relative; height:100%; font:12px/1.5 Helvetica, Tahoma, Arial, "M
 .tips{ text-align:center;}
 img[src="http://icon.cnzz.com/img/pic1.gif"]{ display: none;}
 
-.header{ height:40px; background:url(../img/header-bg.png) repeat; box-shadow:0 0 10px rgba(0,0,0,.3);}
+.header{ position: relative; height:40px; background:url(../img/header-bg.png) repeat; box-shadow:0 0 10px rgba(0,0,0,.3);}
 .container{ overflow:hidden; width:auto; _position:relative; _top:auto; _bottom:auto; _height:100%;}
 .aside{ overflow:auto; position:absolute; top:50px; bottom:10px; left:10px; width:240px; border:1px solid #ccc; box-shadow:0 0 5px rgba(0,0,0,.3); _top:10px;}
 .main{ overflow:auto; position:absolute; top:50px; right:10px; bottom:10px; left:260px; border:1px solid #ccc; box-shadow:0 0 5px rgba(0,0,0,.3); _zomm:1; _top:10px; _position:static; _height:80%; _margin-top:10px; _margin-left:260px;}
@@ -24,9 +24,12 @@ img[src="http://icon.cnzz.com/img/pic1.gif"]{ display: none;}
 .open-aside{ background: url(../img/open.gif) no-repeat;}
 
 /* header */
-.header-link{ float:right; padding:10px 20px 0 0;}
+.header-link{ float:right; margin-right: 50px; padding:10px 20px 0 0;}
 .header-link a{ padding:0 5px; color:#fff; text-decoration:none; font:14px/20px "Microsoft YaHei";}
 .header-link a:hover{ text-decoration:underline;}
+
+.fork { position: absolute; top: -10px; right: -10px; width: 80px; height: 80px; background: url(../img/fork.png) no-repeat; opacity: .8; filter: alpha(opacity=80);}
+.fork:hover { opacity: 1; filter: alpha(opacity=100);}
 
 .animation-logo{ float:left; position:relative; width:200px; height:80px; margin-left:20px; padding:10px;}
 .animation-logo p{ opacity:0; color:#fff; font-size:16px;}
