@@ -241,9 +241,81 @@
 }
 </pre>
 <script>
-	$(function(){
-		$('button.btn').click(function(){
-			$('.animation-3').find('p').eq(0).addClass('txt-1').next('p').addClass('txt-2').next('p').addClass('txt-3');
-		})
-	});
+/* getByClass() */
+function getByClass(cls, p){
+    p = p || document;
+    if(p.getElementsByClassName){
+        return p.getElementsByClassName(cls);
+    }else{
+        var res = [];
+        var re = new RegExp('(^|\\s+)' + cls + '($|\\s+)', 'i');
+        var ele = p.getElementsByTagName('*');
+        for(var i = 0; i < ele.length; i++){
+            if(re.test(ele[i].className)){
+                res.push(ele[i]);
+            }
+        }
+        return res;
+    }
+}
+
+/* getStyle */
+function getStyle(ele, attr) {
+    return ele.currentStyle ? ele.currentStyle[attr] : getComputedStyle(ele, false)[attr];
+}
+
+/* addEvent */
+function addEvent(ele, type, fn) {
+    if (ele.addEventListener) {
+        ele.addEventListener(type, fn, false);
+    } else {
+        ele.attachEvent('on'+type, function () {
+            fn && fn.call(ele, event);  // 纠正this指向，同时将事件对象传入
+        });
+    }
+}
+
+/* trim */
+if (!"".trim) {
+    String.prototype.trim = function () {
+        return this.replace(/^(\s|\u00A0)+|(\s|\u00A0)+$/g, '');
+    };
+}
+
+/* hasClass */
+function hasClass(ele, cls) {
+    var reg = new RegExp('(^|\\s)' + cls + '(\\s|$)', 'i');
+    return reg.test(ele.className);
+}
+
+/* addClass */
+function addClass(ele, cls){
+    if (!hasClass(ele, cls)) {
+        ele.className = (ele.className + ' ' + cls).trim();
+    }
+}
+
+/* removeClass */
+function removeClass(ele, cls) {
+    var reg = new RegExp('(^|\\s+)' + cls + '(\\s+|$)', 'i');
+    if (hasClass(ele, cls)) {
+        ele.className = ele.className.replace(reg, '');
+    }
+}
+
+window.onload = function () {
+	var btn = getByClass('btn')[0];
+	btn.onclick = function () {
+		var p = getByClass('animation-3')[0].getElementsByTagName('p');
+		addClass(p[0], 'txt-1');
+		addClass(p[1], 'txt-2');
+		addClass(p[2], 'txt-3');
+	};
+}
+
+/*$(function(){
+	$('button.btn').click(function(){
+		$('.animation-3').find('p').eq(0).addClass('txt-1').next('p').addClass('txt-2').next('p').addClass('txt-3');
+	})
+});*/
 </script>

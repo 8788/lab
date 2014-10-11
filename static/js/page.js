@@ -4,6 +4,14 @@
  */
 (function () {
 
+    // highlight init
+    try {
+        hljs.initHighlightingOnLoad();
+    } catch (e) {
+        // low browser
+    }
+    
+
     /**
      * getByClass
      */
