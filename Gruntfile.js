@@ -3,6 +3,9 @@ module.exports = function(grunt) {
     var ejs = require('ejs');
     var cheerio = require('cheerio');
 
+    // debug switch
+    var debug = true;
+
     // register buildPage task
     grunt.task.registerTask('buildPage', 'a task to build page', function () {
         var paths = grunt.file.expand([
@@ -85,6 +88,17 @@ module.exports = function(grunt) {
                         dest: 'deploy/'
                     }
                 ]
+            },
+            debugJs: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: '',
+                        src: ['static/js/*.js', '!static/js/*.min.js'],
+                        dest: '',
+                        ext: '.min.js'
+                    }
+                ]
             }
         },
 
@@ -96,12 +110,24 @@ module.exports = function(grunt) {
                     cssDir: 'css',
                     imagesDir: 'img',
                     javascriptsDir: 'js',
-                    outputStyle: 'compressed',
+                    outputStyle: debug ? 'expanded' : 'compressed',
                     force: true,
                     relativeAssets: true,
                     noLineComments: true,
                     assetCacheBuster: false
                 }
+            }
+        },
+
+        uglify: {
+            main: {
+                files: [{
+                    expand: true,
+                    cwd: '',
+                    src: ['static/js/*.js', '!static/js/*.min.js'],
+                    dest: '',
+                    ext: '.min.js'
+                }]
             }
         },
 
@@ -123,6 +149,10 @@ module.exports = function(grunt) {
             sass: {
                 files: ['static/**/*.scss'],
                 tasks: ['compass', 'copy:static']
+            },
+            js: {
+                files: ['static/js/*.js'],
+                tasks: [debug ? 'copy:debugJs' : 'uglify', 'copy:static']
             }
         }
     });
@@ -131,9 +161,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-compass');
 
-    grunt.registerTask('default', ['clean', 'copy:all', 'buildPage']);
+    grunt.registerTask('default', ['clean', 'compass', debug ? 'copy:debugJs' : 'uglify', 'copy:all', 'buildPage']);
     grunt.registerTask('server', ['default', 'connect', 'watch']);
 };
