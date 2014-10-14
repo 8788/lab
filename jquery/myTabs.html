@@ -5,14 +5,14 @@
 </config>
 
 <style type="text/css">
-	.tabs{ width:400px;}
-	.tabs-title{ height:30px; padding:0 10px; border:1px solid #ccc; background-color:#eee;}
-	.tabs-title li{ float:left; overflow:hidden; _height:30px; }
-	.tabs-title li a{ display:inline-block; height:30px; padding:0 10px; font:14px/30px SimSun; text-decoration:none; outline:0;}
-	.tabs-title .active{ background-color:#eee;}
-	.tabs-title .active a{ position:relative; margin-top:1px; background-color:#fff;}
-	.tabs-content{ width:378px; height:200px; padding:10px; border:1px solid #ccc; border-top:0;}
-	.tabs-content .option{ height:100%;}
+.tabs{ width:400px;}
+.tabs-title{ height:30px; padding:0 10px; border:1px solid #ccc; background-color:#eee;}
+.tabs-title li{ float:left; overflow:hidden; _height:30px; }
+.tabs-title li a{ display:inline-block; height:30px; padding:0 10px; font:14px/30px SimSun; text-decoration:none; outline:0;}
+.tabs-title .active{ background-color:#eee;}
+.tabs-title .active a{ position:relative; margin-top:1px; background-color:#fff;}
+.tabs-content{ width:378px; height:200px; padding:10px; border:1px solid #ccc; border-top:0;}
+.tabs-content .option{ height:100%;}
 </style>
 
 
@@ -44,7 +44,6 @@
 </div>
 		
 <pre class="prettyprint linenums">
-==== html结构 ====
 &lt;div class="tabs"&gt;
 	&lt;ul class="tabs-title cls"&gt;
 		&lt;li class="active"&gt;&lt;a href="javascript:;"&gt;选项卡1&lt;/a&gt;&lt;/li&gt;
@@ -60,7 +59,6 @@
 </pre>
 
 <pre class="prettyprint linenums">
-==== 样式 ====
 .tabs{ width:400px;}
 .tabs-title{ height:30px; padding:0 10px; border:1px solid #ccc; background-color:#eee;}
 .tabs-title li{ float:left; overflow:hidden; _height:30px; }
@@ -72,7 +70,6 @@
 </pre>
 
 <pre class="prettyprint linenums">
-==== jquery代码 ====
 ;(function(){
 	$.fn.myTabs = function(options){
 		var opts = $.extend({}, $.fn.myTabs.defaults, options);

@@ -8,7 +8,8 @@
 input{ vertical-align:middle; margin-bottom:0!important;}
 .placeholder{ display:inline-block; position:absolute; zoom:1; color:#c0c0c0; height:32px; line-height:32px; padding:0px 5px; _padding:2px 5px;}
 .placeholder-hide{ display:none;}
-.ipt{ height:30px!important; padding:0 5px!important;}
+.ipt,
+.old-ipt{ height:29px!important; padding:0 5px!important; margin-right: 3px;}
 </style>
 
 
@@ -19,7 +20,6 @@ input{ vertical-align:middle; margin-bottom:0!important;}
 <h3>传统的placeholder</h3>
 <input class="old-ipt" type="text" placeholder="传统的placeholder" name="" id="" />（可在ie下测试）
 <pre class="prettyprint linenums">
-==== 实现代码 ====
 /** old placeholder **/
 ;(function($){
 	$.fn.extend({
@@ -47,8 +47,8 @@ $('.old-ipt').oldPlaceholder();
 </pre>
 
 <div class="alert alert-info">实现思路其实就是对于不支持placeholder的浏览器，把placeholder里的值赋给输入框的value。focus和blur时，执行对应的事件。虽然，实现了placeholder的功能，但却给后续的操作带来了隐患。请看下面的例子</div>
-<input class="old-ipt" type="text" placeholder="请输入用户名"/><input type="submit" class="btn" value="提交" onclick="alert($(this).prev('.old-ipt').val())"/> <br /><br />		
-<input class="old-ipt" type="text" placeholder="请输入关键字" name="" id="" /><input type="submit" class="btn" value="搜索" onclick="alert($(this).prev('.old-ipt').val())"/> <br /><br />
+<input class="old-ipt" type="text" placeholder="请输入用户名"/><input type="submit" class="btn btn-primary" value="提交" onclick="alert($(this).prev('.old-ipt').val())"/> <br /><br />		
+<input class="old-ipt" type="text" placeholder="请输入关键字" name="" id="" /><input type="submit" class="btn btn-primary" value="搜索" onclick="alert($(this).prev('.old-ipt').val())"/> <br /><br />
 <div class="alert alert-error">
 	如果你在IE, FF, Chrome下分别测试了的话，你会发现对于支持placeholder属性的浏览器alert出来的值都为空，而在ie下，alert的值为placeholder的值，因此应用到项目中的话 不论是普通表单还是搜索功能，都需要对输入框的值进行判断，而且仔细观察你还会发现，IE下的placeholder里的字体颜色也不是灰色，如果要实现灰色又需要进行判断... 再者，如果后期需求调整了，要求用图片来代替文字占位符。。。好吧，应该要崩溃了。。。因此要对这个功能进行改进。
 </div>
@@ -56,8 +56,8 @@ $('.old-ipt').oldPlaceholder();
 <div class="alert alert-info">
 	先看例子，请在IE下测试并与上面的进行对比。
 </div>
-<input class="ipt" type="text" placeholder="请输入用户名"/><input type="submit" class="btn" value="提交" onclick="alert($(this).prev('.ipt').val())"/> <br /><br />		
-<input class="ipt" type="text" placeholder="请输入关键字" name="" id="" /><input type="submit" class="btn" value="搜索" onclick="alert($(this).prev('.ipt').val())"/> <br /><br />		
+<input class="ipt" type="text" placeholder="请输入用户名"/><input type="submit" class="btn btn-primary" value="提交" onclick="alert($(this).prev('.ipt').val())"/> <br /><br />		
+<input class="ipt" type="text" placeholder="请输入关键字" name="" id="" /><input type="submit" class="btn btn-primary" value="搜索" onclick="alert($(this).prev('.ipt').val())"/> <br /><br />		
 <div class="alert alert-info">
 	实现思路：针对不支持placeholder的浏览器，在对应的输入框前面动态添加一个span，给span添加样式并绝对定位，同时赋予对应placeholder的值，然后通过输入框的值的状态，控制span的显示与隐藏。<br />
 	优势：<br />
@@ -69,11 +69,9 @@ $('.old-ipt').oldPlaceholder();
 
 <pre class="prettyprint linenums">
 /** new placeholder **/
-==== 样式 ====
 .placeholder{ display:inline-block; position:absolute; zoom:1; color:#c0c0c0; height:32px; line-height:32px; padding:0px 5px; _padding:2px 5px;}
 .placeholder-hide{ display:none;}
 
-==== jquery ====
 ;(function($){
 	$.fn.extend({
 		myPlaceholder: function() {

@@ -32,7 +32,6 @@
 </div>
     
 <pre class="prettyprint linenums">
-==== html ====
 &lt;div class="slide slide-1"&gt;
     &lt;ul class="slide-list cls"&gt;
         &lt;li&gt;&lt;a href="#"&gt;&lt;img src="images/1.jpg" alt="" /&gt;&lt;/a&gt;&lt;/li&gt;
@@ -50,7 +49,6 @@
 </pre>
 
 <pre class="prettyprint linenums">
-==== css ====
 .slide{ position:relative; zoom:1; overflow:hidden; width:715px;}
 .slide .slide-list{ width:10000px;}
 .slide .slide-list li{ float:left;}
@@ -61,7 +59,6 @@
 </pre>
 
 <pre class="prettyprint linenums">
-==== jquery ====
 ;(function(){
     $.fn.mySlide = function(options){
         var opts = $.extend({}, $.fn.mySlide.defaults, options);
