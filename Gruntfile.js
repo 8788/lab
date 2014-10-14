@@ -4,7 +4,7 @@ module.exports = function(grunt) {
     var cheerio = require('cheerio');
 
     // debug switch
-    var debug = true;
+    var debug = false;
 
     // register buildPage task
     grunt.task.registerTask('buildPage', 'a task to build page', function () {
