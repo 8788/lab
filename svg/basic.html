@@ -1,0 +1,56 @@
+<config>
+{
+    "title": "svg使用文档",
+    "keywords": "svg使用文档, 基本图形",
+    "description": "svg使用文档, 基本图形"
+}
+</config>
+
+<style>
+.row { margin-bottom: 20px;}
+svg { display: inline-block; margin-right: 20px; vertical-align: middle;}
+svg + pre { display: inline-block!important; vertical-align: middle;} 
+</style>
+
+<h2>共有属性(所有基本图形都有)</h2>
+<pre>
+fill: 填充颜色
+stroke: 描边颜色
+stroke-width: 描边宽度
+</pre>
+
+<h2>矩形</h2>
+<pre>
+参数：
+x, y: 矩形左上角坐标
+width, height: 矩形宽, 高
+rx, ry: 矩形圆角大小
+</pre>
+
+<div class="row">
+    <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120">
+        <rect x="10" y="10" width="100" height="100" rx="20" ry="20" fill="#BCE8F1"></rect>
+    </svg>
+    <pre>
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120">
+    <rect x="10" y="10" width="100" height="100" rx="20" ry="20" fill="#BCE8F1"></rect>
+</svg>
+    </pre>
+</div>
+
+<h2>圆形</h2>
+<pre>
+cx, cy: 圆心坐标
+r: 半径
+</pre>
+
+<div class="row">
+    <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120">
+        <circle cx="60" cy="60" r="50" fill="#BCE8F1"></circle>
+    </svg>
+    <pre>
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120">
+    <circle cx="60" cy="60" r="50" fill="#BCE8F1"></circle>
+</svg>
+    </pre>
+</div>

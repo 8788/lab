@@ -27,6 +27,13 @@ var zNodes =[
     },
 
     {
+        name: "svg", open: true,
+        children: [
+            {name: "svg基本图形文档", url: "svg/basic.html"}
+        ]
+    },
+
+    {
         name: "tools", open: true,
         children: [
             {name: "html转javascript", url: "tools/html2js.html"},

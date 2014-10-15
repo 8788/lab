@@ -31,8 +31,15 @@ module.exports = function(grunt) {
                     dirLevel--;
                 }
                 config.chdir = chdir;
-
                 str = str.replace(exec[0], '');
+
+                // encoding <, >, ", "
+                str = str.replace(/<pre>([\w\W]+?)<\/pre>/g, function (s, $1) {
+                    return '<pre>' + 
+                            $1.trim().replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;') + 
+                            '<\/pre>';
+                });
+
                 var content = str.trim();
                 var header = grunt.file.read('templates/header.html');
                 var footer = grunt.file.read('templates/footer.html');
