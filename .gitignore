@@ -1,2 +1,3 @@
-node_modules
-deploy
+node_modules/
+deploy/
+.sass-cache/

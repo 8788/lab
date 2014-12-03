@@ -1,8 +1,8 @@
 <config>
 {
-    "title": "svg使用文档",
-    "keywords": "svg使用文档, 基本图形",
-    "description": "svg使用文档, 基本图形"
+    "title": "svg基本图形使用文档",
+    "keywords": "svg参考手册, 基本图形",
+    "description": "svg参考手册, 基本图形"
 }
 </config>
 
@@ -12,16 +12,17 @@ svg { display: inline-block; margin-right: 20px; vertical-align: middle;}
 svg + pre { display: inline-block!important; vertical-align: middle;} 
 </style>
 
-<h2>共有属性(所有基本图形都有)</h2>
+<h2>基本属性(所有图形都有)</h2>
 <pre>
 fill: 填充颜色
 stroke: 描边颜色
 stroke-width: 描边宽度
+transform: 变形，可参考http://www.w3.org/TR/SVG/coords.html#TransformAttribute
 </pre>
 
-<h2>矩形</h2>
+<h2>矩形rect</h2>
 <pre>
-参数：
+属性：
 x, y: 矩形左上角坐标
 width, height: 矩形宽, 高
 rx, ry: 矩形圆角大小
@@ -29,28 +30,99 @@ rx, ry: 矩形圆角大小
 
 <div class="row">
     <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120">
-        <rect x="10" y="10" width="100" height="100" rx="20" ry="20" fill="#BCE8F1"></rect>
+        <rect x="10" y="10" width="100" height="100" rx="20" ry="20" fill="#bce8f1"></rect>
     </svg>
     <pre>
 <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120">
-    <rect x="10" y="10" width="100" height="100" rx="20" ry="20" fill="#BCE8F1"></rect>
+    <rect x="10" y="10" width="100" height="100" rx="20" ry="20" fill="#bce8f1"></rect>
 </svg>
     </pre>
 </div>
 
-<h2>圆形</h2>
+<h2>圆形circle</h2>
 <pre>
+属性：
 cx, cy: 圆心坐标
 r: 半径
 </pre>
 
 <div class="row">
     <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120">
-        <circle cx="60" cy="60" r="50" fill="#BCE8F1"></circle>
+        <circle cx="60" cy="60" r="50" fill="#bce8f1"></circle>
     </svg>
     <pre>
 <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120">
-    <circle cx="60" cy="60" r="50" fill="#BCE8F1"></circle>
+    <circle cx="60" cy="60" r="50" fill="#bce8f1"></circle>
 </svg>
     </pre>
+</div>
+
+<h3>椭圆ellipse</h3>
+<pre>
+属性：
+cx, cy: 椭圆圆心坐标
+rx, ry: 椭圆x轴, y轴半径
+</pre>
+
+<div class="row">
+    <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120">
+        <ellipse cx="60" cy="60" rx="50" ry="30" fill="#bce8f1" transform="rotate(30 60 60)"></ellipse>
+    </svg>
+    <pre>
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120">
+    <ellipse cx="60" cy="60" rx="50" ry="30" fill="#bce8f1" transform="rotate(30 60 60)"></ellipse>
+</svg>
+    </pre>
+</div>
+
+<h3>直线line</h3>
+<pre>
+属性：
+x1, y1: 起点坐标
+x2, y2: 终点坐标
+</pre>
+
+<div class="row">
+    <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120">
+        <line x1="10" y1="10" x2="110" y2="110" fill="none" stroke="#bce8f1" stroke-width="5"></line>
+    </svg>
+    <pre>
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120">
+    <line x1="10" y1="10" x2="110" y2="110" fill="none" stroke="#bce8f1" stroke-width="5"></line>
+</svg>
+    </pre>
+</div>
+
+<h3>折线polyline</h3>
+<pre>
+属性：
+points: 折线的顶点坐标，每个坐标之间用空格隔开，格式如：points="x1,y1 x2,y2 x3,y3..."
+</pre>
+
+<div class="row">
+    <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120">
+        <polyline points="10,110 30,10 90,60 110,110" fill="none" stroke="#bce8f1" stroke-width="2"></polyline>
+    </svg>
+<pre>
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120">
+    <polyline points="10,110 30,10 90,60 110,110" fill="none" stroke="#bce8f1" stroke-width="2"></polyline>
+</svg>
+</pre>
+</div>
+
+<h2>多边形polygon</h2>
+<pre>
+属性：
+points: 折线的顶点坐标，每个坐标之间用空格隔开，格式如：points="x1,y1 x2,y2 x3,y3...", 注意: 与polyline不同的是，polygon会将终点坐标和起点坐标连起来
+</pre>
+
+<div class="row">
+    <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120">
+        <polygon points="10,110 30,10 90,60 110,110" fill="#f00" stroke="#000" stroke-width="1"></polygon>
+    </svg>
+<pre>
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120">
+    <polygon points="10,110 30,10 90,60 110,110" fill="#f00" stroke="#000" stroke-width="1"></polygon>
+</svg>
+</pre>
 </div>

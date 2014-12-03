@@ -1,24 +1,35 @@
-<config>
-{
-    "title": "flappy bird 像素鸟游戏 - javascript",
-    "keywords": "javascript flappy bird, javascript像素鸟",
-    "description": "javascript flappy bird, javascript像素鸟"
-}
-</config>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>flappy bird 像素鸟游戏 - javascript</title>
+<meta name="description" content="javascript flappy bird, javascript像素鸟">
+<meta name="keywords" content="javascript flappy bird, javascript像素鸟">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="css/style.css" rel="stylesheet">
-
-<div class="game" id="game">
-	<div class="main">
-		
-		<div class="lawn" id="lawn"></div>
-	</div>
-	<div class="mask"></div>
-</div>
-
-<script src="js/common.js"></script>
-<script src="js/game.js"></script>
+</head>
+<body>
+    <div class="game" id="game">
+        <div class="main" id="main">
+            <div class="score" id="score">0</div>
+            <div class="pillar" id="pillar"></div>
+            <div class="lawn" id="lawn"></div>
+            <div class="bird" id="bird" style="left: 80px; bottom: 200px;"></div>
+            <div class="ready" id="ready"></div>
+            <div class="over" id="over">
+                <img src="img/over.png" height="61" width="263" alt="game over">
+                <div class="panel" id="panel">
+                    <span></span>
+                    <em></em>
+                </div>
+                <a href="javascript:;" class="restart" id="restart"></a>
+            </div>
+        </div>
+    </div>
+<script src="js/script.js"></script>
 <script>
-    var ele = document.getElementById('game');
-    var game = new Game(ele);
     game.init();
 </script>
+</script><script src="http://s11.cnzz.com/stat.php?id=5886804&web_id=5886804&show=pic1" id="cnzz"></script>
+</body>
+</html>
