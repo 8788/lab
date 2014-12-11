@@ -22,7 +22,8 @@ var zNodes =[
     {
         name: "game", open: true,
         children: [
-            {name: "js版2048游戏", url: "game/2048/index.html"}
+            {name: "js版2048游戏", url: "game/2048/index.html"},
+            {name: "js版flappy bird", url: "game/flappyBird/index.html"}
         ]
     },
 
