@@ -83,7 +83,7 @@ module.exports = function(grunt) {
             all: {
                 files: [
                     {
-                        src: ['**/*', '!node_modules/**', '!templates/**', '!Gruntfile.js', '!package.json'],
+                        src: ['**/*', '!node_modules/**', '!templates/**', '!Gruntfile.js', '!package.json', '!README.md'],
                         dest: 'deploy/'
                     }
                 ]
