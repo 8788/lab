@@ -1,7 +1,3 @@
-/**
- * @fileOverview lab common
- * @author @Bubblings
- */
 (function () {
 
     // highlight init
@@ -10,7 +6,7 @@
     } catch (e) {
         // low browser
     }
-    
+
 
     /**
      * getByClass
@@ -49,11 +45,8 @@
     if (top == self) {
         var topBar = document.createElement('div');
         topBar.className = 'top-bar';
-        topBar.innerHTML = '' + 
-            '<a class="home" target="_blank" href="/">博客首页</a>' +
-            '<a class="lab" target="_blank" href="/lab">前端实验室</a>' +
-            '<a class="lab" target="_blank" href="/guessbook/">留言板</a>' +
-            '<a class="lab" target="_blank" href="http://weibo.com/607768123">微博</a>' +
+        topBar.innerHTML = '' +
+            '<a class="lab" target="_blank" href="https://8788.github.io/lab/">前端实验室</a>' +
             '<span class="top-bar-close" title="关闭"></span>';
         document.body.appendChild(topBar);
         topBar.onclick = function () {

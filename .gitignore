@@ -1,4 +1,6 @@
-node_modules/
-deploy/
-.sass-cache/
-static/.sass-cache/
+node_modules
+deploy
+.sass-cache
+.DS_Store
+.tmp
+.cache

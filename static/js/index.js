@@ -1,8 +1,3 @@
-/**
-* @fileOverview 
-* @authors @Bubblings
-*/
-
 var setting = {
     data: {
         simpleData: {
@@ -60,7 +55,7 @@ var zNodes =[
                     {name:"css3绘制时钟", url:"css3/demo-clock.html"},
                     {name:"纯css3手风琴效果", url:"css3/demo-accordion.html"},
                 ]
-            }           
+            }
         ]
     },
 
@@ -116,8 +111,8 @@ $(function(){
         var urlHash = url.substring(url.indexOf('lab'),url.indexOf('.htm')).replace('lab/','');
         window.location.href = b.substring(0, b.indexOf('#')) + '#' + urlHash.replace('/', '_');
     });
-    
-    
+
+
     setTimeout(function(){
         $('.tips').slideUp();
     },4000);
@@ -129,7 +124,7 @@ $(function(){
         if ($this.hasClass('open-aside')) {
             main.removeClass('main-noaside');
             aside.removeClass('noaside').find('.nav').show();
-            $this.removeClass('open-aside');            
+            $this.removeClass('open-aside');
         } else {
             main.addClass('main-noaside');
             aside.addClass('noaside').find('.nav').hide();

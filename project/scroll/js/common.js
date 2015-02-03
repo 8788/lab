@@ -1,8 +1,3 @@
-/**
- * @fileOverview 
- * @authors Your Name (you@example.org)
- */
-
 window.onload = function () {
     var scroll = document.getElementById('scroll');
     var FullScrollPage = new FullScroll(scroll);
@@ -15,7 +10,7 @@ window.onload = function () {
         String.prototype.trim = function () {
             return this.replace(/^[\s\uFEFF\xa0\u3000\u00A0]+|[\s\uFEFF\xa0\u3000\u00A0]+$/g, '');
         };
-    }    
+    }
 
     // Utility Methods
     var util = {
@@ -88,7 +83,7 @@ window.onload = function () {
             var dis = {};
             var n = 0;
 
-            for (var attr in json) {  
+            for (var attr in json) {
                 if (attr === 'opacity') {
                     start[attr] = parseInt(getStyle(ele, attr)*100);
                 } else {
@@ -103,7 +98,7 @@ window.onload = function () {
                 var cur;
                 for (var attr in json) {
                     switch(opts.type) {
-                        case 'linear': 
+                        case 'linear':
                             cur = start[attr] + dis[attr] * n /count;
                             break;
                         case 'buffer':
@@ -126,7 +121,7 @@ window.onload = function () {
             }, 30);
         }
     };
-    
+
 
 
     function FullScroll (parent) {
