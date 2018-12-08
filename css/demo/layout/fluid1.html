@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>左栏固定，右栏自适应布局</title>
+<meta name="keywords" content="左栏固定，右栏自适应布局">
+<meta name="description" content="左栏固定，右栏自适应布局">
+<link href="../../../static/css/page.css" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0;}
+.clearfix { *zoom: 1;}
+.clearfix:after{ content: ""; display: block; height: 0; visibility:hidden; clear: both;}
+#header{ width: 96%; height: 90px; margin: 0 auto; background: #f60;}
+#body{ width: 96%; margin: 0 auto;}
+#aside{ float: left; width: 240px; background: #ccc;}
+#main{ margin-left: 240px; background: orange; }
+#footer{ width: 96%; height: 90px; margin: 0 auto; background: #08f;}
+</style></head>
+<body>
+<div class="container">
+
+<div id="wrapper">
+	<div id="header">header</div>
+	<div id="body" class="clearfix">
+		<div id="aside">
+			<div class="inner">
+				aside
+				<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+			</div>
+		</div>
+		<div id="main">
+			<div class="inner">
+				main
+				<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+			</div>
+		</div>
+	</div>
+	<div id="footer">footer</div>
+</div></div>
+<script src="../../../static/js/lib/highlight.min.js"></script>
+<script src="../../../static/js/page.min.js"></script>
+<script src="http://s11.cnzz.com/stat.php?id=5886804&web_id=5886804&show=pic1" id="cnzz"></script>
+</body>
+</html>
